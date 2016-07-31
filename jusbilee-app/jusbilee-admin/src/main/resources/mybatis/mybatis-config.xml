@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置项主要有三项：别名，应用环境，mapper文件位置-->
+<configuration>
+
+    <typeAliases>
+    </typeAliases>
+
+    <!--明确所有mapper文件的位置-->
+    <mappers>
+    </mappers>
+</configuration>

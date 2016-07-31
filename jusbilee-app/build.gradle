@@ -1,0 +1,100 @@
+apply from: "lib.gradle"
+
+buildscript {
+    repositories {
+        maven { url maven_url }
+        maven { url spring_snapshot_url }
+        maven { url spring_milestone_url }
+        maven { url spring_plugins_url }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RC1"
+        classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'spring-boot'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        maven { url maven_url }
+        maven { url spring_snapshot_url }
+        maven { url spring_milestone_url }
+        maven { url spring_plugins_url }
+    }
+}
+
+project(":jusbilee-api") {
+    dependencies {
+        compile project(":jusbilee-service")
+        compile libs.springboot_actuator
+        compile libs.springboot_hateoas
+        compile libs.springboot_devtools
+    }
+}
+
+project(":jusbilee-admin") {
+    dependencies {
+        compile project(":jusbilee-service")
+        compile libs.springboot_freemarker
+        compile libs.springboot_security
+        compile libs.springboot_actuator
+        compile libs.springboot_hateoas
+        compile libs.springboot_devtools
+    }
+}
+
+project(":jusbilee-service") {
+    dependencies {
+        compile project(":jusbilee-commons")
+        compile project(":jusbilee-http")
+
+        compile libs.springboot_redis
+        compile libs.springboot_cache
+        compile libs.springboot_aop
+        compile libs.springboot_jdbc
+        compile libs.mybatis
+        compile libs.mybatis_spring
+        compile libs.mysql
+        compile libs.druid
+        testCompile libs.springboot_test
+        testCompile libs.powermock_api
+        testCompile libs.powermock_junit4
+    }
+}
+
+project(":jusbilee-commons") {
+    dependencies {
+        compile libs.jackson_databind
+        compile libs.logback
+        compile libs.springboot_validation
+        compile libs.common_lang3
+        compile libs.shiro_core
+        compile libs.common_fileupload
+        compile libs.common_codec
+
+        testCompile libs.springboot_test
+        testCompile libs.powermock_api
+        testCompile libs.powermock_junit4
+    }
+}
+
+project(":jusbilee-http") {
+    dependencies {
+        compile libs.httpclient
+        compile libs.jackson_databind
+        compile libs.logback
+        compile libs.common_lang3
+
+        testCompile libs.springboot_test
+        testCompile libs.powermock_api
+        testCompile libs.powermock_junit4
+    }
+}

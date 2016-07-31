@@ -1,0 +1,47 @@
+ext {
+    ver = [
+            springboot       : "1.4.0.RC1",
+            common_lang3     : "3.4",
+            shiro_core       : "1.2.6",
+            common_fileupload: "1.3.2",
+            common_codec     : "1.10",
+            jackson_databind : "2.7.5",
+            mybatis          : "3.4.1",
+            mybatis_spring   : "1.3.0",
+            mysql            : "6.0.3",
+            druid            : "1.0.22",
+            powermock        : "1.6.5",
+            guava            : "19.0",
+            httpclient       : "4.5.2",
+            logback          : "1.1.7"
+    ]
+
+    libs = [
+            springboot_validation: "org.springframework.boot:spring-boot-starter-validation:${ver.springboot}",
+            springboot_redis     : "org.springframework.boot:spring-boot-starter-data-redis:${ver.springboot}",
+            springboot_cache     : "org.springframework.boot:spring-boot-starter-cache:${ver.springboot}",
+            springboot_aop       : "org.springframework.boot:spring-boot-starter-aop:${ver.springboot}",
+            springboot_jdbc      : "org.springframework.boot:spring-boot-starter-jdbc:${ver.springboot}",
+            springboot_freemarker: "org.springframework.boot:spring-boot-starter-freemarker:${ver.springboot}",
+            springboot_actuator  : "org.springframework.boot:spring-boot-starter-actuator:${ver.springboot}",
+            springboot_hateoas   : "org.springframework.boot:spring-boot-starter-hateoas:${ver.springboot}",
+            springboot_devtools  : "org.springframework.boot:spring-boot-devtools:${ver.springboot}",
+            springboot_test      : "org.springframework.boot:spring-boot-starter-test:${ver.springboot}",
+            springboot_security  : "org.springframework.boot:spring-boot-starter-security:${ver.springboot}",
+            common_lang3         : "org.apache.commons:commons-lang3:${ver.common_lang3}",
+            common_fileupload    : "commons-fileupload:commons-fileupload:${ver.common_fileupload}",
+            common_codec         : "commons-codec:commons-codec:${ver.common_codec}",
+            shiro_core           : "org.apache.shiro:shiro-core:${ver.shiro_core}",
+            jackson_databind     : "com.fasterxml.jackson.core:jackson-databind:${ver.jackson_databind}",
+            mybatis              : "org.mybatis:mybatis:${ver.mybatis}",
+            mybatis_spring       : "org.mybatis:mybatis-spring:${ver.mybatis_spring}",
+            mysql                : "mysql:mysql-connector-java:${ver.mysql}",
+            druid                : "com.alibaba:druid:${ver.druid}",
+            guava                : "com.google.guava:guava:${ver.guava}",
+            httpclient           : "org.apache.httpcomponents:httpclient:${ver.httpclient}",
+            logback              : "ch.qos.logback:logback-classic:${ver.logback}",
+
+            powermock_api        : "org.powermock:powermock-api-mockito:${ver.powermock}",
+            powermock_junit4     : "org.powermock:powermock-module-junit4:${ver.powermock}"
+    ]
+}
