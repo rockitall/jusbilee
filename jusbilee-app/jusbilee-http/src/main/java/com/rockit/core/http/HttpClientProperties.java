@@ -1,6 +1,6 @@
 package com.rockit.core.http;
 
-public class HttpClientConfig {
+public class HttpClientProperties {
     private int maxTotal = 1000;
     private int defaultMaxPerRoute = 100;
     private int soTimeoutInMillis = 1000;

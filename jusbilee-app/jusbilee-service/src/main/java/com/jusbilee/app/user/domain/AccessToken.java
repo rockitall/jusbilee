@@ -1,4 +1,4 @@
-package com.jusbilee.app.user.pojo;
+package com.jusbilee.app.user.domain;
 
 public class AccessToken {
     private Long userId;

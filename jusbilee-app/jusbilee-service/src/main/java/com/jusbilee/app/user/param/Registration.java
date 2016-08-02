@@ -2,7 +2,7 @@ package com.jusbilee.app.user.param;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class UserRegistration extends Credentials {
+public class Registration extends Credentials {
     @NotBlank(message = "用户昵称不能为空")
     private String nickname;
 

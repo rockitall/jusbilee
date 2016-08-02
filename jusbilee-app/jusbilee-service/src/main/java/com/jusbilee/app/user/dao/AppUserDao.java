@@ -1,13 +1,8 @@
 package com.jusbilee.app.user.dao;
 
-import com.jusbilee.app.user.param.ThirdUserCredentials;
-import com.jusbilee.app.user.param.UserRegistration;
-import com.jusbilee.app.user.pojo.AppUser;
-import com.jusbilee.app.user.pojo.Passport;
-import com.jusbilee.app.user.pojo.UserBind;
-import com.jusbilee.app.user.pojo.WeixinUser;
+import com.jusbilee.app.user.dao.sql.AppUserDaoSqlProvider;
+import com.jusbilee.app.user.domain.AppUser;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.StatementType;
 
 /**
  * Created by Allen on 2016/7/16.
@@ -15,23 +10,16 @@ import org.apache.ibatis.mapping.StatementType;
 
 @Mapper
 public interface AppUserDao {
-    @Select("select user_id as userId, username, password, salt from t_passport where username=#{username}")
-    Passport getAppUserPassportByUsername(@Param("username") String username);
+    @InsertProvider(type = AppUserDaoSqlProvider.class, method = "insert")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "userId", keyColumn = "id", resultType = Long.class, before = false)
+    void insert(AppUser appUser);
 
-    @Update("update t_passport set password=#{password},salt=#{salt} where user_id=#{userId}")
-    void updateUserPassport(Passport passport);
+    @Select("select is_locked from t_app_user where id=#{userId}")
+    Byte getLockStatus(@Param("userId") Long userId);
 
-    @Insert("insert into t_app_user(nickname,create_time) values (#{nickname},now())")
-    @SelectKey(before = false, keyProperty = "userId", keyColumn = "id", resultType = Long.class, statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID()")
-    void createAppUserForRegistration(UserRegistration registration);
+    @Select("select nickname, avatar, sex, description, province, city, birthday from t_app_user where id=#{userId}")
+    AppUser selectById(Long userId);
 
-    @Insert("insert into t_passport (user_id, username, password, salt, create_time) values (#{userId}, #{username}, #{password}, #{salt}, now())")
-    void createAppUserPassport(Passport passport);
-
-    @Insert("insert into t_user_bind (user_id, third_user_type, third_user_identify, third_login_type, create_time) values (#{userId}, #{thirdUserType}, #{thirdUserIdentify}, #{thirdLoginType}, now())")
-    @SelectKey(before = false, keyProperty = "id", keyColumn = "id", resultType = Long.class, statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID()")
-    void createUserBind(UserBind bind);
-
-    @Select("select id, user_id, third_user_type, third_user_identify, third_login_type from t_user_bind where user_id=#{userId} and third_login_type =#{userTypeName}")
-    UserBind getUserBind(ThirdUserCredentials credentials);
+    @Update("update t_app_user set avatar=#{avatarUrl} where id=#{userId}")
+    void updateAvatar(@Param("userId") String userId, @Param("avatarUrl") String avatarUrl);
 }

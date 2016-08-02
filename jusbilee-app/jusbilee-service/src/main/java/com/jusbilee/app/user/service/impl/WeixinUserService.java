@@ -1,0 +1,54 @@
+package com.jusbilee.app.user.service.impl;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.jusbilee.app.common.exception.BadCredentialsException;
+import com.jusbilee.app.common.exception.InvalidAccessTokenException;
+import com.jusbilee.app.common.exception.NetworkErrorException;
+import com.jusbilee.app.common.utils.JacksonUtil;
+import com.jusbilee.app.user.param.ThirdUserCredentials;
+import com.jusbilee.app.user.domain.WeixinUser;
+import com.jusbilee.app.user.service.ThirdUserLookup;
+import com.rockit.core.http.HttpClientService;
+import com.rockit.core.http.HttpRequest;
+import com.rockit.core.http.HttpResponse;
+import com.rockit.core.http.HttpRuntimeException;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+/**
+ * Created by allen on 16-1-24.
+ */
+@Service
+public class WeixinUserService implements ThirdUserLookup {
+    @Value("${weixin.oauth2.userInfoUrl}")
+    private String weixinUrl;
+
+    @Autowired
+    private HttpClientService httpService;
+
+    public WeixinUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {
+        Assert.notNull(credentials, "weixin credentials is null");
+        try {
+            HttpRequest request = HttpRequest.get(weixinUrl);
+            request.addUrlParameter("access_token", credentials.getAccessToken());
+            request.addUrlParameter("openid", credentials.getOpenid());
+
+            HttpResponse response = httpService.execute(request);
+            JsonNode node = JacksonUtil.toJsonNode(response.getBody());
+            if (node != null) {
+                WeixinUser user = JacksonUtil.toObject(node, WeixinUser.class);
+                if (StringUtils.isNotBlank(user.getOpenid())) {
+                    return user;
+                }
+            }
+        } catch (HttpRuntimeException e) {
+            throw new NetworkErrorException();
+        } catch (Exception e) {
+            throw new BadCredentialsException();
+        }
+        throw new InvalidAccessTokenException();
+    }
+}

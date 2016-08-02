@@ -5,7 +5,8 @@ public interface ErrorCode {
 
     int SYS_ERR = 10000;
     int ILLEGAL_PARAMETER = 10001;
-    int USER_OPERATION_DENY = 11001;
+    int USER_OPERATION_DENY = 10002;
+    int NETWORK_ERROR = 10003;
 
     int BAD_CREDENTIALS = 20001;
     int SMS_VERIFY_CODE_EXPIRED = 20002;

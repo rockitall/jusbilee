@@ -1,6 +1,5 @@
 package com.rockit.core.http;
 
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -28,19 +27,24 @@ import java.security.cert.X509Certificate;
  */
 public class HttpClientManager {
     private PoolingHttpClientConnectionManager manager;
-    private HttpClientConfig httpClientConfig;
+    private HttpClientProperties httpClientProperties;
     private CloseableHttpClient httpClient;
 
-    public HttpClientManager(HttpClientConfig httpClientConfig) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        Registry<ConnectionSocketFactory> registry = this.createRegistry();
+    public HttpClientManager(HttpClientProperties httpClientProperties) {
+        Registry<ConnectionSocketFactory> registry = null;
+        try {
+            registry = this.createRegistry();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         manager = new PoolingHttpClientConnectionManager(registry);
-        manager.setDefaultMaxPerRoute(httpClientConfig.getDefaultMaxPerRoute());
-        SocketConfig config = SocketConfig.custom().setSoTimeout(httpClientConfig.getSoTimeoutInMillis()).build();
+        manager.setDefaultMaxPerRoute(httpClientProperties.getDefaultMaxPerRoute());
+        SocketConfig config = SocketConfig.custom().setSoTimeout(httpClientProperties.getSoTimeoutInMillis()).build();
         manager.setDefaultSocketConfig(config);
 
-        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(httpClientConfig.getConnectionTimeoutInMillis()).setSocketTimeout(httpClientConfig.getSocketTimeoutInMillis()).build();
+        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(httpClientProperties.getConnectionTimeoutInMillis()).setSocketTimeout(httpClientProperties.getSocketTimeoutInMillis()).build();
         this.httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).setConnectionManager(manager).build();
-        this.httpClientConfig = httpClientConfig;
+        this.httpClientProperties = httpClientProperties;
     }
 
     public CloseableHttpClient getHttpClient() {
@@ -66,7 +70,7 @@ public class HttpClientManager {
         return manager;
     }
 
-    public HttpClientConfig getHttpClientConfig() {
-        return httpClientConfig;
+    public HttpClientProperties getHttpClientProperties() {
+        return httpClientProperties;
     }
 }

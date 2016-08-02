@@ -1,51 +1,26 @@
-package com.jusbilee.app.user.pojo;
+package com.jusbilee.app.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class WeixinUser {
-    @JsonProperty("nickname")
-    private String nickname;
-
-    @JsonProperty("openid")
-    private String openId;
-
-    @JsonProperty("headimgurl")
-    private String avatar;
-
-    @JsonProperty("sex")
+public class WeixinUser extends ThirdUserBase {
     private Integer sex;
-
-    @JsonProperty("province")
     private String province;
-
-    @JsonProperty("city")
     private String city;
-
-    @JsonProperty("country")
     private String country;
 
-    public String getNickname() {
-        return nickname;
+    @JsonProperty("openid")
+    public void setOpenid(String openid) {
+        super.openid = openid;
     }
 
+    @JsonProperty("nickname")
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        super.nickname = nickname;
     }
 
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
+    @JsonProperty("headimgurl")
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        super.avatar = avatar;
     }
 
     public Integer getSex() {
@@ -79,5 +54,4 @@ public class WeixinUser {
     public void setCountry(String country) {
         this.country = country;
     }
-
 }

@@ -22,8 +22,8 @@ public class HttpClientService {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientService.class);
     private HttpClientManager httpClientManager;
 
-    public HttpClientService(HttpClientManager httpClientManager) {
-        this.httpClientManager = httpClientManager;
+    public HttpClientService(HttpClientProperties httpClientProperties) {
+        this.httpClientManager = new HttpClientManager(httpClientProperties);
     }
 
     public HttpResponse execute(HttpRequest request) {
@@ -32,7 +32,7 @@ public class HttpClientService {
         }
 
         // Transform marmot request to apache http request.
-        HttpUriRequest httpRequest = transformRequest(request, httpClientManager.getHttpClientConfig());
+        HttpUriRequest httpRequest = transformRequest(request, httpClientManager.getHttpClientProperties());
 
         CloseableHttpResponse httpResponse = null;
         HttpResponse response = null;
@@ -62,7 +62,7 @@ public class HttpClientService {
         }
     }
 
-    private HttpUriRequest transformRequest(HttpRequest request, HttpClientConfig config) {
+    private HttpUriRequest transformRequest(HttpRequest request, HttpClientProperties httpClientProperties) {
         // Prepare request.
         RequestBuilder builder = RequestBuilder.create(request.getHttpMethod().name());
 
@@ -88,7 +88,7 @@ public class HttpClientService {
         }
 
         // Prepare request setting.
-        RequestConfig requestConfig = getRequestConfig(request, config);
+        RequestConfig requestConfig = getRequestConfig(request, httpClientProperties);
         builder.setConfig(requestConfig);
 
         HttpUriRequest uriRequest = builder.build();
@@ -103,12 +103,12 @@ public class HttpClientService {
         return null;
     }
 
-    private static RequestConfig getRequestConfig(HttpRequest request, HttpClientConfig config) {
+    private static RequestConfig getRequestConfig(HttpRequest request, HttpClientProperties httpClientProperties) {
         RequestConfig.Builder builder = RequestConfig.custom();
         builder.setRedirectsEnabled(true);
-        builder.setConnectTimeout(config.getSoTimeoutInMillis());
-        builder.setSocketTimeout(config.getSocketTimeoutInMillis());
-        builder.setConnectionRequestTimeout(config.getConnectionTimeoutInMillis());
+        builder.setConnectTimeout(httpClientProperties.getSoTimeoutInMillis());
+        builder.setSocketTimeout(httpClientProperties.getSocketTimeoutInMillis());
+        builder.setConnectionRequestTimeout(httpClientProperties.getConnectionTimeoutInMillis());
 
         if (request.getConnectTimeout() >= 0) {
             builder.setConnectTimeout(request.getConnectTimeout());
@@ -120,7 +120,7 @@ public class HttpClientService {
             builder.setConnectionRequestTimeout(request.getConnectionRequestTimeout());
         }
 
-        if (config.isUserProxy()) {
+        if (httpClientProperties.isUserProxy()) {
             HttpHost proxy = getProxy();
             builder.setProxy(proxy);
         }

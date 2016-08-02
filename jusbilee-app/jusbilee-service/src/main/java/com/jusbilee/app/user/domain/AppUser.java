@@ -1,4 +1,4 @@
-package com.jusbilee.app.user.pojo;
+package com.jusbilee.app.user.domain;
 
 /**
  * Created by Allen on 2016/7/31.

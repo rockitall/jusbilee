@@ -1,32 +1,26 @@
-package com.jusbilee.app.user.pojo;
+package com.jusbilee.app.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SinaWeiboUser {
-    @JsonProperty("id")
-    private long userId;
-    private String name;
+public class SinaWeiboUser extends ThirdUserBase {
     private String province;
     private String city;
     private String location;
-    @JsonProperty("profile_image_url")
-    private String avatar;
     private String gender;
 
-    public long getUserId() {
-        return userId;
+    @JsonProperty("id")
+    public void setOpenid(String openid) {
+        super.openid = openid;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    @JsonProperty("name")
+    public void setNickname(String nickname) {
+        super.nickname = nickname;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("profile_image_url")
+    public void setAvatar(String avatar) {
+        super.avatar = avatar;
     }
 
     public String getProvince() {
@@ -51,14 +45,6 @@ public class SinaWeiboUser {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getGender() {

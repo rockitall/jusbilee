@@ -2,9 +2,8 @@ package com.jusbilee.app.user.param;
 
 public class ThirdUserCredentials {
     private ThirdUserType userType;
-    private String userId;
     private String accessToken;
-    private String nickname;
+    private String openid;
 
     public ThirdUserType getUserType() {
         return userType;
@@ -18,14 +17,6 @@ public class ThirdUserCredentials {
         this.userType = userType;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }
@@ -34,11 +25,11 @@ public class ThirdUserCredentials {
         this.accessToken = accessToken;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 }

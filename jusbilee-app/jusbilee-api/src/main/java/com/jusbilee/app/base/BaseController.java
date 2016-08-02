@@ -12,7 +12,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by Allen on 2016/7/30.
@@ -52,5 +54,11 @@ public class BaseController {
 
     public static JsonResult ok() {
         return JsonResult.ok();
+    }
+
+    protected static JsonResult ok(String key, Object value) {
+        Map<String, Object> data = new HashMap<>();
+        data.put(key, value);
+        return JsonResult.ok(data);
     }
 }
