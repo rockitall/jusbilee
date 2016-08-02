@@ -61,7 +61,7 @@ public class UserAccountController extends BaseController {
         return ok();
     }
 
-    @RequestMapping("/info")
+    @RequestMapping("/profile")
     public JsonResult getUserInfo() {
         Long userId = HttpContext.current().getUserId();
         AppUser appUser = userAccountService.getUserInfo(userId);

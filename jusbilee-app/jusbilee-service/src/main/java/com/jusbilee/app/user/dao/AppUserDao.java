@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface AppUserDao {
     @InsertProvider(type = AppUserDaoSqlProvider.class, method = "insert")
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "userId", keyColumn = "id", resultType = Long.class, before = false)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id", resultType = Long.class, before = false)
     void insert(AppUser appUser);
 
     @Select("select is_locked from t_app_user where id=#{userId}")

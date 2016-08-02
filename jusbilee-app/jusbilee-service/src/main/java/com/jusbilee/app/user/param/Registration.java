@@ -6,21 +6,11 @@ public class Registration extends Credentials {
     @NotBlank(message = "用户昵称不能为空")
     private String nickname;
 
-//    @NotBlank(message = "验证码不能为空")
+    //    @NotBlank(message = "验证码不能为空")
     private String verifyCode;
 
-//    @NotBlank(message = "ssid不能为空")
+    //    @NotBlank(message = "ssid不能为空")
     private String ssid;
-
-    private Long userId;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getNickname() {
         return nickname;

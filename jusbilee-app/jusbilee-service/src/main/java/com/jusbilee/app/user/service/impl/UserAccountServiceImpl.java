@@ -105,7 +105,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
             //bind user
             bind = new ThirdUserBind();
-            bind.setUserId(thirdUserBase.getUserId());
+            bind.setUserId(appUser.getId());
             bind.setOpenid(credentials.getOpenid());
             bind.setUserType(credentials.getUserTypeName());
             thirdUserBindDao.insert(bind);
@@ -140,7 +140,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
         AppUser appUser = new AppUser();
         appUser.setNickname(registration.getNickname());
         this.appUserDao.insert(appUser);
-        Passport passport = this.createAppUserPassport(registration.getUserId(), registration);
+        Passport passport = this.createAppUserPassport(appUser.getId(), registration);
         AccessToken accessToken = getSuccessAccessToken(passport);
         return accessToken;
     }
