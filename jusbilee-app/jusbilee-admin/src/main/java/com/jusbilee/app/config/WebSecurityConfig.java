@@ -1,4 +1,4 @@
-package com.jusbilee.app.config.spring;
+package com.jusbilee.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

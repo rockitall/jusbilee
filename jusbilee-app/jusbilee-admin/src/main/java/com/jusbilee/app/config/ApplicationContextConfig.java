@@ -1,4 +1,4 @@
-package com.jusbilee.app.config.spring;
+package com.jusbilee.app.config;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

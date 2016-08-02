@@ -1,4 +1,4 @@
-package com.jusbilee.app.config.servlet;
+package com.jusbilee.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
