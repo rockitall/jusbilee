@@ -26,7 +26,7 @@ public class SinaWeiboUserService implements ThirdUserLookup {
     @Value("${weibo.oauth2.userInfoUrl}")
     private String url;
 
-    @Autowired
+    @Autowired(required = false)
     private HttpClientService httpService;
 
     public SinaWeiboUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException {

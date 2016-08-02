@@ -26,7 +26,7 @@ public class WeixinUserService implements ThirdUserLookup {
     @Value("${weixin.oauth2.userInfoUrl}")
     private String weixinUrl;
 
-    @Autowired
+    @Autowired(required = false)
     private HttpClientService httpService;
 
     public WeixinUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {

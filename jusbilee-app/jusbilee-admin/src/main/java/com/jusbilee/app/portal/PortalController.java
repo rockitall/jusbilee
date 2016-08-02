@@ -1,17 +1,16 @@
 package com.jusbilee.app.portal;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Allen on 2016/7/15.
  */
 
-@RestController
+@Controller
 public class PortalController {
-
-    @RequestMapping("/hello")
+    @RequestMapping("/index")
     public String hello() {
-        return "hello21";
+        return "main";
     }
 }
