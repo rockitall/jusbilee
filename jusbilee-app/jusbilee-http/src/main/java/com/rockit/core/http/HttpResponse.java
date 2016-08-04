@@ -42,16 +42,4 @@ public class HttpResponse {
         }
         return body;
     }
-
-    public String asText(String charset) {
-        if (bytes == null) {
-            return null;
-        }
-
-        try {
-            return new String(bytes, charset);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

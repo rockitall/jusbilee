@@ -1,5 +1,6 @@
 package com.jusbilee.app.portal;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PortalController {
     @RequestMapping("/index")
-    public String hello() {
+    public String hello(HttpServletRequest request) {
         return "main";
     }
 }
