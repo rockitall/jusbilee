@@ -2,6 +2,7 @@ package com.jusbilee.app.security;
 
 import com.jusbilee.app.admin.domain.SysUser;
 import com.jusbilee.app.common.Constants;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
