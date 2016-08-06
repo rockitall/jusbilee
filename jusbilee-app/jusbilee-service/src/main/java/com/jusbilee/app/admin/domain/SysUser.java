@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Created by Allen on 2016/8/2.
  */
 public class SysUser implements Serializable {
+	
+	private String userId;
     private String username;
     private String nickname;
     private String password;
@@ -87,4 +89,20 @@ public class SysUser implements Serializable {
     public void setIsLocked(Byte isLocked) {
         this.isLocked = isLocked;
     }
+
+	/**
+	 * @return the userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+    
+    
 }
