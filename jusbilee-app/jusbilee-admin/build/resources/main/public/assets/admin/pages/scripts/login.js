@@ -12,8 +12,8 @@ var Login = function() {
                 password: {
                     required: true
                 },
-                remember: {
-                    required: false
+                verifyCode: {
+                    required: true
                 }
             },
 
@@ -23,27 +23,25 @@ var Login = function() {
                 },
                 password: {
                     required: "请填写密码"
+                },
+                verifyCode: {
+                    required: "请填写验证码"
                 }
             },
 
-            invalidHandler: function(event, validator) { //display error alert on form submit   
-                $('.alert-danger', $('.login-form')).show();
+            invalidHandler: function(event, validator) {
+                var err = $('.alert-danger');
+                err.show();
+                err.find("span").text(validator.errorList[0].message);
             },
-
-            highlight: function(element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
             },
-
-            success: function(label) {
-                label.closest('.form-group').removeClass('has-error');
-                label.remove();
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-error');
             },
-
             errorPlacement: function(error, element) {
-                error.insertAfter(element.closest('.input-icon'));
             },
-
             submitHandler: function(form) {
                 form.submit(); // form validation success, call ajax form submit
             }
@@ -62,6 +60,9 @@ var Login = function() {
         //main function to initiate the module
         init: function() {
             handleLogin();
+        },
+        refresh:function(){
+            $("#vimg").attr("src", "captcha?t=" + new Date().getTime());
         }
     };
 }();

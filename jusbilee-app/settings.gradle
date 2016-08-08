@@ -4,4 +4,5 @@ include "jusbilee-admin"
 include "jusbilee-service"
 include "jusbilee-commons"
 include "jusbilee-http"
+include "jusbilee-qcloud"
 

@@ -1,16 +1,4 @@
-
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
-Version: 3.3.0
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -57,35 +45,45 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
+
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" action="/admin/login" method="post">
         <h3 class="form-title">用户登录</h3>
-        <div class="alert alert-danger display-hide">
+        <div class="alert alert-danger  <#if !RequestParameters.error?? >display-hide</#if>">
             <button class="close" data-close="alert"></button>
 			<span>
-                <#if (param.error)?? >用户名或密码不正确</#if>
-                <#if (param.logout)??>您已经退出登录</#if>
+                <#if (RequestParameters.error)?? >用户名或密码不正确</#if>
             </span>
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">用户名</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username"/>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">密码</label>
-            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" maxlength="5" name="verifyCode" class="form-control" placeholder="验证码"/>
+                </div>
+                <div class="col-xs-8">
+                    <img id="vimg" src="captcha" style="height: 32px;border: none">
+                    <a href="javascript:Login.refresh()" style="padding-left: 20px">看不清？</a>
+                </div>
+            </div>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-actions">
             <button type="submit" class="btn btn-success uppercase">登录</button>
-            <label class="rememberme check"><input type="checkbox" name="remember" value="1"/>Remember </label>
         </div>
     </form>
 </div>
 <div class="copyright">
-    2014 © Jusbilee. Admin Login Page.
+    2016 © Jusbilee. Admin Login.
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -114,8 +112,8 @@ License: You must have a valid license purchased only from themeforest(the above
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
         Layout.init(); // init current layout
-        Login.init();
         Demo.init();
+        Login.init();
     });
 </script>
 <!-- END JAVASCRIPTS -->

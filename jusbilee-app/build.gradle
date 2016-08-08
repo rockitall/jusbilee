@@ -17,9 +17,6 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
-    apply plugin: 'propdeps'
-    apply plugin: 'propdeps-idea'
-    apply plugin: 'spring-boot'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
@@ -32,6 +29,12 @@ allprojects {
 }
 
 project(":jusbilee-api") {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'spring-boot'
+    springBoot {
+        executable = true
+    }
     dependencies {
         compile project(":jusbilee-service")
         compile libs.springboot_actuator
@@ -41,6 +44,13 @@ project(":jusbilee-api") {
 }
 
 project(":jusbilee-admin") {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'spring-boot'
+    springBoot {
+        executable = true
+    }
+
     dependencies {
         compile project(":jusbilee-service")
         compile libs.springboot_freemarker
@@ -52,9 +62,14 @@ project(":jusbilee-admin") {
 }
 
 project(":jusbilee-service") {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'spring-boot'
+
     dependencies {
         compile project(":jusbilee-commons")
         compile project(":jusbilee-http")
+        compile project(":jusbilee-qcloud")
 
         compile libs.springboot_redis
         compile libs.springboot_cache
@@ -94,6 +109,16 @@ project(":jusbilee-http") {
         compile libs.common_lang3
 
         testCompile libs.springboot_test
+        testCompile libs.powermock_api
+        testCompile libs.powermock_junit4
+    }
+}
+
+
+project(":jusbilee-qcloud") {
+    dependencies {
+        compile project(":jusbilee-commons")
+
         testCompile libs.powermock_api
         testCompile libs.powermock_junit4
     }

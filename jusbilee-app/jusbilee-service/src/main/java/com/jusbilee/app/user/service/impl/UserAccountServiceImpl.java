@@ -12,6 +12,7 @@ import com.jusbilee.app.user.dao.ThirdUserBindDao;
 import com.jusbilee.app.user.param.*;
 import com.jusbilee.app.user.domain.*;
 import com.jusbilee.app.user.service.IUserAccountService;
+import com.rockit.signature.TLSSignatureGenerator;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -46,6 +47,9 @@ public class UserAccountServiceImpl implements IUserAccountService {
     @Autowired
     private SinaWeiboUserService weiboUserService;
 
+    @Autowired
+    private TLSSignatureGenerator signatureGenerator;
+
     @Value("${passport.securityKey}")
     private String securityKey;
 
@@ -78,6 +82,10 @@ public class UserAccountServiceImpl implements IUserAccountService {
         accessToken.setUserToken(userToken);
         accessToken.setUserSecret(userSecret);
 
+        String identifier = new Md5Hash(passport.getUserId() + userSecret).toHex();
+        String userSignature = signatureGenerator.getUserSignature(identifier);
+        accessToken.setIdentifier(identifier);
+        accessToken.setUserSignature(userSignature);
         return accessToken;
     }
 
