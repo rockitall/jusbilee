@@ -21,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Constraint(validatedBy = {MobileValidator.class})
 public @interface Mobile {
-    String message() default "这不是有效的手机号码";
+    String message() default "手机号码不正确";
 
     String regexp() default "^1[3|4|5|7|8]\\d{9}$";
 
