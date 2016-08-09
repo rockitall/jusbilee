@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>/app/logs/jusbilee-app.log</File>
+        <File>/apps/logs/app/jusbilee-app.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <FileNamePattern>/app/logs/jusbilee-app.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>/apps/logs/app/jusbilee-app.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!-- keep 30 days' worth of history -->
             <maxHistory>7</maxHistory>
         </rollingPolicy>

@@ -24,7 +24,6 @@ public class SmsService {
         verifyCode.setCode(UniqueIdUtils.getVerifyCode());
 
         redisCacheService.setSmsVerifyCode(verifyCode, param.getSmsType());
-
         return verifyCode;
     }
 
