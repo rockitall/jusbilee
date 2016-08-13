@@ -1,13 +1,15 @@
-package com.rockit.signature;
+package com.rockit.qcloud.im.signature;
 
 import com.jusbilee.app.common.exception.UserSignatureException;
+import com.rockit.qcloud.im.common.QCloudProperties;
 import com.tls.sigcheck.tls_sigcheck;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 public class TLSSignatureGenerator {
     private static final Logger logger = LoggerFactory.getLogger(TLSSignatureGenerator.class);
@@ -19,9 +21,9 @@ public class TLSSignatureGenerator {
     public static final String SYSTEM_PROPERTY_KEY = "user.signature.privateKeyFile";
     private String privateKey;
 
-    private UserSignatureProperties userSignatureProperties;
+    private QCloudProperties userSignatureProperties;
 
-    public TLSSignatureGenerator(UserSignatureProperties userSignatureProperties) throws UserSignatureException {
+    public TLSSignatureGenerator(QCloudProperties userSignatureProperties) throws UserSignatureException {
         this.userSignatureProperties = userSignatureProperties;
 
         if (userSignatureProperties == null) {
@@ -111,11 +113,12 @@ public class TLSSignatureGenerator {
         return new File(file);
     }
 
-    public UserSignatureProperties getUserSignatureProperties() {
+    public QCloudProperties getUserSignatureProperties() {
         return userSignatureProperties;
     }
 
-    public void setUserSignatureProperties(UserSignatureProperties userSignatureProperties) {
+    public void setUserSignatureProperties(QCloudProperties userSignatureProperties) {
         this.userSignatureProperties = userSignatureProperties;
     }
+
 }

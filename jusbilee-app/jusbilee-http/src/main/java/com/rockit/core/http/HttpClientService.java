@@ -71,7 +71,10 @@ public class HttpClientService {
         builder.setUri(url);
 
         // Prepare post body.
-        HttpEntity entity = buildEntity(request.getBodyParameters());
+        HttpEntity entity = request.getBodyEntity();
+        if (entity == null) {
+            entity = buildEntity(request.getBodyParameters());
+        }
         builder.setEntity(entity);
 
         // Prepare default http headers.

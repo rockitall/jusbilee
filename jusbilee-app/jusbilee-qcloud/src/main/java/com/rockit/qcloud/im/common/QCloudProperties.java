@@ -1,13 +1,14 @@
-package com.rockit.signature;
+package com.rockit.qcloud.im.common;
 
 /**
  * Created by Allen on 2016/8/8.
  */
-public class UserSignatureProperties {
+public class QCloudProperties {
     private String sdkAppId;
     private String privateKeyFile;
     private String jniLibFile;
     private String expire = String.valueOf(30 * 24 * 60 * 60);
+    private String qcloudApiDomain;
 
     public String getExpire() {
         return expire;
@@ -41,4 +42,7 @@ public class UserSignatureProperties {
         this.sdkAppId = sdkAppId;
     }
 
+    public String getQCloudApiDomain() {
+        return qcloudApiDomain;
+    }
 }

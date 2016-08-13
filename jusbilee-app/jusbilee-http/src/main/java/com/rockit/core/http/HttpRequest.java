@@ -1,6 +1,7 @@
 package com.rockit.core.http;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -27,6 +28,7 @@ public class HttpRequest {
     private SortedMap<String, String> headers;
     private HttpMethod httpMethod;
     private String requestUrl;
+    private HttpEntity bodyEntity;
 
     public static HttpRequest post(String url) {
         return new HttpRequest(url, HttpMethod.POST);
@@ -196,5 +198,13 @@ public class HttpRequest {
         }
         srcMap.putAll(destMap);
         return destMap;
+    }
+
+    public HttpEntity getBodyEntity() {
+        return bodyEntity;
+    }
+
+    public void setBodyEntity(HttpEntity bodyEntity) {
+        this.bodyEntity = bodyEntity;
     }
 }
