@@ -17,4 +17,11 @@ public interface ErrorCode {
     int USER_ALREADY_EXISTS = 20010;
     int UNAUTHORIZED = 20020;
     int USER_NOT_EXISTS = 20030;
+    
+   
+    
+    /**
+     * admin后面加上来
+     */
+    int CENSORSHIP_ALREADY_EXISTS = 50010;
 }
