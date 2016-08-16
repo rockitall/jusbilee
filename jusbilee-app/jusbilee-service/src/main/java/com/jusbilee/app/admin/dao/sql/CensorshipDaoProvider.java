@@ -45,6 +45,7 @@ public class CensorshipDaoProvider {
 			sb.append("where instr(name, #{censorshipName}) > 0 ");
 		}
 		sb.append("order by censorship_id ");
+		sb.append("limit #{rp} offset #{offset}");
 		return sb.toString();
 		
 	}
@@ -71,6 +72,7 @@ public class CensorshipDaoProvider {
 			sb.append("where t.censorship_id = #{censorshipIdQuery} ");
 		}
 		sb.append("order by songName ");
+		sb.append("limit #{rp} offset #{offset}");
 		return sb.toString();
 		
 	}

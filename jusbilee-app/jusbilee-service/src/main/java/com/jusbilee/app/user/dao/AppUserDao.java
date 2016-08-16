@@ -22,4 +22,10 @@ public interface AppUserDao {
 
     @Update("update t_app_user set avatar=#{avatarUrl} where id=#{userId}")
     void updateAvatar(@Param("userId") String userId, @Param("avatarUrl") String avatarUrl);
+    
+    
+    //新加部分，打个标识
+    @Update("update t_app_user set nickname=#{nickname},description=#{description},birthday=#{birthday},province=#{province},city=#{city} where id=#{id}")
+    void updateAppUser(AppUser appUser);
+    
 }

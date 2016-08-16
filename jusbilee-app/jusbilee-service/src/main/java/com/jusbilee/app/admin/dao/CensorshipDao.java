@@ -37,10 +37,10 @@ public interface CensorshipDao {
 	@Delete("delete from t_censorship where censorship_id=#{censorshipId}")
 	void deleteCensorship(long censorshipId);
 	
-	@Select("select censorship_id ascensorshipId, name, description  from  t_censorship where censorship_id = #{censorshipId}")
+	@Select("select censorship_id as censorshipId, name, description  from  t_censorship where censorship_id = #{censorshipId}")
 	Censorship selectById(@Param("censorshipId") long censorshipId);
 	
-	@Select("select censorship_id ascensorshipId, name, description  from  t_censorship where name = #{name}")
+	@Select("select censorship_id as censorshipId, name, description  from  t_censorship where name = #{name}")
 	Censorship selectByName(@Param("name") String name);
 	
 	@SelectProvider(type = CensorshipDaoProvider.class, method = "queryList")

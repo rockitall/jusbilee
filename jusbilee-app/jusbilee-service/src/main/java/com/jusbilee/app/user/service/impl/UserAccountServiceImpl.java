@@ -201,4 +201,9 @@ public class UserAccountServiceImpl implements IUserAccountService {
         //TODO
         return null;
     }
+    
+	@Override
+	public void updateAppUser(AppUser appUser) {
+		appUserDao.updateAppUser(appUser);
+	}
 }

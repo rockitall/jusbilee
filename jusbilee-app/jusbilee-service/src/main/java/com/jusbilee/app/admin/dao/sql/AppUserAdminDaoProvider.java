@@ -41,7 +41,7 @@ public class AppUserAdminDaoProvider {
 		}
 		
 		sb.append("order by nickname");
-		
+		sb.append("limit #{rp} offset #{offset}");
 		return sb.toString();
 	}
 

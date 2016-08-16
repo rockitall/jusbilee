@@ -31,4 +31,8 @@ public interface IUserAccountService {
     AppUser getUserInfo(Long userId);
 
     String uploadAvatar(Long userId, File file);
+    
+    //新加部分
+    void updateAppUser(AppUser appUser);
+    
 }
