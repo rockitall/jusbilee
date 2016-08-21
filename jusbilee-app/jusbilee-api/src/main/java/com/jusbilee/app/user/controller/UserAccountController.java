@@ -2,10 +2,9 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.common.context.HttpContext;
-import com.jusbilee.app.common.pojo.JsonResult;
+import com.rockit.core.context.HttpContext;
+import com.rockit.core.pojo.JsonResult;
 import com.jusbilee.app.sms.param.SmsParam;
-import com.jusbilee.app.sms.param.SmsType;
 import com.jusbilee.app.sms.param.VerifyCode;
 import com.jusbilee.app.sms.service.SmsService;
 import com.jusbilee.app.user.domain.AppUser;
@@ -15,12 +14,9 @@ import com.jusbilee.app.user.service.IUserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 

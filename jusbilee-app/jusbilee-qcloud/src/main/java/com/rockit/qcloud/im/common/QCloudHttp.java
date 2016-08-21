@@ -1,6 +1,6 @@
 package com.rockit.qcloud.im.common;
 
-import com.jusbilee.app.common.utils.JacksonUtil;
+import com.rockit.core.utils.JacksonUtil;
 import com.rockit.core.http.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.entity.StringEntity;

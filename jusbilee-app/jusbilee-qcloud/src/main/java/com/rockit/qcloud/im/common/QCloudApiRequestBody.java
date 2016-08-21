@@ -1,7 +1,7 @@
 package com.rockit.qcloud.im.common;
 
 
-import com.jusbilee.app.common.utils.JacksonUtil;
+import com.rockit.core.utils.JacksonUtil;
 
 /**
  * Created by Allen on 2016/8/13.

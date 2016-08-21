@@ -1,10 +1,10 @@
 package com.jusbilee.app.user.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.jusbilee.app.common.exception.BadCredentialsException;
-import com.jusbilee.app.common.exception.InvalidAccessTokenException;
-import com.jusbilee.app.common.exception.NetworkErrorException;
-import com.jusbilee.app.common.utils.JacksonUtil;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.InvalidAccessTokenException;
+import com.rockit.core.exception.NetworkErrorException;
+import com.rockit.core.utils.JacksonUtil;
 import com.jusbilee.app.user.param.ThirdUserCredentials;
 import com.jusbilee.app.user.domain.SinaWeiboUser;
 import com.jusbilee.app.user.service.ThirdUserLookup;
@@ -15,7 +15,6 @@ import com.rockit.core.http.HttpRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 

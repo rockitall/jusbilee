@@ -1,6 +1,6 @@
 package com.rockit.qcloud.im.signature;
 
-import com.jusbilee.app.common.exception.UserSignatureException;
+import com.rockit.core.exception.UserSignatureException;
 import com.rockit.qcloud.im.common.QCloudProperties;
 import com.tls.sigcheck.tls_sigcheck;
 import org.apache.commons.io.FileUtils;
