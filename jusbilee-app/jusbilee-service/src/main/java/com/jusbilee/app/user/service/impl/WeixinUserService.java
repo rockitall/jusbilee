@@ -1,22 +1,23 @@
 package com.jusbilee.app.user.service.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.rockit.core.exception.BadCredentialsException;
-import com.rockit.core.exception.InvalidAccessTokenException;
-import com.rockit.core.exception.NetworkErrorException;
-import com.rockit.core.utils.JacksonUtil;
-import com.jusbilee.app.user.param.ThirdUserCredentials;
-import com.jusbilee.app.user.domain.WeixinUser;
-import com.jusbilee.app.user.service.ThirdUserLookup;
-import com.rockit.core.http.HttpClientService;
-import com.rockit.core.http.HttpRequest;
-import com.rockit.core.http.HttpResponse;
-import com.rockit.core.http.HttpRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.jusbilee.app.user.domain.WeixinUser;
+import com.jusbilee.app.user.param.ThirdUserCredentials;
+import com.jusbilee.app.user.service.ThirdUserLookup;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.InvalidAccessTokenException;
+import com.rockit.core.exception.NetworkErrorException;
+import com.rockit.core.http.HttpClientService;
+import com.rockit.core.http.HttpRequest;
+import com.rockit.core.http.HttpResponse;
+import com.rockit.core.http.HttpRuntimeException;
+import com.rockit.core.utils.JacksonUtil;
 
 /**
  * Created by allen on 16-1-24.

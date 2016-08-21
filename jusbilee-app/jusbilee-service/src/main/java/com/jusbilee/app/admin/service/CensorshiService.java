@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.jusbilee.app.admin.dao.CensorshipDao;
 import com.jusbilee.app.admin.domain.Censorship;
 import com.jusbilee.app.admin.domain.CensorshipCriteria;
-import com.jusbilee.app.common.exception.CensorshipAlreadyExistsException;
-import com.jusbilee.app.common.exception.UserAlreadyExistsException;
+import com.rockit.core.exception.CensorshipAlreadyExistsException;
+import com.rockit.core.exception.UserAlreadyExistsException;
 
 /**
  * @author zhandc 2016年8月9日

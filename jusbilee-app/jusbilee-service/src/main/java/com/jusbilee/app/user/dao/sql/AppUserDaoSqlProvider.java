@@ -1,7 +1,8 @@
 package com.jusbilee.app.user.dao.sql;
 
-import com.jusbilee.app.user.domain.AppUser;
 import org.apache.ibatis.jdbc.SQL;
+
+import com.jusbilee.app.user.domain.AppUser;
 
 /**
  * Created by Allen on 2016/7/16.

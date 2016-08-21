@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jusbilee.app.admin.dao.UserArchiveDao;
-import com.jusbilee.app.admin.domain.Censorship;
 import com.jusbilee.app.admin.domain.UserArchive;
 import com.jusbilee.app.admin.domain.UserArchiveCriteria;
 

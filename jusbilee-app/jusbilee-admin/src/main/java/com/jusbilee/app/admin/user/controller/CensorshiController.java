@@ -16,7 +16,7 @@ import com.jusbilee.app.admin.domain.Censorship;
 import com.jusbilee.app.admin.domain.CensorshipCriteria;
 import com.jusbilee.app.admin.service.CensorshiService;
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.common.pojo.JsonResult;
+import com.rockit.core.pojo.JsonResult;
 
 /**
  * @author zhandc 2016年8月9日

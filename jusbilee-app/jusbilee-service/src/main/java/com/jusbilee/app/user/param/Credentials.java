@@ -1,8 +1,9 @@
 package com.jusbilee.app.user.param;
 
-import com.rockit.core.constraints.annotation.Mobile;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.rockit.core.constraints.annotation.Mobile;
 
 public class Credentials {
     @NotBlank(message = "登录名不能为空")

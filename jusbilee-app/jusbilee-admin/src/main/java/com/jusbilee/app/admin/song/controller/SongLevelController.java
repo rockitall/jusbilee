@@ -16,7 +16,7 @@ import com.jusbilee.app.admin.domain.SongLevel;
 import com.jusbilee.app.admin.domain.SongLevelCriteria;
 import com.jusbilee.app.admin.service.SongLevelService;
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.common.pojo.JsonResult;
+import com.rockit.core.pojo.JsonResult;
 
 /**
  * @author zhandc 2016年8月17日

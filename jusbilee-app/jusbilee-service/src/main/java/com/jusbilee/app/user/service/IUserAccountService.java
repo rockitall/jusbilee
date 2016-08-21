@@ -1,16 +1,16 @@
 package com.jusbilee.app.user.service;
 
-import com.rockit.core.exception.BadCredentialsException;
-import com.rockit.core.exception.UserAccountLockedException;
-import com.rockit.core.exception.UserAlreadyExistsException;
+import java.io.File;
+
+import com.jusbilee.app.user.domain.AccessToken;
 import com.jusbilee.app.user.domain.AppUser;
 import com.jusbilee.app.user.param.Credentials;
 import com.jusbilee.app.user.param.PasswordModification;
 import com.jusbilee.app.user.param.Registration;
 import com.jusbilee.app.user.param.ThirdUserCredentials;
-import com.jusbilee.app.user.domain.AccessToken;
-
-import java.io.File;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.UserAccountLockedException;
+import com.rockit.core.exception.UserAlreadyExistsException;
 
 /**
  * Created by Allen on 2016/8/2.

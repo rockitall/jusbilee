@@ -1,8 +1,8 @@
 package com.jusbilee.app.song.dao;
 
-import com.jusbilee.app.song.domain.Song;
-
 import java.util.List;
+
+import com.jusbilee.app.song.domain.Song;
 
 /**
  * Created by Allen on 2016/8/21.

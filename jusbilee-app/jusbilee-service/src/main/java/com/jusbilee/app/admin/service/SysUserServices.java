@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jusbilee.app.admin.dao.SysUserDao;
 import com.jusbilee.app.admin.domain.SysUser;
 import com.jusbilee.app.admin.domain.SysUserCriteria;
-import com.jusbilee.app.common.exception.UserAlreadyExistsException;
+import com.rockit.core.exception.UserAlreadyExistsException;
 
 /**
  * @author zhandc 2016年8月6日

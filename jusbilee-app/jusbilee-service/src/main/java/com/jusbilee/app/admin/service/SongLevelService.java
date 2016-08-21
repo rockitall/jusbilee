@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.jusbilee.app.admin.dao.SongLevelDao;
 import com.jusbilee.app.admin.domain.SongLevel;
 import com.jusbilee.app.admin.domain.SongLevelCriteria;
-import com.jusbilee.app.admin.domain.SongStyle;
 
 /**
  * @author zhandc 2016年8月17日

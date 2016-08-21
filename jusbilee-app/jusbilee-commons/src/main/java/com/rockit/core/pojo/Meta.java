@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年8月6日
  */
-package com.jusbilee.app.common.page;
+package com.rockit.core.pojo;
 
 import java.util.List;
 

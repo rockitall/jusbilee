@@ -1,9 +1,9 @@
 /**
  * zhandc 2016年8月9日
  */
-package com.jusbilee.app.common.exception;
+package com.rockit.core.exception;
 
-import com.jusbilee.app.common.code.ErrorCode;
+import com.rockit.core.code.ErrorCode;
 
 /**
  * @author zhandc 2016年8月9日

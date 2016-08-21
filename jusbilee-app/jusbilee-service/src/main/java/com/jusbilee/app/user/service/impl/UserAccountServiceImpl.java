@@ -1,18 +1,7 @@
 package com.jusbilee.app.user.service.impl;
 
-import com.rockit.core.Constants;
-import com.rockit.core.exception.BadCredentialsException;
-import com.rockit.core.exception.UserAccountLockedException;
-import com.rockit.core.exception.UserAlreadyExistsException;
-import com.rockit.core.utils.UniqueIdUtils;
-import com.jusbilee.app.redis.RedisCacheService;
-import com.jusbilee.app.user.dao.AppUserDao;
-import com.jusbilee.app.user.dao.PassportDao;
-import com.jusbilee.app.user.dao.ThirdUserBindDao;
-import com.jusbilee.app.user.param.*;
-import com.jusbilee.app.user.domain.*;
-import com.jusbilee.app.user.service.IUserAccountService;
-import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
+import java.io.File;
+
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -22,7 +11,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.io.File;
+import com.jusbilee.app.redis.RedisCacheService;
+import com.jusbilee.app.user.dao.AppUserDao;
+import com.jusbilee.app.user.dao.PassportDao;
+import com.jusbilee.app.user.dao.ThirdUserBindDao;
+import com.jusbilee.app.user.domain.AccessToken;
+import com.jusbilee.app.user.domain.AppUser;
+import com.jusbilee.app.user.domain.Passport;
+import com.jusbilee.app.user.domain.SinaWeiboUser;
+import com.jusbilee.app.user.domain.ThirdUserBase;
+import com.jusbilee.app.user.domain.ThirdUserBind;
+import com.jusbilee.app.user.domain.WeixinUser;
+import com.jusbilee.app.user.param.Credentials;
+import com.jusbilee.app.user.param.PasswordModification;
+import com.jusbilee.app.user.param.Registration;
+import com.jusbilee.app.user.param.ThirdUserCredentials;
+import com.jusbilee.app.user.param.ThirdUserType;
+import com.jusbilee.app.user.service.IUserAccountService;
+import com.rockit.core.Constants;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.UserAccountLockedException;
+import com.rockit.core.exception.UserAlreadyExistsException;
+import com.rockit.core.utils.UniqueIdUtils;
+import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 
 /**
  * Created by Allen on 2016/7/16.

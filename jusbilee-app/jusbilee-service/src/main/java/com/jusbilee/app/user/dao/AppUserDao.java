@@ -1,8 +1,14 @@
 package com.jusbilee.app.user.dao;
 
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
+
 import com.jusbilee.app.user.dao.sql.AppUserDaoSqlProvider;
 import com.jusbilee.app.user.domain.AppUser;
-import org.apache.ibatis.annotations.*;
 
 /**
  * Created by Allen on 2016/7/16.

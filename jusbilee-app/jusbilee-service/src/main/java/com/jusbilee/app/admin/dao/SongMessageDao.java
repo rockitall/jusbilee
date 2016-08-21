@@ -14,7 +14,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 import com.jusbilee.app.admin.dao.sql.SongMessageDaoProvider;
-import com.jusbilee.app.admin.domain.Censorship;
 import com.jusbilee.app.admin.domain.SongMessage;
 import com.jusbilee.app.admin.domain.SongMessageCriteria;
 

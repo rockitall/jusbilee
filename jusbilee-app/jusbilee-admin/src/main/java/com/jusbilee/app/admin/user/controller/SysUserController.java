@@ -16,7 +16,7 @@ import com.jusbilee.app.admin.domain.SysUser;
 import com.jusbilee.app.admin.domain.SysUserCriteria;
 import com.jusbilee.app.admin.service.SysUserServices;
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.common.pojo.JsonResult;
+import com.rockit.core.pojo.JsonResult;
 
 /**
  * @author zhandc 2016年8月6日

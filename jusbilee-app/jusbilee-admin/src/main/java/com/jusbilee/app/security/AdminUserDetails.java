@@ -1,14 +1,15 @@
 package com.jusbilee.app.security;
 
-import com.jusbilee.app.admin.domain.SysUser;
-import com.rockit.core.Constants;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.jusbilee.app.admin.domain.SysUser;
+import com.rockit.core.Constants;
 
 /**
  * Created by Allen on 2016/8/4.

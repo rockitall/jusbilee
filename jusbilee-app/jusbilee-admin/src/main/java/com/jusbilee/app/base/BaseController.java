@@ -1,10 +1,9 @@
 package com.jusbilee.app.base;
 
-import com.jusbilee.app.common.exception.ApiException;
-import com.jusbilee.app.common.code.ErrorCode;
-import com.jusbilee.app.common.exception.IllegalApiParameterException;
-import com.jusbilee.app.common.pojo.JsonResult;
-import org.apache.commons.lang3.StringUtils;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.BindingResult;
@@ -12,9 +11,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import com.rockit.core.code.ErrorCode;
+import com.rockit.core.exception.ApiException;
+import com.rockit.core.exception.IllegalApiParameterException;
+import com.rockit.core.pojo.JsonResult;
 
 /**
  * Created by Allen on 2016/7/30.

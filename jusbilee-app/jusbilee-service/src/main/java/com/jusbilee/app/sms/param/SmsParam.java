@@ -1,9 +1,9 @@
 package com.jusbilee.app.sms.param;
 
 
-import com.rockit.core.constraints.annotation.Mobile;
-
 import javax.validation.constraints.NotNull;
+
+import com.rockit.core.constraints.annotation.Mobile;
 
 /**
  * Created by Allen on 2016/7/31.

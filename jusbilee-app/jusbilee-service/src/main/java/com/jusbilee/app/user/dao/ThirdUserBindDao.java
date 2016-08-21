@@ -1,8 +1,13 @@
 package com.jusbilee.app.user.dao;
 
-import com.jusbilee.app.user.domain.ThirdUserBind;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.mapping.StatementType;
+
+import com.jusbilee.app.user.domain.ThirdUserBind;
 
 /**
  * Created by Allen on 2016/7/16.

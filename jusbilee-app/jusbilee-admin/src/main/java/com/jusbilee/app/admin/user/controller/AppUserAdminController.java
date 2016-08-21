@@ -18,11 +18,11 @@ import com.jusbilee.app.admin.domain.UserArchiveCriteria;
 import com.jusbilee.app.admin.service.AppUserAdminService;
 import com.jusbilee.app.admin.service.UserArchiveService;
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.common.context.HttpContext;
-import com.jusbilee.app.common.pojo.JsonResult;
 import com.jusbilee.app.user.domain.AppUser;
 import com.jusbilee.app.user.param.PasswordModification;
 import com.jusbilee.app.user.service.IUserAccountService;
+import com.rockit.core.context.HttpContext;
+import com.rockit.core.pojo.JsonResult;
 
 /**
  * @author zhandc 2016年8月8日
