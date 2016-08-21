@@ -21,12 +21,11 @@ import com.jusbilee.app.admin.login.service.VerifyImage;
  */
 
 @Controller
-@RequestMapping("/login")
 public class VerifyImageController{
 	
 	private static final String VERIFY_CODE = "verifyCode_sesion";
 	
-	@RequestMapping("/getImage")
+	@RequestMapping("/captcha")
     public  void getImage(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		

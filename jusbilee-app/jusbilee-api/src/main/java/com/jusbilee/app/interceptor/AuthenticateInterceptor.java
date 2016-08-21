@@ -1,6 +1,6 @@
 package com.jusbilee.app.interceptor;
 
-import com.jusbilee.app.common.context.HttpContext;
+import com.rockit.core.context.HttpContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -1,10 +1,10 @@
 package com.jusbilee.app.user.service.impl;
 
-import com.jusbilee.app.common.Constants;
-import com.jusbilee.app.common.exception.BadCredentialsException;
-import com.jusbilee.app.common.exception.UserAccountLockedException;
-import com.jusbilee.app.common.exception.UserAlreadyExistsException;
-import com.jusbilee.app.common.utils.UniqueIdUtils;
+import com.rockit.core.Constants;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.UserAccountLockedException;
+import com.rockit.core.exception.UserAlreadyExistsException;
+import com.rockit.core.utils.UniqueIdUtils;
 import com.jusbilee.app.redis.RedisCacheService;
 import com.jusbilee.app.user.dao.AppUserDao;
 import com.jusbilee.app.user.dao.PassportDao;
@@ -12,6 +12,7 @@ import com.jusbilee.app.user.dao.ThirdUserBindDao;
 import com.jusbilee.app.user.param.*;
 import com.jusbilee.app.user.domain.*;
 import com.jusbilee.app.user.service.IUserAccountService;
+import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -46,6 +47,9 @@ public class UserAccountServiceImpl implements IUserAccountService {
     @Autowired
     private SinaWeiboUserService weiboUserService;
 
+    @Autowired
+    private TLSSignatureGenerator signatureGenerator;
+
     @Value("${passport.securityKey}")
     private String securityKey;
 
@@ -78,6 +82,10 @@ public class UserAccountServiceImpl implements IUserAccountService {
         accessToken.setUserToken(userToken);
         accessToken.setUserSecret(userSecret);
 
+        String identifier = new Md5Hash(passport.getUserId() + userSecret).toHex();
+        String userSignature = signatureGenerator.getUserSignature(identifier);
+        accessToken.setIdentifier(identifier);
+        accessToken.setUserSignature(userSignature);
         return accessToken;
     }
 

@@ -1,6 +1,6 @@
 package com.jusbilee.app.redis;
 
-import com.jusbilee.app.common.utils.JacksonUtil;
+import com.rockit.core.utils.JacksonUtil;
 import com.jusbilee.app.sms.param.SmsType;
 import com.jusbilee.app.sms.param.VerifyCode;
 import com.jusbilee.app.user.domain.AccessToken;

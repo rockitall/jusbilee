@@ -1,10 +1,10 @@
 package com.jusbilee.app.user.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.jusbilee.app.common.exception.BadCredentialsException;
-import com.jusbilee.app.common.exception.InvalidAccessTokenException;
-import com.jusbilee.app.common.exception.NetworkErrorException;
-import com.jusbilee.app.common.utils.JacksonUtil;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.InvalidAccessTokenException;
+import com.rockit.core.exception.NetworkErrorException;
+import com.rockit.core.utils.JacksonUtil;
 import com.jusbilee.app.user.param.ThirdUserCredentials;
 import com.jusbilee.app.user.domain.WeixinUser;
 import com.jusbilee.app.user.service.ThirdUserLookup;

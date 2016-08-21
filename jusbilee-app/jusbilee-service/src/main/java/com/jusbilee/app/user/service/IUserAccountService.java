@@ -1,8 +1,8 @@
 package com.jusbilee.app.user.service;
 
-import com.jusbilee.app.common.exception.BadCredentialsException;
-import com.jusbilee.app.common.exception.UserAccountLockedException;
-import com.jusbilee.app.common.exception.UserAlreadyExistsException;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.UserAccountLockedException;
+import com.rockit.core.exception.UserAlreadyExistsException;
 import com.jusbilee.app.user.domain.AppUser;
 import com.jusbilee.app.user.param.Credentials;
 import com.jusbilee.app.user.param.PasswordModification;
