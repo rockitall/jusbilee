@@ -3,7 +3,7 @@ package com.jusbilee.app.redis;
 import com.rockit.core.utils.JacksonUtil;
 import com.jusbilee.app.sms.param.SmsType;
 import com.jusbilee.app.sms.param.VerifyCode;
-import com.jusbilee.app.user.domain.AccessToken;
+import com.jusbilee.app.user.account.domain.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

@@ -5,6 +5,7 @@ import com.rockit.qcloud.im.common.QCloudProperties;
 import com.tls.sigcheck.tls_sigcheck;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,6 +82,10 @@ public class TLSSignatureGenerator {
         } catch (IOException e) {
             throw new UserSignatureException(e);
         }
+    }
+
+    public String getIdentifier(Long userId) {
+        return new Md5Hash(userId.toString(), String.valueOf(userId.hashCode())).toHex();
     }
 
     public String getUserSignature(String identifier) throws UserSignatureException {
