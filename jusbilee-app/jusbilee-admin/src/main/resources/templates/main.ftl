@@ -37,15 +37,6 @@
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
-        <!-- BEGIN LOGO -->
-        <div class="page-logo">
-            <a href="#">
-                <img src="assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
-            </a>
-            <div class="menu-toggler sidebar-toggler hide">
-            </div>
-        </div>
-        <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
         </a>
@@ -107,24 +98,16 @@
                 <li class="start active open">
                     <a href="javascript:;">
                         <i class="icon-basket"></i>
-                        <span class="title">APP用户管理</span>
+                        <span class="title">基础数据管理</span>
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
-                                <i class="icon-basket"></i>
-                                用户列表</a>
+                            <a href="##" onclick="Index.menuLink('/admin/meta/song/level/list')" id="basic_data_m1"><i class="icon-basket"></i> 闯关难易级别管理</a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-tag"></i>
-                                添加用户</a>
-                        </li>
-
                     </ul>
                 </li>
-                <li class="last ">
+                <li class="last">
                     <a href="javascript:;">
                         <i class="icon-pointer"></i>
                         <span class="title">系统设置</span>
