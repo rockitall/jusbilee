@@ -2,6 +2,7 @@ package com.jusbilee.app.user.account.service.impl;
 
 import com.jusbilee.app.user.account.domain.*;
 import com.jusbilee.app.user.account.param.*;
+import com.jusbilee.app.user.relationship.service.IUserRelationshipService;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.PasswordModificationException;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import sun.plugin.util.UserProfile;
 
 import java.io.File;
 
@@ -206,8 +208,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     @Override
-    public AppUser getUserInfo(Long userId) {
-        return appUserDao.selectById(userId);
+    public AppUserProfile getAppUserProfile(Long userId) {
+        return appUserDao.getUserProfile(userId);
     }
 
     @Override
@@ -222,10 +224,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public UserSummary getUserSummary(Long userId) {
-        return appUserDao.getUserSummary(userId);
-    }
+        UserSummary userSummary = appUserDao.getUserSummary(userId);
 
-    private String uploadToImageServer(File file) {
-        return null;//TODO uploadToImageServer
+        return userSummary;
     }
 }

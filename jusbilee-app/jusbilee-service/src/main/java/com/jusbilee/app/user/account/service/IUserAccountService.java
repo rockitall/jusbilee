@@ -1,17 +1,16 @@
 package com.jusbilee.app.user.account.service;
 
+import com.jusbilee.app.user.account.domain.AccessToken;
+import com.jusbilee.app.user.account.domain.AppUserProfile;
 import com.jusbilee.app.user.account.domain.UserSummary;
-import com.rockit.core.exception.BadCredentialsException;
-import com.rockit.core.exception.UserAccountLockedException;
-import com.rockit.core.exception.UserAlreadyExistsException;
-import com.jusbilee.app.user.account.domain.AppUser;
 import com.jusbilee.app.user.account.param.Credentials;
 import com.jusbilee.app.user.account.param.PasswordModification;
 import com.jusbilee.app.user.account.param.Registration;
 import com.jusbilee.app.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.user.account.domain.AccessToken;
+import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.UserAccountLockedException;
+import com.rockit.core.exception.UserAlreadyExistsException;
 
-import java.io.File;
 
 /**
  * Created by Allen on 2016/8/2.
@@ -29,7 +28,7 @@ public interface IUserAccountService {
 
     void logout(String userToken);
 
-    AppUser getUserInfo(Long userId);
+    AppUserProfile getAppUserProfile(Long userId);
 
     void uploadAvatar(Long userId, String avatar);
 

@@ -60,6 +60,9 @@ public class UserRelationshipService implements IUserRelationshipService {
         friend.setUserId(friendId);
         friend.setFriendUserId(userId);
         userFriendMapper.insertSelective(friend);
+
+        appUserDao.increaseUserFriend(userId);
+        appUserDao.increaseUserFriend(friendId);
     }
 
     @Override
@@ -74,6 +77,9 @@ public class UserRelationshipService implements IUserRelationshipService {
         criteria = new UserFriendCriteria();
         criteria.createCriteria().andUserIdEqualTo(friendId).andFriendUserIdEqualTo(userId);
         userFriendMapper.updateByExampleSelective(friend, criteria);
+
+        appUserDao.decreaseUserFriend(userId);
+        appUserDao.decreaseUserFriend(friendId);
     }
 
     @Override
@@ -92,5 +98,12 @@ public class UserRelationshipService implements IUserRelationshipService {
         UserFriendCriteria criteria = new UserFriendCriteria();
         criteria.createCriteria().andUserIdEqualTo(userId).andFriendUserIdEqualTo(friendId).andIsDeletedEqualTo(Constants.BOOL.NO);
         return userFriendMapper.selectByExample(criteria).size() > 0;
+    }
+
+    @Override
+    public long getUserFriendCount(Long userId) {
+        UserFriendCriteria criteria = new UserFriendCriteria();
+        criteria.createCriteria().andUserIdEqualTo(userId).andIsDeletedEqualTo(Constants.BOOL.NO);
+        return userFriendMapper.countByExample(criteria);
     }
 }

@@ -2,6 +2,7 @@ package com.jusbilee.app.user.account.dao;
 
 import com.jusbilee.app.user.account.dao.sql.AppUserDaoSqlProvider;
 import com.jusbilee.app.user.account.domain.AppUser;
+import com.jusbilee.app.user.account.domain.AppUserProfile;
 import com.jusbilee.app.user.account.domain.UserSummary;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -12,6 +13,9 @@ import org.apache.ibatis.type.JdbcType;
 
 @Mapper
 public interface AppUserDao {
+    @Select("select nickname,points,avatar,friend_count as friendCount from t_app_user where id=#{userId}")
+    AppUserProfile getUserProfile(@Param("userId") Long userId);
+
     @InsertProvider(type = AppUserDaoSqlProvider.class, method = "insert")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id", resultType = Long.class, before = false)
     void insert(AppUser appUser);
@@ -46,4 +50,10 @@ public interface AppUserDao {
 
     @Insert("insert into t_user_summary(user_id) values (#{userId})")
     void initUserSummary(@Param("userId") Long userId);
+
+    @Update("update t_app_user set friend_count=friend_count+1 where id=#{userId}")
+    void increaseUserFriend(@Param("userId") Long userId);
+
+    @Update("update t_app_user set friend_count=friend_count-1 where id=#{userId}")
+    void decreaseUserFriend(@Param("userId") Long userId);
 }

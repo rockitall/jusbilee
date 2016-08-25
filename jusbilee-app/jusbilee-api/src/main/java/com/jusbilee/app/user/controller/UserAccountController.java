@@ -2,17 +2,16 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.user.account.domain.AppUserProfile;
 import com.jusbilee.app.user.account.domain.UserSummary;
 import com.jusbilee.app.user.account.param.Credentials;
 import com.jusbilee.app.user.account.param.PasswordModification;
 import com.jusbilee.app.user.account.param.Registration;
 import com.jusbilee.app.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.user.domain.AppUserProfile;
 import com.jusbilee.app.user.request.UserAvatarModificationRequest;
 import com.jusbilee.app.user.request.UserProfileModificationRequest;
 import com.rockit.core.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
-import com.jusbilee.app.user.account.domain.AppUser;
 import com.jusbilee.app.user.account.domain.AccessToken;
 import com.jusbilee.app.user.account.service.IUserAccountService;
 import org.apache.commons.lang3.StringUtils;
@@ -20,11 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.File;
 
 @RestController
 @RequestMapping("/user")
@@ -70,10 +67,10 @@ public class UserAccountController extends BaseController {
     }
 
     @RequestMapping("/profile")
-    public JsonResult getUserInfo() {
+    public JsonResult getAppUserProfile() {
         Long userId = HttpContext.current().getUserId();
-        AppUser appUser = userAccountService.getUserInfo(userId);
-        return ok(new AppUserProfile(appUser));
+        AppUserProfile profile = userAccountService.getAppUserProfile(userId);
+        return ok(profile);
     }
 
     @RequestMapping("/profile/update")

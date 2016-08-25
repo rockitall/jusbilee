@@ -2,9 +2,8 @@ package com.jusbilee.app.stage.service;
 
 import com.jusbilee.app.mybatis.dao.StageSongMapper;
 import com.jusbilee.app.mybatis.dao.UserStageActLogMapper;
-import com.jusbilee.app.mybatis.pojo.StageSong;
-import com.jusbilee.app.mybatis.pojo.UserStageActLog;
-import com.jusbilee.app.mybatis.pojo.UserStageActLogCriteria;
+import com.jusbilee.app.mybatis.dao.UserSummaryMapper;
+import com.jusbilee.app.mybatis.pojo.*;
 import com.jusbilee.app.stage.dao.UserStageDao;
 import com.jusbilee.app.stage.domain.UserStageLevel;
 import com.jusbilee.app.stage.domain.UserStageSong;
@@ -28,6 +27,9 @@ public class UserStageService {
 
     @Autowired
     private StageSongMapper stageSongMapper;
+
+    @Autowired
+    private UserSummaryMapper userSummaryMapper;
 
 
     public List<UserStageLevel> getUserStageLevelList(Long userId) {
@@ -59,11 +61,13 @@ public class UserStageService {
                 }
             }
 
+
             userStageActLogMapper.updateByPrimaryKeySelective(log);
             return;
         }
 
         StageSong song = stageSongMapper.selectByPrimaryKey(log.getStageSongId());
+
 
         if (log.getScore() >= song.getPassScore()) {
             log.setIsPassed(Constants.BOOL.YES);
@@ -71,6 +75,13 @@ public class UserStageService {
 
         log.setCreateTime(new Date());
         userStageActLogMapper.insertSelective(log);
+    }
+
+    private UserSummary getUserSummaryBuUserId(Long userId) {
+        UserSummaryCriteria criteria = new UserSummaryCriteria();
+        criteria.createCriteria().andUserIdEqualTo(userId);
+        List<UserSummary> summaryList = userSummaryMapper.selectByExample(criteria);
+        return summaryList.get(0);
     }
 
     private UserStageActLog getUserStageActLogByStageSongId(Long userId, Integer stageSongId) {

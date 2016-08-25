@@ -16,4 +16,6 @@ public interface IUserRelationshipService {
     List<UserFriendProfile> getAllFriends(Long userId);
 
     boolean isFriend(Long userId, Long friendId);
+
+    long getUserFriendCount(Long userId);
 }
