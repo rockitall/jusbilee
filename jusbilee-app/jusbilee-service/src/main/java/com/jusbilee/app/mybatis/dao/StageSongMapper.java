@@ -2,20 +2,10 @@ package com.jusbilee.app.mybatis.dao;
 
 import com.jusbilee.app.mybatis.pojo.StageSong;
 import com.jusbilee.app.mybatis.pojo.StageSongCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface StageSongMapper {
     /**
@@ -24,7 +14,7 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=StageSongSqlProvider.class, method="countByExample")
+    @SelectProvider(type = StageSongSqlProvider.class, method = "countByExample")
     long countByExample(StageSongCriteria example);
 
     /**
@@ -33,7 +23,7 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @DeleteProvider(type=StageSongSqlProvider.class, method="deleteByExample")
+    @DeleteProvider(type = StageSongSqlProvider.class, method = "deleteByExample")
     int deleteByExample(StageSongCriteria example);
 
     /**
@@ -43,8 +33,8 @@ public interface StageSongMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Delete({
-        "delete from t_stage_song",
-        "where id = #{id,jdbcType=INTEGER}"
+            "delete from t_stage_song",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer id);
 
@@ -55,14 +45,14 @@ public interface StageSongMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Insert({
-        "insert into t_stage_song (song_id, stage_level_id, ",
-        "pass_score, is_deleted, ",
-        "create_time, update_time)",
-        "values (#{songId,jdbcType=INTEGER}, #{stageLevelId,jdbcType=INTEGER}, ",
-        "#{passScore,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
+            "insert into t_stage_song (song_id, stage_level_id, ",
+            "pass_score, is_deleted, ",
+            "create_time, update_time)",
+            "values (#{songId,jdbcType=INTEGER}, #{stageLevelId,jdbcType=INTEGER}, ",
+            "#{passScore,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, ",
+            "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Integer.class)
     int insert(StageSong record);
 
     /**
@@ -71,8 +61,8 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @InsertProvider(type=StageSongSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
+    @InsertProvider(type = StageSongSqlProvider.class, method = "insertSelective")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Integer.class)
     int insertSelective(StageSong record);
 
     /**
@@ -81,15 +71,15 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=StageSongSqlProvider.class, method="selectByExample")
+    @SelectProvider(type = StageSongSqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="song_id", property="songId", jdbcType=JdbcType.INTEGER),
-        @Result(column="stage_level_id", property="stageLevelId", jdbcType=JdbcType.INTEGER),
-        @Result(column="pass_score", property="passScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "song_id", property = "songId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "stage_level_id", property = "stageLevelId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "pass_score", property = "passScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<StageSong> selectByExample(StageSongCriteria example);
 
@@ -100,19 +90,19 @@ public interface StageSongMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Select({
-        "select",
-        "id, song_id, stage_level_id, pass_score, is_deleted, create_time, update_time",
-        "from t_stage_song",
-        "where id = #{id,jdbcType=INTEGER}"
+            "select",
+            "id, song_id, stage_level_id, pass_score, is_deleted, create_time, update_time",
+            "from t_stage_song",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="song_id", property="songId", jdbcType=JdbcType.INTEGER),
-        @Result(column="stage_level_id", property="stageLevelId", jdbcType=JdbcType.INTEGER),
-        @Result(column="pass_score", property="passScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "song_id", property = "songId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "stage_level_id", property = "stageLevelId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "pass_score", property = "passScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     StageSong selectByPrimaryKey(Integer id);
 
@@ -122,7 +112,7 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=StageSongSqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = StageSongSqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") StageSong record, @Param("example") StageSongCriteria example);
 
     /**
@@ -131,7 +121,7 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=StageSongSqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = StageSongSqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") StageSong record, @Param("example") StageSongCriteria example);
 
     /**
@@ -140,7 +130,7 @@ public interface StageSongMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=StageSongSqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = StageSongSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(StageSong record);
 
     /**
@@ -150,14 +140,14 @@ public interface StageSongMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Update({
-        "update t_stage_song",
-        "set song_id = #{songId,jdbcType=INTEGER},",
-          "stage_level_id = #{stageLevelId,jdbcType=INTEGER},",
-          "pass_score = #{passScore,jdbcType=INTEGER},",
-          "is_deleted = #{isDeleted,jdbcType=TINYINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+            "update t_stage_song",
+            "set song_id = #{songId,jdbcType=INTEGER},",
+            "stage_level_id = #{stageLevelId,jdbcType=INTEGER},",
+            "pass_score = #{passScore,jdbcType=INTEGER},",
+            "is_deleted = #{isDeleted,jdbcType=TINYINT},",
+            "create_time = #{createTime,jdbcType=TIMESTAMP},",
+            "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(StageSong record);
 }

@@ -2,20 +2,10 @@ package com.jusbilee.app.mybatis.dao;
 
 import com.jusbilee.app.mybatis.pojo.UserGoldCoinLog;
 import com.jusbilee.app.mybatis.pojo.UserGoldCoinLogCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface UserGoldCoinLogMapper {
     /**
@@ -24,7 +14,7 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserGoldCoinLogSqlProvider.class, method="countByExample")
+    @SelectProvider(type = UserGoldCoinLogSqlProvider.class, method = "countByExample")
     long countByExample(UserGoldCoinLogCriteria example);
 
     /**
@@ -33,7 +23,7 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @DeleteProvider(type=UserGoldCoinLogSqlProvider.class, method="deleteByExample")
+    @DeleteProvider(type = UserGoldCoinLogSqlProvider.class, method = "deleteByExample")
     int deleteByExample(UserGoldCoinLogCriteria example);
 
     /**
@@ -43,8 +33,8 @@ public interface UserGoldCoinLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Delete({
-        "delete from t_user_gold_coin_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from t_user_gold_coin_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -55,18 +45,18 @@ public interface UserGoldCoinLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Insert({
-        "insert into t_user_gold_coin_log (user_id, type, ",
-        "gold_coin, event_id, ",
-        "event_name, event_target_id, ",
-        "is_deleted, create_time, ",
-        "update_time)",
-        "values (#{userId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, ",
-        "#{goldCoin,jdbcType=INTEGER}, #{eventId,jdbcType=INTEGER}, ",
-        "#{eventName,jdbcType=VARCHAR}, #{eventTargetId,jdbcType=BIGINT}, ",
-        "#{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+            "insert into t_user_gold_coin_log (user_id, type, ",
+            "gold_coin, event_id, ",
+            "event_name, event_target_id, ",
+            "is_deleted, create_time, ",
+            "update_time)",
+            "values (#{userId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, ",
+            "#{goldCoin,jdbcType=INTEGER}, #{eventId,jdbcType=INTEGER}, ",
+            "#{eventName,jdbcType=VARCHAR}, #{eventTargetId,jdbcType=BIGINT}, ",
+            "#{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
+            "#{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(UserGoldCoinLog record);
 
     /**
@@ -75,8 +65,8 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @InsertProvider(type=UserGoldCoinLogSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @InsertProvider(type = UserGoldCoinLogSqlProvider.class, method = "insertSelective")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insertSelective(UserGoldCoinLog record);
 
     /**
@@ -85,18 +75,18 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserGoldCoinLogSqlProvider.class, method="selectByExample")
+    @SelectProvider(type = UserGoldCoinLogSqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="type", property="type", jdbcType=JdbcType.TINYINT),
-        @Result(column="gold_coin", property="goldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="event_id", property="eventId", jdbcType=JdbcType.INTEGER),
-        @Result(column="event_name", property="eventName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="event_target_id", property="eventTargetId", jdbcType=JdbcType.BIGINT),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "type", property = "type", jdbcType = JdbcType.TINYINT),
+            @Result(column = "gold_coin", property = "goldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "event_id", property = "eventId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "event_name", property = "eventName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "event_target_id", property = "eventTargetId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<UserGoldCoinLog> selectByExample(UserGoldCoinLogCriteria example);
 
@@ -107,23 +97,23 @@ public interface UserGoldCoinLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Select({
-        "select",
-        "id, user_id, type, gold_coin, event_id, event_name, event_target_id, is_deleted, ",
-        "create_time, update_time",
-        "from t_user_gold_coin_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, user_id, type, gold_coin, event_id, event_name, event_target_id, is_deleted, ",
+            "create_time, update_time",
+            "from t_user_gold_coin_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="type", property="type", jdbcType=JdbcType.TINYINT),
-        @Result(column="gold_coin", property="goldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="event_id", property="eventId", jdbcType=JdbcType.INTEGER),
-        @Result(column="event_name", property="eventName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="event_target_id", property="eventTargetId", jdbcType=JdbcType.BIGINT),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "type", property = "type", jdbcType = JdbcType.TINYINT),
+            @Result(column = "gold_coin", property = "goldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "event_id", property = "eventId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "event_name", property = "eventName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "event_target_id", property = "eventTargetId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     UserGoldCoinLog selectByPrimaryKey(Long id);
 
@@ -133,7 +123,7 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserGoldCoinLogSqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = UserGoldCoinLogSqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") UserGoldCoinLog record, @Param("example") UserGoldCoinLogCriteria example);
 
     /**
@@ -142,7 +132,7 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserGoldCoinLogSqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = UserGoldCoinLogSqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") UserGoldCoinLog record, @Param("example") UserGoldCoinLogCriteria example);
 
     /**
@@ -151,7 +141,7 @@ public interface UserGoldCoinLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserGoldCoinLogSqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = UserGoldCoinLogSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserGoldCoinLog record);
 
     /**
@@ -161,17 +151,17 @@ public interface UserGoldCoinLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Update({
-        "update t_user_gold_coin_log",
-        "set user_id = #{userId,jdbcType=BIGINT},",
-          "type = #{type,jdbcType=TINYINT},",
-          "gold_coin = #{goldCoin,jdbcType=INTEGER},",
-          "event_id = #{eventId,jdbcType=INTEGER},",
-          "event_name = #{eventName,jdbcType=VARCHAR},",
-          "event_target_id = #{eventTargetId,jdbcType=BIGINT},",
-          "is_deleted = #{isDeleted,jdbcType=TINYINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update t_user_gold_coin_log",
+            "set user_id = #{userId,jdbcType=BIGINT},",
+            "type = #{type,jdbcType=TINYINT},",
+            "gold_coin = #{goldCoin,jdbcType=INTEGER},",
+            "event_id = #{eventId,jdbcType=INTEGER},",
+            "event_name = #{eventName,jdbcType=VARCHAR},",
+            "event_target_id = #{eventTargetId,jdbcType=BIGINT},",
+            "is_deleted = #{isDeleted,jdbcType=TINYINT},",
+            "create_time = #{createTime,jdbcType=TIMESTAMP},",
+            "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserGoldCoinLog record);
 }

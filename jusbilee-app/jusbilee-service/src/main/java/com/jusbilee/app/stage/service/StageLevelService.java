@@ -1,10 +1,8 @@
 package com.jusbilee.app.stage.service;
 
 import com.jusbilee.app.mybatis.dao.StageLevelMapper;
-import com.jusbilee.app.mybatis.dao.StageLevelMapper;
 import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.jusbilee.app.mybatis.pojo.StageLevelCriteria;
-import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.rockit.core.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,19 +1,18 @@
 package com.jusbilee.app.user.account.service.impl;
 
+import com.jusbilee.app.redis.RedisCacheService;
+import com.jusbilee.app.user.account.dao.AppUserDao;
+import com.jusbilee.app.user.account.dao.PassportDao;
+import com.jusbilee.app.user.account.dao.ThirdUserBindDao;
 import com.jusbilee.app.user.account.domain.*;
 import com.jusbilee.app.user.account.param.*;
-import com.jusbilee.app.user.relationship.service.IUserRelationshipService;
+import com.jusbilee.app.user.account.service.IUserAccountService;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.PasswordModificationException;
 import com.rockit.core.exception.UserAccountLockedException;
 import com.rockit.core.exception.UserAlreadyExistsException;
 import com.rockit.core.utils.UniqueIdUtils;
-import com.jusbilee.app.redis.RedisCacheService;
-import com.jusbilee.app.user.account.dao.AppUserDao;
-import com.jusbilee.app.user.account.dao.PassportDao;
-import com.jusbilee.app.user.account.dao.ThirdUserBindDao;
-import com.jusbilee.app.user.account.service.IUserAccountService;
 import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -23,9 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import sun.plugin.util.UserProfile;
-
-import java.io.File;
 
 /**
  * Created by Allen on 2016/7/16.

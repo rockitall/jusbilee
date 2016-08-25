@@ -2,20 +2,10 @@ package com.jusbilee.app.mybatis.dao;
 
 import com.jusbilee.app.mybatis.pojo.UserSummary;
 import com.jusbilee.app.mybatis.pojo.UserSummaryCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface UserSummaryMapper {
     /**
@@ -24,7 +14,7 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserSummarySqlProvider.class, method="countByExample")
+    @SelectProvider(type = UserSummarySqlProvider.class, method = "countByExample")
     long countByExample(UserSummaryCriteria example);
 
     /**
@@ -33,7 +23,7 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @DeleteProvider(type=UserSummarySqlProvider.class, method="deleteByExample")
+    @DeleteProvider(type = UserSummarySqlProvider.class, method = "deleteByExample")
     int deleteByExample(UserSummaryCriteria example);
 
     /**
@@ -43,8 +33,8 @@ public interface UserSummaryMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Delete({
-        "delete from t_user_summary",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from t_user_summary",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -55,20 +45,20 @@ public interface UserSummaryMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Insert({
-        "insert into t_user_summary (user_id, total_gold_coin, ",
-        "total_practice_time, total_practice_score, ",
-        "total_practice_count, unlock_practice_song_count, ",
-        "match_count, match_win_count, ",
-        "last_practice_time, create_time, ",
-        "update_time)",
-        "values (#{userId,jdbcType=BIGINT}, #{totalGoldCoin,jdbcType=INTEGER}, ",
-        "#{totalPracticeTime,jdbcType=INTEGER}, #{totalPracticeScore,jdbcType=INTEGER}, ",
-        "#{totalPracticeCount,jdbcType=INTEGER}, #{unlockPracticeSongCount,jdbcType=INTEGER}, ",
-        "#{matchCount,jdbcType=INTEGER}, #{matchWinCount,jdbcType=INTEGER}, ",
-        "#{lastPracticeTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+            "insert into t_user_summary (user_id, total_gold_coin, ",
+            "total_practice_time, total_practice_score, ",
+            "total_practice_count, unlock_practice_song_count, ",
+            "match_count, match_win_count, ",
+            "last_practice_time, create_time, ",
+            "update_time)",
+            "values (#{userId,jdbcType=BIGINT}, #{totalGoldCoin,jdbcType=INTEGER}, ",
+            "#{totalPracticeTime,jdbcType=INTEGER}, #{totalPracticeScore,jdbcType=INTEGER}, ",
+            "#{totalPracticeCount,jdbcType=INTEGER}, #{unlockPracticeSongCount,jdbcType=INTEGER}, ",
+            "#{matchCount,jdbcType=INTEGER}, #{matchWinCount,jdbcType=INTEGER}, ",
+            "#{lastPracticeTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, ",
+            "#{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(UserSummary record);
 
     /**
@@ -77,8 +67,8 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @InsertProvider(type=UserSummarySqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @InsertProvider(type = UserSummarySqlProvider.class, method = "insertSelective")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insertSelective(UserSummary record);
 
     /**
@@ -87,20 +77,20 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserSummarySqlProvider.class, method="selectByExample")
+    @SelectProvider(type = UserSummarySqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="total_gold_coin", property="totalGoldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_time", property="totalPracticeTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_score", property="totalPracticeScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_count", property="totalPracticeCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="unlock_practice_song_count", property="unlockPracticeSongCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="match_count", property="matchCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="match_win_count", property="matchWinCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="last_practice_time", property="lastPracticeTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "total_gold_coin", property = "totalGoldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_time", property = "totalPracticeTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_score", property = "totalPracticeScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_count", property = "totalPracticeCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "unlock_practice_song_count", property = "unlockPracticeSongCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "match_count", property = "matchCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "match_win_count", property = "matchWinCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "last_practice_time", property = "lastPracticeTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<UserSummary> selectByExample(UserSummaryCriteria example);
 
@@ -111,26 +101,26 @@ public interface UserSummaryMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Select({
-        "select",
-        "id, user_id, total_gold_coin, total_practice_time, total_practice_score, total_practice_count, ",
-        "unlock_practice_song_count, match_count, match_win_count, last_practice_time, ",
-        "create_time, update_time",
-        "from t_user_summary",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, user_id, total_gold_coin, total_practice_time, total_practice_score, total_practice_count, ",
+            "unlock_practice_song_count, match_count, match_win_count, last_practice_time, ",
+            "create_time, update_time",
+            "from t_user_summary",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="total_gold_coin", property="totalGoldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_time", property="totalPracticeTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_score", property="totalPracticeScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_count", property="totalPracticeCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="unlock_practice_song_count", property="unlockPracticeSongCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="match_count", property="matchCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="match_win_count", property="matchWinCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="last_practice_time", property="lastPracticeTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "total_gold_coin", property = "totalGoldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_time", property = "totalPracticeTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_score", property = "totalPracticeScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_count", property = "totalPracticeCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "unlock_practice_song_count", property = "unlockPracticeSongCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "match_count", property = "matchCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "match_win_count", property = "matchWinCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "last_practice_time", property = "lastPracticeTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     UserSummary selectByPrimaryKey(Long id);
 
@@ -140,7 +130,7 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserSummarySqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = UserSummarySqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") UserSummary record, @Param("example") UserSummaryCriteria example);
 
     /**
@@ -149,7 +139,7 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserSummarySqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = UserSummarySqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") UserSummary record, @Param("example") UserSummaryCriteria example);
 
     /**
@@ -158,7 +148,7 @@ public interface UserSummaryMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserSummarySqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = UserSummarySqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserSummary record);
 
     /**
@@ -168,19 +158,19 @@ public interface UserSummaryMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Update({
-        "update t_user_summary",
-        "set user_id = #{userId,jdbcType=BIGINT},",
-          "total_gold_coin = #{totalGoldCoin,jdbcType=INTEGER},",
-          "total_practice_time = #{totalPracticeTime,jdbcType=INTEGER},",
-          "total_practice_score = #{totalPracticeScore,jdbcType=INTEGER},",
-          "total_practice_count = #{totalPracticeCount,jdbcType=INTEGER},",
-          "unlock_practice_song_count = #{unlockPracticeSongCount,jdbcType=INTEGER},",
-          "match_count = #{matchCount,jdbcType=INTEGER},",
-          "match_win_count = #{matchWinCount,jdbcType=INTEGER},",
-          "last_practice_time = #{lastPracticeTime,jdbcType=TIMESTAMP},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update t_user_summary",
+            "set user_id = #{userId,jdbcType=BIGINT},",
+            "total_gold_coin = #{totalGoldCoin,jdbcType=INTEGER},",
+            "total_practice_time = #{totalPracticeTime,jdbcType=INTEGER},",
+            "total_practice_score = #{totalPracticeScore,jdbcType=INTEGER},",
+            "total_practice_count = #{totalPracticeCount,jdbcType=INTEGER},",
+            "unlock_practice_song_count = #{unlockPracticeSongCount,jdbcType=INTEGER},",
+            "match_count = #{matchCount,jdbcType=INTEGER},",
+            "match_win_count = #{matchWinCount,jdbcType=INTEGER},",
+            "last_practice_time = #{lastPracticeTime,jdbcType=TIMESTAMP},",
+            "create_time = #{createTime,jdbcType=TIMESTAMP},",
+            "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserSummary record);
 }

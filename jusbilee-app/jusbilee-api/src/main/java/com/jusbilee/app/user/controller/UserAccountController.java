@@ -2,18 +2,18 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.user.account.domain.AccessToken;
 import com.jusbilee.app.user.account.domain.AppUserProfile;
 import com.jusbilee.app.user.account.domain.UserSummary;
 import com.jusbilee.app.user.account.param.Credentials;
 import com.jusbilee.app.user.account.param.PasswordModification;
 import com.jusbilee.app.user.account.param.Registration;
 import com.jusbilee.app.user.account.param.ThirdUserCredentials;
+import com.jusbilee.app.user.account.service.IUserAccountService;
 import com.jusbilee.app.user.request.UserAvatarModificationRequest;
 import com.jusbilee.app.user.request.UserProfileModificationRequest;
 import com.rockit.core.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
-import com.jusbilee.app.user.account.domain.AccessToken;
-import com.jusbilee.app.user.account.service.IUserAccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

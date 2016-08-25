@@ -3,7 +3,6 @@ package com.jusbilee.app.user.relationship.service.impl;
 import com.jusbilee.app.mybatis.dao.UserFriendMapper;
 import com.jusbilee.app.mybatis.pojo.UserFriend;
 import com.jusbilee.app.mybatis.pojo.UserFriendCriteria;
-
 import com.jusbilee.app.user.account.dao.AppUserDao;
 import com.jusbilee.app.user.relationship.dao.UserRelationshipDao;
 import com.jusbilee.app.user.relationship.domain.UserFriendProfile;

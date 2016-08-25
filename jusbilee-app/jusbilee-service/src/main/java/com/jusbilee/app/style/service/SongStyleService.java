@@ -1,11 +1,8 @@
 package com.jusbilee.app.style.service;
 
 import com.jusbilee.app.mybatis.dao.SongStyleMapper;
-import com.jusbilee.app.mybatis.dao.StageLevelMapper;
 import com.jusbilee.app.mybatis.pojo.SongStyle;
 import com.jusbilee.app.mybatis.pojo.SongStyleCriteria;
-import com.jusbilee.app.mybatis.pojo.StageLevel;
-import com.jusbilee.app.mybatis.pojo.StageLevelCriteria;
 import com.rockit.core.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

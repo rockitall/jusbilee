@@ -2,20 +2,10 @@ package com.jusbilee.app.mybatis.dao;
 
 import com.jusbilee.app.mybatis.pojo.UserPracticeActLog;
 import com.jusbilee.app.mybatis.pojo.UserPracticeActLogCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface UserPracticeActLogMapper {
     /**
@@ -24,7 +14,7 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserPracticeActLogSqlProvider.class, method="countByExample")
+    @SelectProvider(type = UserPracticeActLogSqlProvider.class, method = "countByExample")
     long countByExample(UserPracticeActLogCriteria example);
 
     /**
@@ -33,7 +23,7 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @DeleteProvider(type=UserPracticeActLogSqlProvider.class, method="deleteByExample")
+    @DeleteProvider(type = UserPracticeActLogSqlProvider.class, method = "deleteByExample")
     int deleteByExample(UserPracticeActLogCriteria example);
 
     /**
@@ -43,8 +33,8 @@ public interface UserPracticeActLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Delete({
-        "delete from t_user_practice_act_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from t_user_practice_act_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -55,20 +45,20 @@ public interface UserPracticeActLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Insert({
-        "insert into t_user_practice_act_log (user_id, practice_song_id, ",
-        "style_id, total_practice_time, ",
-        "total_practice_count, total_practice_score, ",
-        "best_avg_score, full_score_best_time, ",
-        "is_deleted, create_time, ",
-        "update_time)",
-        "values (#{userId,jdbcType=BIGINT}, #{practiceSongId,jdbcType=INTEGER}, ",
-        "#{styleId,jdbcType=INTEGER}, #{totalPracticeTime,jdbcType=INTEGER}, ",
-        "#{totalPracticeCount,jdbcType=INTEGER}, #{totalPracticeScore,jdbcType=INTEGER}, ",
-        "#{bestAvgScore,jdbcType=INTEGER}, #{fullScoreBestTime,jdbcType=INTEGER}, ",
-        "#{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+            "insert into t_user_practice_act_log (user_id, practice_song_id, ",
+            "style_id, total_practice_time, ",
+            "total_practice_count, total_practice_score, ",
+            "best_avg_score, full_score_best_time, ",
+            "is_deleted, create_time, ",
+            "update_time)",
+            "values (#{userId,jdbcType=BIGINT}, #{practiceSongId,jdbcType=INTEGER}, ",
+            "#{styleId,jdbcType=INTEGER}, #{totalPracticeTime,jdbcType=INTEGER}, ",
+            "#{totalPracticeCount,jdbcType=INTEGER}, #{totalPracticeScore,jdbcType=INTEGER}, ",
+            "#{bestAvgScore,jdbcType=INTEGER}, #{fullScoreBestTime,jdbcType=INTEGER}, ",
+            "#{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
+            "#{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(UserPracticeActLog record);
 
     /**
@@ -77,8 +67,8 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @InsertProvider(type=UserPracticeActLogSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @InsertProvider(type = UserPracticeActLogSqlProvider.class, method = "insertSelective")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insertSelective(UserPracticeActLog record);
 
     /**
@@ -87,20 +77,20 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserPracticeActLogSqlProvider.class, method="selectByExample")
+    @SelectProvider(type = UserPracticeActLogSqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="practice_song_id", property="practiceSongId", jdbcType=JdbcType.INTEGER),
-        @Result(column="style_id", property="styleId", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_time", property="totalPracticeTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_count", property="totalPracticeCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_score", property="totalPracticeScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="best_avg_score", property="bestAvgScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="full_score_best_time", property="fullScoreBestTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "practice_song_id", property = "practiceSongId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "style_id", property = "styleId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_time", property = "totalPracticeTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_count", property = "totalPracticeCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_score", property = "totalPracticeScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "best_avg_score", property = "bestAvgScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "full_score_best_time", property = "fullScoreBestTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<UserPracticeActLog> selectByExample(UserPracticeActLogCriteria example);
 
@@ -111,26 +101,26 @@ public interface UserPracticeActLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Select({
-        "select",
-        "id, user_id, practice_song_id, style_id, total_practice_time, total_practice_count, ",
-        "total_practice_score, best_avg_score, full_score_best_time, is_deleted, create_time, ",
-        "update_time",
-        "from t_user_practice_act_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, user_id, practice_song_id, style_id, total_practice_time, total_practice_count, ",
+            "total_practice_score, best_avg_score, full_score_best_time, is_deleted, create_time, ",
+            "update_time",
+            "from t_user_practice_act_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="practice_song_id", property="practiceSongId", jdbcType=JdbcType.INTEGER),
-        @Result(column="style_id", property="styleId", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_time", property="totalPracticeTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_count", property="totalPracticeCount", jdbcType=JdbcType.INTEGER),
-        @Result(column="total_practice_score", property="totalPracticeScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="best_avg_score", property="bestAvgScore", jdbcType=JdbcType.INTEGER),
-        @Result(column="full_score_best_time", property="fullScoreBestTime", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "practice_song_id", property = "practiceSongId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "style_id", property = "styleId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_time", property = "totalPracticeTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_count", property = "totalPracticeCount", jdbcType = JdbcType.INTEGER),
+            @Result(column = "total_practice_score", property = "totalPracticeScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "best_avg_score", property = "bestAvgScore", jdbcType = JdbcType.INTEGER),
+            @Result(column = "full_score_best_time", property = "fullScoreBestTime", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     UserPracticeActLog selectByPrimaryKey(Long id);
 
@@ -140,7 +130,7 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeActLogSqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = UserPracticeActLogSqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") UserPracticeActLog record, @Param("example") UserPracticeActLogCriteria example);
 
     /**
@@ -149,7 +139,7 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeActLogSqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = UserPracticeActLogSqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") UserPracticeActLog record, @Param("example") UserPracticeActLogCriteria example);
 
     /**
@@ -158,7 +148,7 @@ public interface UserPracticeActLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeActLogSqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = UserPracticeActLogSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserPracticeActLog record);
 
     /**
@@ -168,19 +158,19 @@ public interface UserPracticeActLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Update({
-        "update t_user_practice_act_log",
-        "set user_id = #{userId,jdbcType=BIGINT},",
-          "practice_song_id = #{practiceSongId,jdbcType=INTEGER},",
-          "style_id = #{styleId,jdbcType=INTEGER},",
-          "total_practice_time = #{totalPracticeTime,jdbcType=INTEGER},",
-          "total_practice_count = #{totalPracticeCount,jdbcType=INTEGER},",
-          "total_practice_score = #{totalPracticeScore,jdbcType=INTEGER},",
-          "best_avg_score = #{bestAvgScore,jdbcType=INTEGER},",
-          "full_score_best_time = #{fullScoreBestTime,jdbcType=INTEGER},",
-          "is_deleted = #{isDeleted,jdbcType=TINYINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update t_user_practice_act_log",
+            "set user_id = #{userId,jdbcType=BIGINT},",
+            "practice_song_id = #{practiceSongId,jdbcType=INTEGER},",
+            "style_id = #{styleId,jdbcType=INTEGER},",
+            "total_practice_time = #{totalPracticeTime,jdbcType=INTEGER},",
+            "total_practice_count = #{totalPracticeCount,jdbcType=INTEGER},",
+            "total_practice_score = #{totalPracticeScore,jdbcType=INTEGER},",
+            "best_avg_score = #{bestAvgScore,jdbcType=INTEGER},",
+            "full_score_best_time = #{fullScoreBestTime,jdbcType=INTEGER},",
+            "is_deleted = #{isDeleted,jdbcType=TINYINT},",
+            "create_time = #{createTime,jdbcType=TIMESTAMP},",
+            "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserPracticeActLog record);
 }

@@ -1,7 +1,7 @@
 package com.jusbilee.app.base;
 
-import com.rockit.core.exception.ApiException;
 import com.rockit.core.code.ErrorCode;
+import com.rockit.core.exception.ApiException;
 import com.rockit.core.exception.IllegalApiParameterException;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

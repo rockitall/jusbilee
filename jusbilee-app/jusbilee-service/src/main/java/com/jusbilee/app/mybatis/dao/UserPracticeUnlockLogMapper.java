@@ -2,20 +2,10 @@ package com.jusbilee.app.mybatis.dao;
 
 import com.jusbilee.app.mybatis.pojo.UserPracticeUnlockLog;
 import com.jusbilee.app.mybatis.pojo.UserPracticeUnlockLogCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface UserPracticeUnlockLogMapper {
     /**
@@ -24,7 +14,7 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserPracticeUnlockLogSqlProvider.class, method="countByExample")
+    @SelectProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "countByExample")
     long countByExample(UserPracticeUnlockLogCriteria example);
 
     /**
@@ -33,7 +23,7 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @DeleteProvider(type=UserPracticeUnlockLogSqlProvider.class, method="deleteByExample")
+    @DeleteProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "deleteByExample")
     int deleteByExample(UserPracticeUnlockLogCriteria example);
 
     /**
@@ -43,8 +33,8 @@ public interface UserPracticeUnlockLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Delete({
-        "delete from t_user_practice_unlock_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "delete from t_user_practice_unlock_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
@@ -55,14 +45,14 @@ public interface UserPracticeUnlockLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Insert({
-        "insert into t_user_practice_unlock_log (user_id, practice_song_id, ",
-        "gold_coin, is_deleted, ",
-        "create_time, update_time)",
-        "values (#{userId,jdbcType=BIGINT}, #{practiceSongId,jdbcType=INTEGER}, ",
-        "#{goldCoin,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
+            "insert into t_user_practice_unlock_log (user_id, practice_song_id, ",
+            "gold_coin, is_deleted, ",
+            "create_time, update_time)",
+            "values (#{userId,jdbcType=BIGINT}, #{practiceSongId,jdbcType=INTEGER}, ",
+            "#{goldCoin,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, ",
+            "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insert(UserPracticeUnlockLog record);
 
     /**
@@ -71,8 +61,8 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @InsertProvider(type=UserPracticeUnlockLogSqlProvider.class, method="insertSelective")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
+    @InsertProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "insertSelective")
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = false, resultType = Long.class)
     int insertSelective(UserPracticeUnlockLog record);
 
     /**
@@ -81,15 +71,15 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @SelectProvider(type=UserPracticeUnlockLogSqlProvider.class, method="selectByExample")
+    @SelectProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "selectByExample")
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="practice_song_id", property="practiceSongId", jdbcType=JdbcType.INTEGER),
-        @Result(column="gold_coin", property="goldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "practice_song_id", property = "practiceSongId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "gold_coin", property = "goldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<UserPracticeUnlockLog> selectByExample(UserPracticeUnlockLogCriteria example);
 
@@ -100,19 +90,19 @@ public interface UserPracticeUnlockLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Select({
-        "select",
-        "id, user_id, practice_song_id, gold_coin, is_deleted, create_time, update_time",
-        "from t_user_practice_unlock_log",
-        "where id = #{id,jdbcType=BIGINT}"
+            "select",
+            "id, user_id, practice_song_id, gold_coin, is_deleted, create_time, update_time",
+            "from t_user_practice_unlock_log",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
-        @Result(column="practice_song_id", property="practiceSongId", jdbcType=JdbcType.INTEGER),
-        @Result(column="gold_coin", property="goldCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.TINYINT),
-        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "practice_song_id", property = "practiceSongId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "gold_coin", property = "goldCoin", jdbcType = JdbcType.INTEGER),
+            @Result(column = "is_deleted", property = "isDeleted", jdbcType = JdbcType.TINYINT),
+            @Result(column = "create_time", property = "createTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_time", property = "updateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     UserPracticeUnlockLog selectByPrimaryKey(Long id);
 
@@ -122,7 +112,7 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeUnlockLogSqlProvider.class, method="updateByExampleSelective")
+    @UpdateProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "updateByExampleSelective")
     int updateByExampleSelective(@Param("record") UserPracticeUnlockLog record, @Param("example") UserPracticeUnlockLogCriteria example);
 
     /**
@@ -131,7 +121,7 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeUnlockLogSqlProvider.class, method="updateByExample")
+    @UpdateProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "updateByExample")
     int updateByExample(@Param("record") UserPracticeUnlockLog record, @Param("example") UserPracticeUnlockLogCriteria example);
 
     /**
@@ -140,7 +130,7 @@ public interface UserPracticeUnlockLogMapper {
      *
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
-    @UpdateProvider(type=UserPracticeUnlockLogSqlProvider.class, method="updateByPrimaryKeySelective")
+    @UpdateProvider(type = UserPracticeUnlockLogSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserPracticeUnlockLog record);
 
     /**
@@ -150,14 +140,14 @@ public interface UserPracticeUnlockLogMapper {
      * @mbg.generated Thu Aug 25 23:36:33 CST 2016
      */
     @Update({
-        "update t_user_practice_unlock_log",
-        "set user_id = #{userId,jdbcType=BIGINT},",
-          "practice_song_id = #{practiceSongId,jdbcType=INTEGER},",
-          "gold_coin = #{goldCoin,jdbcType=INTEGER},",
-          "is_deleted = #{isDeleted,jdbcType=TINYINT},",
-          "create_time = #{createTime,jdbcType=TIMESTAMP},",
-          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=BIGINT}"
+            "update t_user_practice_unlock_log",
+            "set user_id = #{userId,jdbcType=BIGINT},",
+            "practice_song_id = #{practiceSongId,jdbcType=INTEGER},",
+            "gold_coin = #{goldCoin,jdbcType=INTEGER},",
+            "is_deleted = #{isDeleted,jdbcType=TINYINT},",
+            "create_time = #{createTime,jdbcType=TIMESTAMP},",
+            "update_time = #{updateTime,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserPracticeUnlockLog record);
 }

@@ -1,7 +1,6 @@
 package com.jusbilee.app.user.account.param;
 
 import com.rockit.core.constraints.annotation.ID;
-import com.rockit.core.constraints.annotation.Mobile;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
