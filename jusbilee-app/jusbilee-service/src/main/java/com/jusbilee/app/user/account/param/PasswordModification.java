@@ -1,10 +1,26 @@
 package com.jusbilee.app.user.account.param;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class PasswordModification {
+    @NotBlank(message = "新密码不能为空")
+    @Length(max = 32, message = "新密码不能超过32个字符")
     private String password;
-    private String ssid;
-    private String verifyCode;
+
+    @NotBlank(message = "原密码不能为空")
+    @Length(max = 32, message = "原密码不能超过32个字符")
+    private String oldPassword;
+
     private Long userId;
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
 
     public Long getUserId() {
         return userId;
@@ -20,21 +36,5 @@ public class PasswordModification {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSsid() {
-        return ssid;
-    }
-
-    public void setSsid(String ssid) {
-        this.ssid = ssid;
-    }
-
-    public String getVerifyCode() {
-        return verifyCode;
-    }
-
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
     }
 }

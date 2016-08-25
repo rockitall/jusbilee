@@ -1,5 +1,6 @@
 package com.jusbilee.app.user.account.service;
 
+import com.jusbilee.app.user.account.domain.UserSummary;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.UserAccountLockedException;
 import com.rockit.core.exception.UserAlreadyExistsException;
@@ -30,7 +31,9 @@ public interface IUserAccountService {
 
     AppUser getUserInfo(Long userId);
 
-    String uploadAvatar(Long userId, File file);
+    void uploadAvatar(Long userId, String avatar);
 
     void modifyNickname(Long userId, String nickname);
+
+    UserSummary getUserSummary(Long userId);
 }

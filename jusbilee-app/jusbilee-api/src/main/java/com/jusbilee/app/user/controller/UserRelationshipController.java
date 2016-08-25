@@ -2,15 +2,6 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.sms.param.SmsParam;
-import com.jusbilee.app.sms.param.VerifyCode;
-import com.jusbilee.app.sms.service.SmsService;
-import com.jusbilee.app.user.account.domain.AccessToken;
-import com.jusbilee.app.user.account.domain.AppUser;
-import com.jusbilee.app.user.account.param.Credentials;
-import com.jusbilee.app.user.account.param.PasswordModification;
-import com.jusbilee.app.user.account.param.Registration;
-import com.jusbilee.app.user.account.param.ThirdUserCredentials;
 import com.jusbilee.app.user.account.service.IUserAccountService;
 import com.jusbilee.app.user.relationship.domain.UserFriendProfile;
 import com.jusbilee.app.user.relationship.service.IUserRelationshipService;
@@ -24,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.util.List;
 
 @RestController

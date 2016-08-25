@@ -4,6 +4,7 @@ import com.jusbilee.app.user.account.domain.*;
 import com.jusbilee.app.user.account.param.*;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.BadCredentialsException;
+import com.rockit.core.exception.PasswordModificationException;
 import com.rockit.core.exception.UserAccountLockedException;
 import com.rockit.core.exception.UserAlreadyExistsException;
 import com.rockit.core.utils.UniqueIdUtils;
@@ -116,8 +117,10 @@ public class UserAccountServiceImpl implements IUserAccountService {
             bind.setUserId(appUser.getId());
             bind.setOpenid(credentials.getOpenid());
             bind.setUserType(credentials.getUserTypeName());
-            thirdUserBindDao.insert(bind);
+            this.thirdUserBindDao.insert(bind);
+            this.appUserDao.initUserSummary(appUser.getId());
         } else {
+
             //check user account locked status
             passport.setUserId(bind.getUserId());
             checkUserAccountLocked(bind.getUserId());
@@ -134,6 +137,13 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     public void modifyPassword(PasswordModification modification) {
+        Passport old = passportDao.selectByUserId(modification.getUserId());
+        String pwd = new Md5Hash(modification.getOldPassword(), old.getSalt()).toHex();
+
+        if (!pwd.equals(old.getPassword())) {
+            throw new PasswordModificationException();
+        }
+
         Passport passport = new Passport();
         passport.setUserId(modification.getUserId());
         resetPassword(passport, modification.getPassword());
@@ -146,8 +156,10 @@ public class UserAccountServiceImpl implements IUserAccountService {
         this.checkUsernameExists(registration.getUsername());
 
         AppUser appUser = new AppUser();
-        appUser.setNickname(registration.getNickname());
+        appUser.setNickname("");
         this.appUserDao.insert(appUser);
+        this.appUserDao.initUserSummary(appUser.getId());
+
         Passport passport = this.createAppUserPassport(appUser.getId(), registration);
         AccessToken accessToken = getSuccessAccessToken(passport);
         return accessToken;
@@ -199,15 +211,18 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     @Override
-    public String uploadAvatar(Long userId, File file) {
-        String url = uploadToImageServer(file);
-        appUserDao.updateAvatar(userId, url);
-        return url;
+    public void uploadAvatar(Long userId, String avatar) {
+        appUserDao.updateAvatar(userId, avatar);
     }
 
     @Override
     public void modifyNickname(Long userId, String nickname) {
         appUserDao.updateNickname(userId, nickname);
+    }
+
+    @Override
+    public UserSummary getUserSummary(Long userId) {
+        return appUserDao.getUserSummary(userId);
     }
 
     private String uploadToImageServer(File file) {
