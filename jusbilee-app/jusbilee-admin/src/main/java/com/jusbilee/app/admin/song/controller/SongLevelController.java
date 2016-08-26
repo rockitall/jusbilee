@@ -23,8 +23,6 @@ import com.rockit.core.pojo.JsonResult;
  *
  */
 
-@RestController
-@RequestMapping("/songLevel")
 public class SongLevelController extends BaseController{
 	
 	@Autowired

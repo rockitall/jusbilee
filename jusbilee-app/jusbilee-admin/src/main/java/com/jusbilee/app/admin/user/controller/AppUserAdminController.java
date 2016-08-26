@@ -18,9 +18,9 @@ import com.jusbilee.app.admin.domain.UserArchiveCriteria;
 import com.jusbilee.app.admin.service.AppUserAdminService;
 import com.jusbilee.app.admin.service.UserArchiveService;
 import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.user.domain.AppUser;
-import com.jusbilee.app.user.param.PasswordModification;
-import com.jusbilee.app.user.service.IUserAccountService;
+import com.jusbilee.app.user.account.domain.AppUser;
+import com.jusbilee.app.user.account.param.PasswordModification;
+import com.jusbilee.app.user.account.service.IUserAccountService;
 import com.rockit.core.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 
@@ -63,8 +63,8 @@ public class AppUserAdminController extends BaseController{
 	 */
 	@RequestMapping("/selectById")
 	public JsonResult selectById(@RequestParam(value = "userId", required = true) long userId) {
-		AppUser appUser = userAccountService.getUserInfo(userId);
-		return ok(appUser);
+//		AppUser appUser = userAccountService.getUserInfo(userId);
+		return ok();
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class AppUserAdminController extends BaseController{
 	@RequestMapping("/updateAppUser")
 	public JsonResult updateAppUser(@Valid @ModelAttribute AppUser appUser, BindingResult bindingResult) {
 		assertValid(bindingResult);
-		userAccountService.updateAppUser(appUser);
+//		userAccountService.updateAppUser(appUser);
 		return ok();
 	}
 	

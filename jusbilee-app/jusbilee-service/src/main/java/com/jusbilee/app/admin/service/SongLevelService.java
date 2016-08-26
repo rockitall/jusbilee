@@ -17,7 +17,6 @@ import com.jusbilee.app.admin.domain.SongLevelCriteria;
  *
  */
 
-@Service
 public class SongLevelService {
 	
 	@Autowired

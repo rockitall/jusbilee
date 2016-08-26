@@ -17,7 +17,6 @@ import com.jusbilee.app.admin.domain.SongStyleCriteria;
  *
  */
 
-@Service
 public class SongStyleService {
 
 	@Autowired
