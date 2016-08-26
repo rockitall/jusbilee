@@ -13,7 +13,8 @@ ext {
             powermock        : "1.6.5",
             guava            : "19.0",
             httpclient       : "4.5.2",
-            logback          : "1.1.7"
+            logback          : "1.1.7",
+            qiniu_sdk        : "7.1.2"
     ]
 
     libs = [
@@ -40,6 +41,7 @@ ext {
             guava                : "com.google.guava:guava:${ver.guava}",
             httpclient           : "org.apache.httpcomponents:httpclient:${ver.httpclient}",
             logback              : "ch.qos.logback:logback-classic:${ver.logback}",
+            qiniu_sdk            : "com.qiniu:qiniu-java-sdk:${ver.qiniu_sdk}",
 
             powermock_api        : "org.powermock:powermock-api-mockito:${ver.powermock}",
             powermock_junit4     : "org.powermock:powermock-module-junit4:${ver.powermock}"
