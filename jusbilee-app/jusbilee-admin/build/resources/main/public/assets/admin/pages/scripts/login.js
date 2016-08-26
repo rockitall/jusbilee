@@ -11,9 +11,6 @@ var Login = function() {
                 },
                 password: {
                     required: true
-                },
-                verifyCode: {
-                    required: true
                 }
             },
 
@@ -23,9 +20,6 @@ var Login = function() {
                 },
                 password: {
                     required: "请填写密码"
-                },
-                verifyCode: {
-                    required: "请填写验证码"
                 }
             },
 

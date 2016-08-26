@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
-import com.jusbilee.app.user.dao.sql.AppUserDaoSqlProvider;
-import com.jusbilee.app.user.domain.AppUser;
+import com.jusbilee.app.user.account.dao.sql.AppUserDaoSqlProvider;
+import com.jusbilee.app.user.account.domain.AppUser;
 
 /**
  * Created by Allen on 2016/7/16.

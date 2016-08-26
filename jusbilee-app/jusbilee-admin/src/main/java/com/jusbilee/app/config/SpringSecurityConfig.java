@@ -16,13 +16,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        if (environment.acceptsProfiles("prod", "dev")) {
+        if (environment.acceptsProfiles("prod")) {
             http.
                     authorizeRequests()
                     .antMatchers("/admin/assets/**", "/admin/captcha").permitAll()
                     .anyRequest().authenticated()
                     .and().formLogin()
-                    .loginPage("/admin/login").successForwardUrl("/admin/index")
+                    .loginPage("/admin/login").defaultSuccessUrl("/admin/index")
                     .permitAll();
         }
     }

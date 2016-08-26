@@ -1,11 +1,10 @@
 package com.jusbilee.app.config;
 
+import com.rockit.qcloud.im.common.QCloudProperties;
+import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.rockit.qcloud.im.common.QCloudProperties;
-import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 
 /**
  * Created by Allen on 2016/8/8.
@@ -14,12 +13,12 @@ import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
 public class QCloudConfig {
     @Bean
     @ConfigurationProperties(prefix = "qcloud.im")
-    public QCloudProperties tlsUserSignatureProperties() {
+    public QCloudProperties qCloudProperties() {
         return new QCloudProperties();
     }
 
     @Bean
-    public TLSSignatureGenerator signatureGenerator(QCloudProperties userSignatureProperties) {
-        return new TLSSignatureGenerator(userSignatureProperties);
+    public TLSSignatureGenerator signatureGenerator(QCloudProperties qCloudProperties) {
+        return new TLSSignatureGenerator(qCloudProperties);
     }
 }

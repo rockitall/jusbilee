@@ -65,17 +65,17 @@
             <label class="control-label visible-ie8 visible-ie9">密码</label>
             <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-4">
-                    <input type="text" maxlength="5" name="verifyCode" class="form-control" placeholder="验证码"/>
-                </div>
-                <div class="col-xs-8">
-                    <img id="vimg" src="captcha" style="height: 32px;border: none">
-                    <a href="javascript:Login.refresh()" style="padding-left: 20px">看不清？</a>
-                </div>
-            </div>
-        </div>
+        <#--<div class="form-group">-->
+            <#--<div class="row">-->
+                <#--<div class="col-xs-4">-->
+                    <#--<input type="text" maxlength="5" name="verifyCode" class="form-control" placeholder="验证码"/>-->
+                <#--</div>-->
+                <#--<div class="col-xs-8">-->
+                    <#--<img id="vimg" src="captcha" style="height: 32px;border: none">-->
+                    <#--<a href="javascript:Login.refresh()" style="padding-left: 20px">看不清？</a>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-actions">
             <button type="submit" class="btn btn-success uppercase">登录</button>

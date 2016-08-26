@@ -2,15 +2,19 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.user.account.domain.AccessToken;
+import com.jusbilee.app.user.account.domain.AppUserProfile;
+import com.jusbilee.app.user.account.domain.UserSummary;
+import com.jusbilee.app.user.account.param.Credentials;
+import com.jusbilee.app.user.account.param.PasswordModification;
+import com.jusbilee.app.user.account.param.Registration;
+import com.jusbilee.app.user.account.param.ThirdUserCredentials;
+import com.jusbilee.app.user.account.service.IUserAccountService;
+import com.jusbilee.app.user.request.UserAvatarModificationRequest;
+import com.jusbilee.app.user.request.UserProfileModificationRequest;
 import com.rockit.core.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
-import com.jusbilee.app.sms.param.SmsParam;
-import com.jusbilee.app.sms.param.VerifyCode;
-import com.jusbilee.app.sms.service.SmsService;
-import com.jusbilee.app.user.domain.AppUser;
-import com.jusbilee.app.user.param.*;
-import com.jusbilee.app.user.domain.AccessToken;
-import com.jusbilee.app.user.service.IUserAccountService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,24 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.File;
 
 @RestController
 @RequestMapping("/user")
 public class UserAccountController extends BaseController {
     @Autowired
     private IUserAccountService userAccountService;
-
-    @Autowired
-    private SmsService smsService;
-
-    @RequestMapping("/sms")
-    public JsonResult sms(@Valid @ModelAttribute SmsParam param, BindingResult bindingResult) {
-        assertValid(bindingResult);
-
-        VerifyCode verifyCode = smsService.getVerifyCode(param);
-        return JsonResult.ok(verifyCode);
-    }
 
     @RequestMapping("/register")
     public JsonResult register(@Valid @ModelAttribute Registration registration, BindingResult bindingResult) {
@@ -75,16 +67,33 @@ public class UserAccountController extends BaseController {
     }
 
     @RequestMapping("/profile")
-    public JsonResult getUserInfo() {
+    public JsonResult getAppUserProfile() {
         Long userId = HttpContext.current().getUserId();
-        AppUser appUser = userAccountService.getUserInfo(userId);
-        return ok(appUser);
+        AppUserProfile profile = userAccountService.getAppUserProfile(userId);
+        return ok(profile);
+    }
+
+    @RequestMapping("/profile/update")
+    public JsonResult modifyNickname(@Valid @ModelAttribute UserProfileModificationRequest request, BindingResult bindingResult) {
+        assertValid(bindingResult);
+
+        Long userId = HttpContext.current().getUserId();
+        String nickname = StringUtils.trim(request.getNickname());
+        userAccountService.modifyNickname(userId, nickname);
+        return ok();
     }
 
     @RequestMapping("/avatar/upload")
-    public JsonResult uploadAvatar(File file) {
+    public JsonResult uploadAvatar(@Valid @ModelAttribute UserAvatarModificationRequest request, BindingResult bindingResult) {
         Long userId = HttpContext.current().getUserId();
-        String avatarUrl = userAccountService.uploadAvatar(userId, file);
-        return ok("avatar", avatarUrl);
+        userAccountService.uploadAvatar(userId, request.getAvatar());
+        return ok();
+    }
+
+    @RequestMapping("/summary")
+    public JsonResult getUserSummary() {
+        Long userId = HttpContext.current().getUserId();
+        UserSummary summary = userAccountService.getUserSummary(userId);
+        return ok(summary);
     }
 }

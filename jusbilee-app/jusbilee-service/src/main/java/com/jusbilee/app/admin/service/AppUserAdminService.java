@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.jusbilee.app.admin.dao.AppUserAdminDao;
 import com.jusbilee.app.admin.domain.AppUserCriteria;
-import com.jusbilee.app.user.domain.AppUser;
+import com.jusbilee.app.user.account.domain.AppUser;
 
 /**
  * @author zhandc 2016年8月8日

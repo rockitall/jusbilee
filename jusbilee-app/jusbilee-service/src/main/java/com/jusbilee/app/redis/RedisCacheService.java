@@ -1,15 +1,12 @@
 package com.jusbilee.app.redis;
 
-import java.util.concurrent.TimeUnit;
-
+import com.jusbilee.app.user.account.domain.AccessToken;
+import com.rockit.core.utils.JacksonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.jusbilee.app.sms.param.SmsType;
-import com.jusbilee.app.sms.param.VerifyCode;
-import com.jusbilee.app.user.domain.AccessToken;
-import com.rockit.core.utils.JacksonUtil;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class RedisCacheService {
@@ -43,19 +40,6 @@ public class RedisCacheService {
             return JacksonUtil.toObject(value, AccessToken.class);
         }
         return null;
-    }
-
-    public void setSmsVerifyCode(VerifyCode verifyCode, SmsType smsType) {
-        String key = SMS_PREFIX + smsType.name() + ":" + verifyCode.getSsid();
-        this.set(key, verifyCode.getCode(), 30, TimeUnit.DAYS);
-    }
-
-    public String getSmsVerifyCode(String ssid, SmsType smsType) {
-        String key = SMS_PREFIX + smsType.name() + ":" + ssid;
-        String value = this.get(key);
-
-        this.delete(key);
-        return value;
     }
 
     public StringRedisTemplate getStringRedisTemplate() {
