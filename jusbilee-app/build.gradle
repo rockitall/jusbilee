@@ -58,6 +58,7 @@ project(":jusbilee-admin") {
         compile libs.springboot_actuator
         compile libs.springboot_hateoas
         compile libs.springboot_devtools
+        compile libs.qiniu_sdk
     }
 }
 
