@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-admin/jusbilee-admin.iml" filepath="$PROJECT_DIR$/jusbilee-admin/jusbilee-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-api/jusbilee-api.iml" filepath="$PROJECT_DIR$/jusbilee-api/jusbilee-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-app.iml" filepath="$PROJECT_DIR$/jusbilee-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-commons/jusbilee-commons.iml" filepath="$PROJECT_DIR$/jusbilee-commons/jusbilee-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-http/jusbilee-http.iml" filepath="$PROJECT_DIR$/jusbilee-http/jusbilee-http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-qcloud/jusbilee-qcloud.iml" filepath="$PROJECT_DIR$/jusbilee-qcloud/jusbilee-qcloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jusbilee-service/jusbilee-service.iml" filepath="$PROJECT_DIR$/jusbilee-service/jusbilee-service.iml" />
+    </modules>
+  </component>
+</project>

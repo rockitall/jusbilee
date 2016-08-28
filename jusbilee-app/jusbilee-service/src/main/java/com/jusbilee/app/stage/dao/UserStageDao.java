@@ -22,6 +22,6 @@ public interface UserStageDao {
             "t2.midi_play_url as midiPlayUrl, t0.pass_score as passScore, ifnull(t1.is_passed, 0) as isPassed, " +
             "ifnull(t1.act_count, 0) as actCount, ifnull(t1.score, 0) as score from t_stage_song t0 left join t_user_stage_act_log t1 " +
             "on t1.is_deleted=0 and t0.id = t1.stage_song_id and t1.user_id=#{userId} left join t_song t2 on t2.is_deleted=0 and t0.song_id = t2.id  " +
-            "where t0.is_deleted=0 and t0.stage_level_id = #{stageLevelId}")
+            "where t0.status=0 and t0.stage_level_id = #{stageLevelId}")
     List<UserStageSong> getUserStageSongList(@Param("userId") Long userId, @Param("stageLevelId") Integer stageLevelId);
 }
