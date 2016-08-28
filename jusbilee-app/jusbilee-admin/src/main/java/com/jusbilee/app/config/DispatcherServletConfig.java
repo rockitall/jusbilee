@@ -3,6 +3,7 @@ package com.jusbilee.app.config;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -15,5 +16,10 @@ public class DispatcherServletConfig {
         ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet);
         registration.addUrlMappings("/admin/*");
         return registration;
+    }
+    
+    @Bean
+    public  CommonsMultipartResolver commonsMultipartResolver(){
+    	return new CommonsMultipartResolver();
     }
 }

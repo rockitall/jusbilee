@@ -26,4 +26,6 @@ public interface ErrorCode {
      * admin后面加上来
      */
     int CENSORSHIP_ALREADY_EXISTS = 50010;
+    
+    int QINNIU_UPLOAD_ERROR = 70010;
 }

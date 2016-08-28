@@ -29,17 +29,15 @@ import com.rockit.core.pojo.JsonResult;
  *
  */
 
-@RestController
+// @RestController
 @RequestMapping("/appUser/manage")
 public class AppUserAdminController extends BaseController{
 	
 	@Autowired
 	private AppUserAdminService appUserAdminService;
 	
-	@Autowired
     private IUserAccountService userAccountService;
 	
-	@Autowired
     private UserArchiveService userArchiveService;
 	
 	/**

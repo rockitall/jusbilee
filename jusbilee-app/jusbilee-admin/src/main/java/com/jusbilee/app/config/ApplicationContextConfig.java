@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Component
 public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
-    @Override
+	@Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new AuthenticateInterceptor());
     }
