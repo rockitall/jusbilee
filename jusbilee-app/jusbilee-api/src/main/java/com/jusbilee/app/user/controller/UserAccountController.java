@@ -2,6 +2,8 @@ package com.jusbilee.app.user.controller;
 
 
 import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.qiniu.QiniuSDKProperties;
+import com.jusbilee.app.qiniu.QiniuSdkAuth;
 import com.jusbilee.app.user.account.domain.AccessToken;
 import com.jusbilee.app.user.account.domain.AppUserProfile;
 import com.jusbilee.app.user.account.domain.UserSummary;
@@ -28,6 +30,12 @@ import javax.validation.Valid;
 public class UserAccountController extends BaseController {
     @Autowired
     private IUserAccountService userAccountService;
+
+    @Autowired
+    private QiniuSDKProperties qiniuSDKProperties;
+
+    @Autowired
+    private QiniuSdkAuth qiniuSdkAuth;
 
     @RequestMapping("/register")
     public JsonResult register(@Valid @ModelAttribute Registration registration, BindingResult bindingResult) {
@@ -88,6 +96,12 @@ public class UserAccountController extends BaseController {
         Long userId = HttpContext.current().getUserId();
         userAccountService.uploadAvatar(userId, request.getAvatar());
         return ok();
+    }
+
+    @RequestMapping("/upload/token")
+    public JsonResult uploadToken() {
+        String token = qiniuSdkAuth.uploadToken(qiniuSDKProperties.getBucketName(), null, 10L * 365 * 24 * 60 * 60, null);
+        return ok("token", token);
     }
 
     @RequestMapping("/summary")
