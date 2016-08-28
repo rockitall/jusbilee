@@ -105,6 +105,9 @@
                         <li>
                             <a href="##" onclick="Index.menuLink('/admin/meta/stage/level/list')" id="basic_data_m1"><i class="icon-basket"></i> 闯关难易级别管理</a>
                             <a href="##" onclick="Index.menuLink('/admin/meta/song/style/list')" id="basic_data_m2"><i class="icon-basket"></i> 歌曲风格管理</a>
+                            <a href="##" onclick="Index.menuLink('/admin/meta/song/lib/list')" id="basic_data_m3"><i class="icon-basket"></i> 歌曲总库管理</a>
+                            <a href="##" onclick="Index.menuLink('/admin/meta/song/practice/list')" id="basic_data_m4"><i class="icon-basket"></i> 练习歌曲库管理</a>
+                            <a href="##" onclick="Index.menuLink('/admin/meta/song/stage/list')" id="basic_data_m5"><i class="icon-basket"></i> 闯关歌曲库管理</a>
                         </li>
                     </ul>
                 </li>
