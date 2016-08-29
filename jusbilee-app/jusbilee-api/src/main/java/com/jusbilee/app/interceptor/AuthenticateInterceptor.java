@@ -1,7 +1,7 @@
 package com.jusbilee.app.interceptor;
 
 import com.jusbilee.app.redis.RedisCacheService;
-import com.jusbilee.app.module.user.account.domain.AccessToken;
+import com.jusbilee.app.api.user.account.domain.AccessToken;
 import com.jusbilee.app.context.HttpContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
