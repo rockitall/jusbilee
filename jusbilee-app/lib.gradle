@@ -45,6 +45,9 @@ ext {
             qiniu_sdk            : "com.qiniu:qiniu-java-sdk:${ver.qiniu_sdk}",
 
             validator            : "org.hibernate:hibernate-validator:${ver.validator}",
+            rockit_commons       : "com.rockit:rockit-commons:1.0",
+            rockit_qcloud        : "com.rockit:rockit-qcloud:1.0",
+            rockit_http          : "com.rockit:rockit-http:1.0",
 
             powermock_api        : "org.powermock:powermock-api-mockito:${ver.powermock}",
             powermock_junit4     : "org.powermock:powermock-module-junit4:${ver.powermock}"

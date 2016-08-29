@@ -1,8 +1,8 @@
 package com.jusbilee.app.interceptor;
 
 import com.jusbilee.app.redis.RedisCacheService;
-import com.jusbilee.app.user.account.domain.AccessToken;
-import com.rockit.core.context.HttpContext;
+import com.jusbilee.app.module.user.account.domain.AccessToken;
+import com.jusbilee.app.context.HttpContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

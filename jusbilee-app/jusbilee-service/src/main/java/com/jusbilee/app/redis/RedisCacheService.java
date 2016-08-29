@@ -1,6 +1,6 @@
 package com.jusbilee.app.redis;
 
-import com.jusbilee.app.user.account.domain.AccessToken;
+import com.jusbilee.app.module.user.account.domain.AccessToken;
 import com.rockit.core.utils.JacksonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

@@ -1,8 +1,9 @@
-
 apply from: "lib.gradle"
 
 buildscript {
     repositories {
+        mavenLocal()
+
         maven { url maven_url }
         maven { url spring_snapshot_url }
         maven { url spring_milestone_url }
@@ -18,10 +19,12 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
+
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
     repositories {
+        mavenLocal()
         maven { url maven_url }
         maven { url spring_snapshot_url }
         maven { url spring_milestone_url }
@@ -69,9 +72,9 @@ project(":jusbilee-service") {
     apply plugin: 'spring-boot'
 
     dependencies {
-        compile project(":jusbilee-commons")
-        compile project(":jusbilee-http")
-        compile project(":jusbilee-qcloud")
+        compile libs.rockit_commons
+        compile libs.rockit_http
+        compile libs.rockit_qcloud
 
         compile libs.springboot_redis
         compile libs.springboot_cache
@@ -82,44 +85,6 @@ project(":jusbilee-service") {
         compile libs.mysql
         compile libs.druid
         testCompile libs.springboot_test
-        testCompile libs.powermock_api
-        testCompile libs.powermock_junit4
-    }
-}
-
-project(":jusbilee-commons") {
-    dependencies {
-        compile libs.jackson_databind
-        compile libs.logback
-        compile libs.validator
-        compile libs.common_lang3
-        compile libs.shiro_core
-        compile libs.common_fileupload
-        compile libs.common_codec
-
-        testCompile libs.powermock_api
-        testCompile libs.powermock_junit4
-    }
-}
-
-project(":jusbilee-http") {
-    dependencies {
-        compile libs.httpclient
-        compile libs.jackson_databind
-        compile libs.logback
-        compile libs.common_lang3
-
-        testCompile libs.powermock_api
-        testCompile libs.powermock_junit4
-    }
-}
-
-
-project(":jusbilee-qcloud") {
-    dependencies {
-        compile project(":jusbilee-commons")
-        compile project(":jusbilee-http")
-
         testCompile libs.powermock_api
         testCompile libs.powermock_junit4
     }
