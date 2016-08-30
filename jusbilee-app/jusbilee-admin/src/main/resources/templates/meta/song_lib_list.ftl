@@ -8,7 +8,7 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" id="songForm" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="" id="songForm" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="songId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">歌曲名称</label>
@@ -104,7 +104,7 @@
             <div class="portlet box red">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-cogs"></i>歌曲风格管理
+                        <i class="fa fa-cogs"></i>歌曲总库管理
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -124,8 +124,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>歌曲风格名称</th>
-                                <th>排序</th>
+                                <th>歌曲名称</th>
+                                <th>描述</th>
                                 <th>创建时间</th>
                                 <th>最后更新时间</th>
                                 <th>操作</th>
@@ -140,7 +140,7 @@
                                 <td>${l.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td>${l.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                 <td>
-                                    <a href="javascript:SongLib.edit('${l.id}')">编辑<i class="fa fa-edit"></i></a> |
+                                    <a href="javascript:SongLib.edit('${l.id}','${l.name}','${l.description}')">编辑<i class="fa fa-edit"></i></a> |
                                     <a href="javascript:SongLib.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
