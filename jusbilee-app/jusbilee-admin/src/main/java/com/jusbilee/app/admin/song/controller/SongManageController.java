@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.jusbilee.app.api.song.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jusbilee.app.admin.request.SongRequests;
 import com.jusbilee.app.mybatis.pojo.Song;
 import com.jusbilee.app.qiniu.QinniuUtil;
-import com.jusbilee.app.song.service.SongService;
 import com.rockit.core.pojo.JsonResult;
 
 /**
