@@ -1,7 +1,7 @@
 package com.jusbilee.app.config;
 
-import com.rockit.qcloud.im.common.QCloudProperties;
-import com.rockit.qcloud.im.signature.TLSSignatureGenerator;
+import com.rockit.core.qcloud.im.common.QCloudProperties;
+import com.rockit.core.qcloud.im.signature.TLSSignatureGenerator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -34,7 +34,7 @@ public class MybatisConfig {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
-        configurer.setBasePackage("com.jusbilee.app.*.dao;com.jusbilee.app.*.*.dao");
+        configurer.setBasePackage("com.jusbilee.app.*.dao;com.jusbilee.app.*.*.dao;com.jusbilee.app.*.*.*.dao");
         return configurer;
     }
 }
