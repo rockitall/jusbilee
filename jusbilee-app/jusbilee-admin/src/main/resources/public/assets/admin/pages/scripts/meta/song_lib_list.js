@@ -7,10 +7,10 @@ var SongLib = function() {
 			$("#formModal .modal-title").text("添加");
 			$("#formModal").modal();
 		},
-		edit : function(id, name, sortOrder) {
-			$("#songStyleId").val(id);
+		edit : function(id, name, description) {
+			$("#songId").val(id);
 			$("#name").val(name);
-			$("#sortOrder").val(sortOrder);
+			$("#description").val(description);
 			$("#formModal .modal-title").text("编辑");
 			$("#formModal").modal();
 		},
@@ -19,7 +19,7 @@ var SongLib = function() {
 			if (!yes) {
 				return;
 			}
-			var url = "/admin/meta/song/style/delete?songStyleId=" + id;
+			var url = "/admin/meta/song/lib/delete?songId=" + id;
 			$.get(url, {}, function(data) {
 				if (data.code != 200) {
 					alert(data.msg);
@@ -29,22 +29,22 @@ var SongLib = function() {
 			}, "json")
 		},
 		save : function() {
-			var id = $("#songStyleId").val();
+			var id = $("#songId").val();
 			if (!id) {
 				SongLib.insert();
+			} else {
+				SongLib.update();
 			}
 
 		},
 		refresh : function() {
-			$("#basic_data_m2").click();
+			$("#basic_data_m3").click();
 			$(".modal-backdrop").remove();
 		},
 
 		insert : function() {
 			var _name = $.trim($("#name").val());
-			var _description = $.trim($("#description").val());
-			var _iconUrl = $("#iconUrl");
-//			var _iconUrl = $("#songForm").files[0];
+			var _iconUrl = $("#iconUrl").val();
 			var _opernScreenshotUrl = $("#opernScreenshotUrl").val();
 			var _opernUrl = $("#opernUrl").val();
 			var _wavPlayUrl = $("#wavPlayUrl").val();
@@ -58,9 +58,8 @@ var SongLib = function() {
 				alert("小图标不能为空")
 				return;
 			}
-			alert(_iconUrl);
 
-			/*if (!_opernScreenshotUrl) {
+			if (!_opernScreenshotUrl) {
 				alert("乐谱截屏不能为空")
 				return;
 			}
@@ -77,47 +76,61 @@ var SongLib = function() {
 			if (!_midiPlayUrl) {
 				alert("midi文件不能为空")
 				return;
-			}*/
-/*
-			var url = "/admin/meta/song/lib/add";
-			$.get(url, {
-				name : _name,
-				description : _description,
-				iconUrl : _iconUrl,
-				opernScreenshotUrl : _opernScreenshotUrl,
-				opernUrl : _opernUrl,
-				wavPlayUrl : _wavPlayUrl,
-				midiPlayUrl : _midiPlayUrl
-			}, function(data) {
-				$("#formModal").modal("hide");
-				if (data.code != 200) {
-					alert(data.msg);
-					return;
+			}
+
+			// alert("1");
+			/*
+			 * $("#songForm").attr("action", "/admin/meta/song/lib/add");
+			 * $("#songForm").submit(function( event ) { alert( "Handler for
+			 * .submit() called." ); event.preventDefault(); });
+			 * $("#songForm").submit();
+			 */
+			// SongLib.refresh();
+			var formData = new FormData($("#songForm")[0]);
+
+			$.ajax({
+				url : '/admin/meta/song/lib/add',
+				type : 'POST',
+				data : formData,
+				async : false,
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(returndata) {
+					SongLib.refresh();
+				},
+				error : function(returndata) {
+					console.log("error");
 				}
-				SongLib.refresh();
-			}, "json")*/
+			});
+
+		},
+		update : function() {
+			var _name = $.trim($("#name").val());
+			if (!_name) {
+				alert("名称不能为空")
+				return;
+			}
 			
-		var form = new FormData($('#songForm'));
-         $.ajax({
-             url:"/admin/meta/song/lib/add",
-             type:"post",
-             data:form,
-             processData:false,
-             contentType:false,
-             success:function(data){
-            	 $("#formModal").modal("hide");
- 				if (data.code != 200) {
- 					alert(data.msg);
- 					return;
- 				}
- 				SongLib.refresh();
-             },
-             error:function(e){
-                 alert("错误！！");
-                 window.clearInterval(timer);
-             }
-         });        
-			
+			var id = $("#songId").val();
+			var formData = new FormData($("#songForm")[0]);
+			formData.append("songId", id);
+			$.ajax({
+				url : '/admin/meta/song/lib/update',
+				type : 'POST',
+				data : formData,
+				async : false,
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(returndata) {
+					SongLib.refresh();
+				},
+				error : function(returndata) {
+					console.log("error");
+				}
+			});
+
 		}
 	};
 }();

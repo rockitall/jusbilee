@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jusbilee.app.admin.request.SongRequests;
 import com.jusbilee.app.mybatis.pojo.Song;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
@@ -25,13 +24,6 @@ public class QinniuUtil {
 	@Autowired
 	private QiniuSDKProperties qiniuSDKProperties;
 
-	public void uploadSong(SongRequests.SongParam param) throws QiniuUploadEXception {
-		upload(param.getIconUrl());
-		upload(param.getOpernScreenshotUrl());
-		upload(param.getOpernUrl());
-		upload(param.getWavPlayUrl());
-		upload(param.getMidiPlayUrl());
-	}
 	
 	public void getDownloadUrl(Song song){
 		song.setIconUrl(getDownLoadURL(song.getIconUrl()));
@@ -49,7 +41,7 @@ public class QinniuUtil {
 		delete(song.getMidiPlayUrl());
 	}
 
-	private void upload(MultipartFile file) throws QiniuUploadEXception {
+	public void upload(MultipartFile file) throws QiniuUploadEXception {
 		Auth auth = Auth.create(qiniuSDKProperties.getAccessKey(), qiniuSDKProperties.getSecretKey());
 		String token = auth.uploadToken(qiniuSDKProperties.getBucketName(), file.getOriginalFilename());
 		UploadManager uploadManager = new UploadManager();

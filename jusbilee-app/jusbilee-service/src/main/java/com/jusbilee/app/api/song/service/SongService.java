@@ -46,4 +46,8 @@ public class SongService {
     public Song selectById(Integer id){
     	return mapper.selectByPrimaryKey(id);
     }
+    
+    public void update(Song song){
+    	mapper.updateByPrimaryKeySelective(song);
+    }
 }

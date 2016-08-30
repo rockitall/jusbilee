@@ -22,5 +22,7 @@ public class QiniuConfig {
 	public QiniuSDKProperties qiniuSDKProperties() {
 		return new QiniuSDKProperties();
 	}
+	
+
 
 }
