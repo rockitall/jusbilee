@@ -1,4 +1,6 @@
+
 <div class="page-content" style="min-height:800px">
+    <form class="form-horizontal" id="form">
     <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -8,35 +10,28 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
                         <input type="hidden" id="stageLevelId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">闯关级别名称</label>
                             <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
-                                    <input type="text" class="form-control" id="name"  placeholder="闯关级别名称" name="name">
-                                </div>
+                                <input type="text" class="form-control" id="name"  placeholder="闯关级别名称" name="name" maxlength="16">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">难易程度权重</label>
                             <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
-                                    <input type="text" class="form-control" id="weight"  placeholder="难易程度权重" name="weight">
-                                </div>
+                                <input type="text" class="form-control" id="weight"  placeholder="难易程度权重" name="weight" maxlength="5">
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn blue" onclick="StageLevel.save()">提交</button>
+                    <button type="submit" class="btn blue">提交</button>
                     <button type="button" class="btn default" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
