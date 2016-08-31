@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by Allen on 2016/8/26.
  */
 @Configuration
-public class QiniuSDKConfiguration {
+public class QiniuSDKConfig {
     @Bean
     @ConfigurationProperties(prefix = "qiniu.sdk")
     public QiniuSDKProperties qiniuSDKProperties() {
