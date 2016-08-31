@@ -3,14 +3,14 @@
  */
 package com.jusbilee.app.qiniu;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.jusbilee.app.mybatis.pojo.Song;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.rockit.core.exception.FileUploadEXception;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author zhandc 2016年8月26日
@@ -37,14 +37,14 @@ public class QinniuUtil {
         delete(song.getMidiPlayUrl());
     }
 
-    public void upload(MultipartFile file) throws FileUploadEXception {
+    public void upload(MultipartFile file)  {
         Auth auth = Auth.create(qiniuSDKProperties.getAccessKey(), qiniuSDKProperties.getSecretKey());
         String token = auth.uploadToken(qiniuSDKProperties.getBucketName(), file.getOriginalFilename());
         UploadManager uploadManager = new UploadManager();
         try {
             uploadManager.put(file.getBytes(), file.getOriginalFilename(), token);
         } catch (Exception e) {
-            throw new FileUploadEXception();
+            e.printStackTrace();
         }
 
     }

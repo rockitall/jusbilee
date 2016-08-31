@@ -3,8 +3,8 @@
  */
 package com.jusbilee.app.admin.domain;
 
+import com.jusbilee.app.admin.page.Pager;
 import com.jusbilee.app.api.user.account.domain.AppUser;
-import com.rockit.core.pojo.Pager;
 
 /**
  * @author zhandc 2016年8月7日

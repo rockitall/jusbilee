@@ -3,7 +3,7 @@
  */
 package com.jusbilee.app.admin.domain;
 
-import com.rockit.core.pojo.Pager;
+import com.jusbilee.app.admin.page.Pager;
 
 /**
  * @author zhandc 2016年8月6日

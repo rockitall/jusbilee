@@ -12,7 +12,6 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-import com.jusbilee.app.admin.domain.SongStyle;
 import com.jusbilee.app.song.dao.sql.PracticeSongDaoSqlProvider;
 import com.jusbilee.app.song.domain.PracticeSong;
 import com.jusbilee.app.song.domain.PracticeSongCriteria;
