@@ -6,7 +6,7 @@ package com.jusbilee.app.qiniu;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.rockit.core.exception.FileUploadEXception;
+import com.rockit.core.exception.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,13 +35,13 @@ public class QiniuFileUploadService {
         return upload(auth, file, qiniuSDKProperties.getAvatar(), null, sn);
     }
 
-    private String upload(Auth auth, MultipartFile file, QiniuBucket bucket, String type, String sn) throws FileUploadEXception {
+    private String upload(Auth auth, MultipartFile file, QiniuBucket bucket, String type, String sn) throws FileUploadException {
         String filename = UploadFileNameUtils.getUploadFilename(file.getOriginalFilename(), bucket.getName(), type, sn);
         String token = auth.uploadToken(bucket.getName(), filename);
         try {
             uploadManager.put(file.getBytes(), filename, token);
         } catch (Exception e) {
-            throw new FileUploadEXception();
+            throw new FileUploadException();
         }
         return UploadFileNameUtils.getUploadUrl(bucket.getDomain(), filename);
     }
