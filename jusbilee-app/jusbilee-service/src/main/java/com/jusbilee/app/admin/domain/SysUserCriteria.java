@@ -3,13 +3,14 @@
  */
 package com.jusbilee.app.admin.domain;
 
-import com.jusbilee.app.admin.page.Pager;
+
+import com.rockit.core.pojo.Pager;
 
 /**
  * @author zhandc 2016年8月6日
  *
  */
-public class SysUserCriteria extends Pager<SysUser>{
+public class SysUserCriteria extends Pager<SysUser> {
 	
 	private String userName;
 

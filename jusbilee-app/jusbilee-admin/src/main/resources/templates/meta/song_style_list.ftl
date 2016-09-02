@@ -1,4 +1,5 @@
 <div class="page-content" style="min-height:800px">
+    <form class="form-horizontal" id="form">
     <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -8,35 +9,28 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
                         <input type="hidden" id="songStyleId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">歌曲风格名称</label>
                             <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
-                                    <input type="text" class="form-control" id="name"  placeholder="歌曲风格名称" name="name">
-                                </div>
+                                <input type="text" class="form-control" id="name"  placeholder="歌曲风格名称" name="name" maxlength="16">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">排序序号</label>
                             <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
-                                    <input type="text" class="form-control" id="sortOrder"  placeholder="排序序号" name="sortOrder">
-                                </div>
+                                <input type="text" class="form-control" id="sortOrder"  placeholder="排序序号" name="sortOrder" maxlength="5">
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn blue" onclick="SongStyle.save()">提交</button>
+                    <button type="submit" class="btn blue">提交</button>
                     <button type="button" class="btn default" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>

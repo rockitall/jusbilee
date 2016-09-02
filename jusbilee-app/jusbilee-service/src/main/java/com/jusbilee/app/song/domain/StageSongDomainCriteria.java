@@ -3,13 +3,14 @@
  */
 package com.jusbilee.app.song.domain;
 
-import com.jusbilee.app.admin.page.Pager;
+
+import com.rockit.core.pojo.Pager;
 
 /**
  * @author zhandc 2016年8月28日
  *
  */
-public class StageSongDomainCriteria extends Pager<StageSongDomain>{
+public class StageSongDomainCriteria extends Pager<StageSongDomain> {
 
 	private String songName;
 	private Integer stageId;
