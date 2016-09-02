@@ -1,26 +1,29 @@
 package com.jusbilee.app.api.user.controller;
 
 
-import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.context.HttpContext;
 import com.jusbilee.app.api.user.account.domain.AccessToken;
 import com.jusbilee.app.api.user.account.domain.AppUserProfile;
-import com.jusbilee.app.api.user.account.param.Credentials;
-import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.api.user.account.service.IUserAccountService;
-import com.jusbilee.app.api.user.request.UserAvatarModificationRequest;
-import com.jusbilee.app.api.user.request.UserProfileModificationRequest;
-import com.jusbilee.app.qiniu.QiniuSDKProperties;
-import com.jusbilee.app.qiniu.QiniuSdkAuth;
 import com.jusbilee.app.api.user.account.domain.UserSummary;
+import com.jusbilee.app.api.user.account.param.Credentials;
 import com.jusbilee.app.api.user.account.param.PasswordModification;
 import com.jusbilee.app.api.user.account.param.Registration;
+import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
+import com.jusbilee.app.api.user.account.service.IUserAccountService;
+import com.jusbilee.app.api.user.domain.UploadToken;
+import com.jusbilee.app.api.user.request.UserAvatarModificationRequest;
+import com.jusbilee.app.api.user.request.UserProfileModificationRequest;
+import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.context.HttpContext;
+import com.jusbilee.app.qiniu.QiniuBucket;
+import com.jusbilee.app.qiniu.QiniuSDKProperties;
+import com.jusbilee.app.qiniu.QiniuSdkAuth;
 import com.rockit.core.pojo.JsonResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -100,8 +103,15 @@ public class UserAccountController extends BaseController {
 
     @RequestMapping("/upload/token")
     public JsonResult uploadToken() {
-        String token = qiniuSdkAuth.uploadToken(qiniuSDKProperties.getBucketName(), null, 10L * 365 * 24 * 60 * 60, null);
-        return ok("token", token);
+        QiniuBucket bucket = qiniuSDKProperties.getAvatar();
+        String token = qiniuSdkAuth.uploadToken(bucket.getName(), null, 10L * 365 * 24 * 60 * 60, null);
+
+        UploadToken uploadToken = new UploadToken();
+        uploadToken.setBucket(bucket.getName());
+        uploadToken.setToken(token);
+        uploadToken.setDomain(bucket.getDomain());
+
+        return ok(uploadToken);
     }
 
     @RequestMapping("/summary")
@@ -109,5 +119,11 @@ public class UserAccountController extends BaseController {
         Long userId = HttpContext.current().getUserId();
         UserSummary summary = userAccountService.getUserSummary(userId);
         return ok(summary);
+    }
+
+    @RequestMapping("/other/profile")
+    public JsonResult viewUserInfo(@RequestParam Long userId) {
+        AppUserProfile profile = userAccountService.getAppUserProfile(userId);
+        return ok(profile);
     }
 }

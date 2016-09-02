@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年8月28日
  */
-package com.jusbilee.app.admin.song.controller;
+package com.jusbilee.app.admin.controller;
 
 import com.jusbilee.app.api.song.service.SongService;
 import com.jusbilee.app.api.style.service.SongStyleService;

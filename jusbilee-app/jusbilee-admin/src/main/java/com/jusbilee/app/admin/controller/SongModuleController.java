@@ -1,4 +1,4 @@
-package com.jusbilee.app.admin;
+package com.jusbilee.app.admin.controller;
 
 import org.springframework.stereotype.Controller;
 
