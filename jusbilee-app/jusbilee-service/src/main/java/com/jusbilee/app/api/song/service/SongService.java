@@ -25,7 +25,7 @@ public class SongService {
         SongCriteria criteria = new SongCriteria();
         criteria.createCriteria().andIsDeletedEqualTo(Constants.BOOL.NO);
 //      criteria.createCriteria().andNameLike(sss)
-        criteria.setLimit(10);
+        criteria.setLimit(100);
         criteria.setOffset(0);
         criteria.setOrderByClause(" name asc, create_time desc");
 
