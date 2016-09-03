@@ -34,6 +34,6 @@ public interface UserPracticeDao {
 			+ " left join t_song s on ps.song_id = s.id"
 			+ " left join t_user_practice_unlock_log pu on ps.id=pu.practice_song_id and pu.user_id = #{userId} "
 			+ " left join t_user_practice_act_log pa on ps.id=pa.practice_song_id and pa.user_id = #{userId} "
-			+ " where ps.status=0 and ps.style_id = #{styleId}")
+			+ " where ps.is_deleted=0 and ps.style_id = #{styleId}")
 	List<UserPracticeSong> getUserStageSongList(@Param("userId") Long userId, @Param("styleId") Integer styleId);
 }

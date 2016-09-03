@@ -23,6 +23,7 @@ import com.jusbilee.app.mybatis.pojo.UserPracticeActLogCriteria;
 import com.jusbilee.app.mybatis.pojo.UserPracticeUnlockLog;
 import com.jusbilee.app.mybatis.pojo.UserSummary;
 import com.jusbilee.app.mybatis.pojo.UserSummaryCriteria;
+import com.rockit.core.exception.GlogCoinNoEnoughException;
 
 /**
  * @author zhandc 2016年9月2日
@@ -56,10 +57,10 @@ public class UserPracticeService {
 	}
 
 	@Transactional
-	public void practiceSongUnlock(UserPracticeUnlockLog userPracticeUnlockLog) throws RuntimeException {
+	public void practiceSongUnlock(UserPracticeUnlockLog userPracticeUnlockLog) throws GlogCoinNoEnoughException {
 		UserSummary userSummary = getUserSummaryBuUserId(userPracticeUnlockLog.getUserId());
 		if (userPracticeUnlockLog.getGoldCoin() > userSummary.getTotalGoldCoin()) {
-			throw new RuntimeException("金币不够！");
+			throw new GlogCoinNoEnoughException();
 		}
 		// 解锁表
 		userPracticeUnlockLogMapper.insertSelective(userPracticeUnlockLog);
@@ -115,13 +116,17 @@ public class UserPracticeService {
 		UserPracticeActLogCriteria criteria = new UserPracticeActLogCriteria();
 		criteria.createCriteria().andUserIdEqualTo(userPracticeActLog.getUserId())
 				.andPracticeSongIdEqualTo(userPracticeActLog.getPracticeSongId());
-		return userPracticeActLogMapper.selectByExample(criteria).get(0);
+		List<UserPracticeActLog> list = userPracticeActLogMapper.selectByExample(criteria);
+		if(list.size() < 1)
+			return null;
+		return list.get(0);
 	}
 
 	private UserSummary getUserSummaryBuUserId(Long userId) {
 		UserSummaryCriteria criteria = new UserSummaryCriteria();
 		criteria.createCriteria().andUserIdEqualTo(userId);
 		List<UserSummary> summaryList = userSummaryMapper.selectByExample(criteria);
+		
 		return summaryList.get(0);
 	}
 }

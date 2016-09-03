@@ -99,7 +99,8 @@ public class UserPracticeController extends BaseController{
         userPracticeActLog.setStyleId(data.getStyleId());
         userPracticeActLog.setTotalPracticeTime(data.getPracticeTime());
         userPracticeActLog.setTotalPracticeScore(data.getPracticeScore());
-        userPracticeActLog.setBestAvgScore(data.getBestTime());
+        userPracticeActLog.setBestAvgScore(data.getAvgScore());
+        userPracticeActLog.setFullScoreBestTime(data.getBestTime());
         userPracticeActLog.setCreateTime(new Date());
 
         userPracticeService.practiceActLog(userPracticeActLog);

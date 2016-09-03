@@ -166,11 +166,19 @@ public class UserPracticeActLogDomain implements Serializable{
         String text = "";
         int h = (fullScoreBestTime / 3600);
         if (h > 0) {
-            text += (h + "小时");
+            text += (h + "小时 ");
         }
 
         int f = (fullScoreBestTime - h * 3600) / 60;
-        text += (f + "分钟");
+        if( f > 0){
+        	 text += (f + "分钟 ");
+        }
+       
+        int m = fullScoreBestTime - h * 3600 - f * 60;
+        if(m > 0){
+        	 text += (m + "秒");	
+        }
+       
         return text;
 	}
 
