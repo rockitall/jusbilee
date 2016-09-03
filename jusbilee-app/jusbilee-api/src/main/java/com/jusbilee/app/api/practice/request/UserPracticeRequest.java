@@ -51,8 +51,6 @@ public class UserPracticeRequest {
 	        @NotNull(message = "bestTime不能为空")
 	        private Integer bestTime;
 	        
-	        @NotNull(message = "avgScore不能为空")
-	        private Integer avgScore;
 
 			public Integer getPracticeSongId() {
 				return practiceSongId;
@@ -94,13 +92,6 @@ public class UserPracticeRequest {
 				this.bestTime = bestTime;
 			}
 
-			public Integer getAvgScore() {
-				return avgScore;
-			}
-
-			public void setAvgScore(Integer avgScore) {
-				this.avgScore = avgScore;
-			}
 	        
 			
 	        
