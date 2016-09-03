@@ -11,7 +11,6 @@ var SongStyle = function () {
     }
 
     var handSave = function () {
-
         form.validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block help-block-error', // default input error message class
@@ -28,10 +27,10 @@ var SongStyle = function () {
 
             messages: {
                 name: {
-                    required: "请输入歌曲风格名称"
+                    required: "歌曲风格名称不能为空"
                 },
                 sortOrder: {
-                    required: "请输入排序序号",
+                    required: "排序序号不能为空",
                     digits: "请输入一个有效的整数"
                 }
             },

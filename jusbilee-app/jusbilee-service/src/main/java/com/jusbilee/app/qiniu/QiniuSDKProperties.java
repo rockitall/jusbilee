@@ -1,13 +1,15 @@
 package com.jusbilee.app.qiniu;
 
 /**
- * Created by Allen on 2016/8/26.
+ * @author zhandc 2016年8月27日
  */
 public class QiniuSDKProperties {
     private String accessKey;
     private String secretKey;
-    private String bucketName;
-    private String url;
+
+    private QiniuBucket image;
+    private QiniuBucket music;
+    private QiniuBucket avatar;
 
     public String getAccessKey() {
         return accessKey;
@@ -25,19 +27,27 @@ public class QiniuSDKProperties {
         this.secretKey = secretKey;
     }
 
-    public String getBucketName() {
-        return bucketName;
+    public QiniuBucket getImage() {
+        return image;
     }
 
-    public void setBucketName(String bucketName) {
-        this.bucketName = bucketName;
+    public void setImage(QiniuBucket image) {
+        this.image = image;
     }
 
-    public String getUrl() {
-        return url;
+    public QiniuBucket getMusic() {
+        return music;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setMusic(QiniuBucket music) {
+        this.music = music;
+    }
+
+    public QiniuBucket getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(QiniuBucket avatar) {
+        this.avatar = avatar;
     }
 }

@@ -25,16 +25,16 @@ public class SongStyleService {
         return songStyleMapper.selectByExample(criteria);
     }
 
-    public void addStageLevel(SongStyle style) {
+    public void addSongStyle(SongStyle style) {
         style.setCreateTime(new Date());
         songStyleMapper.insertSelective(style);
     }
 
-    public void updateStageLevel(SongStyle style) {
+    public void updateSongStyle(SongStyle style) {
         songStyleMapper.updateByPrimaryKeySelective(style);
     }
 
-    public void deleteStageLevel(Integer id) {
+    public void deleteSongStyle(Integer id) {
         SongStyle style = new SongStyle();
         style.setId(id);
         style.setIsDeleted(Constants.BOOL.YES);

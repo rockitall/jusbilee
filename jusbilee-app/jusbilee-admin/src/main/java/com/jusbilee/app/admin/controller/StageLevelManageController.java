@@ -1,8 +1,8 @@
-package com.jusbilee.app.admin;
+package com.jusbilee.app.admin.controller;
 
-import com.jusbilee.app.api.stage.service.StageLevelService;
+import com.jusbilee.app.admin.manager.StageLevelManager;
+import com.jusbilee.app.admin.request.StageLevelRequest;
 import com.jusbilee.app.mybatis.pojo.StageLevel;
-import com.jusbilee.app.admin.request.StageLevelRequests;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,52 +23,42 @@ import java.util.List;
 @RequestMapping("/meta/stage/level")
 public class StageLevelManageController {
     @Autowired
-    private StageLevelService stageLevelService;
+    private StageLevelManager stageLevelManager;
 
     @RequestMapping("/list")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("meta/stage_level_list");
-        List<StageLevel> allLevels = stageLevelService.list();
+        List<StageLevel> allLevels = stageLevelManager.list();
         mv.addObject("levels", allLevels);
         return mv;
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public JsonResult add(@Valid @ModelAttribute StageLevelRequests.StageLevelParam param, BindingResult bindingResult) {
+    public JsonResult add(@Valid @ModelAttribute StageLevelRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
 
-        StageLevel level = new StageLevel();
-        level.setName(param.getName());
-        level.setWeight(param.getWeight());
-        stageLevelService.addStageLevel(level);
-
+        stageLevelManager.addStageLevel(request);
         return JsonResult.ok();
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public JsonResult update(@RequestParam(required = true) Integer stageLevelId, @Valid @ModelAttribute StageLevelRequests.StageLevelParam param, BindingResult bindingResult) {
+    public JsonResult update(@RequestParam(required = true) Integer stageLevelId,
+                             @Valid @ModelAttribute StageLevelRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-
-        StageLevel level = new StageLevel();
-        level.setId(stageLevelId);
-        level.setWeight(param.getWeight());
-        level.setName(param.getName());
-
-        stageLevelService.updateStageLevel(level);
-
+        stageLevelManager.updateStageLevel(stageLevelId, request);
         return JsonResult.ok();
     }
 
     @RequestMapping("/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam(required = true) Integer stageLevelId) {
-        stageLevelService.deleteStageLevel(stageLevelId);
+        stageLevelManager.deleteStageLevel(stageLevelId);
         return JsonResult.ok();
     }
 }

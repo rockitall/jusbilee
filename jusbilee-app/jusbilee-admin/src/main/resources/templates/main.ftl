@@ -105,9 +105,9 @@
                         <li>
                             <a href="##" onclick="Index.menuLink('/admin/meta/stage/level/list')" id="basic_data_m1"><i class="icon-basket"></i> 闯关难易级别管理</a>
                             <a href="##" onclick="Index.menuLink('/admin/meta/song/style/list')" id="basic_data_m2"><i class="icon-basket"></i> 歌曲风格管理</a>
-                            <a href="##" onclick="Index.menuLink('/admin/meta/song/lib/list')" id="basic_data_m3"><i class="icon-basket"></i> 歌曲总库管理</a>
-                            <a href="##" onclick="Index.menuLink('/admin/meta/song/practice/list')" id="basic_data_m4"><i class="icon-basket"></i> 练习歌曲库管理</a>
-                            <a href="##" onclick="Index.menuLink('/admin/meta/song/stage/list')" id="basic_data_m5"><i class="icon-basket"></i> 闯关歌曲库管理</a>
+                            <a href="##" onclick="Index.menuLink('/admin/meta/song/list')" id="basic_data_m3"><i class="icon-basket"></i> 歌曲总库管理</a>
+                            <#--<a href="##" onclick="Index.menuLink('/admin/meta/song/practice/list')" id="basic_data_m4"><i class="icon-basket"></i> 练习歌曲库管理</a>-->
+                            <#--<a href="##" onclick="Index.menuLink('/admin/meta/song/stage/list')" id="basic_data_m5"><i class="icon-basket"></i> 闯关歌曲库管理</a>-->
                         </li>
                     </ul>
                 </li>
@@ -948,7 +948,8 @@
 <script src="assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
 <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-validation/js/additional-methods.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>

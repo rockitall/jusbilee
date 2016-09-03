@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -30,6 +32,14 @@ public class BaseController {
         if (e instanceof IllegalArgumentException || e instanceof IllegalApiParameterException) {
             errorCode = ErrorCode.ILLEGAL_PARAMETER;
             args = new String[]{e.getMessage()};
+        } else if (e instanceof MissingServletRequestParameterException) {
+            errorCode = ErrorCode.ILLEGAL_PARAMETER;
+            MissingServletRequestParameterException ex = ((MissingServletRequestParameterException) e);
+            args = new String[]{"参数'" + ex.getParameterName() + "'缺失"};
+        } else if (e instanceof MethodArgumentTypeMismatchException) {
+            MethodArgumentTypeMismatchException ex = ((MethodArgumentTypeMismatchException) e);
+            errorCode = ErrorCode.ILLEGAL_PARAMETER;
+            args = new String[]{"参数'" + ex.getName() + "'数据类型不正确"};
         } else if (e instanceof ApiException) {
             errorCode = ((ApiException) e).getErrorCode();
         } else {

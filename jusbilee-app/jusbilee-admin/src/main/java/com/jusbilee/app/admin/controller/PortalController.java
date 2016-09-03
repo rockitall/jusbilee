@@ -1,4 +1,4 @@
-package com.jusbilee.app.admin;
+package com.jusbilee.app.admin.controller;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;

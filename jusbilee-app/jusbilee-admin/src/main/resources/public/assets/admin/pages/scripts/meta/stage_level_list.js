@@ -28,10 +28,10 @@ var StageLevel = function () {
 
             messages: {
                 name: {
-                    required: "请输入闯关级别名称"
+                    required: "闯关级别名称不能为空"
                 },
                 weight: {
-                    required: "请输入难易程度权重",
+                    required: "难易程度权重不能为空",
                     digits:"请输入一个有效的整数"
                 }
             },
