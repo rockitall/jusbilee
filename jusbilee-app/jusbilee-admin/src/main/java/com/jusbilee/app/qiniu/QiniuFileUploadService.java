@@ -8,6 +8,8 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.rockit.core.exception.FileUploadException;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class QiniuFileUploadService {
+    private static final Logger logger = LoggerFactory.getLogger(QiniuFileUploadService.class);
     @Autowired
     private QiniuSDKProperties qiniuSDKProperties;
 
@@ -36,11 +39,20 @@ public class QiniuFileUploadService {
     }
 
     private String upload(Auth auth, MultipartFile file, QiniuBucket bucket, String type, String sn) throws FileUploadException {
+
         String filename = UploadFileNameUtils.getUploadFilename(file.getOriginalFilename(), bucket.getName(), type, sn);
         String token = auth.uploadToken(bucket.getName(), filename);
         try {
+            if (logger.isDebugEnabled()) {
+                logger.debug("begin upload file:{}", filename);
+            }
             uploadManager.put(file.getBytes(), filename, token);
+
+            if (logger.isDebugEnabled()) {
+                logger.debug("upload file:{} successfully", filename);
+            }
         } catch (Exception e) {
+            logger.error("upload file:{} error", filename, e);
             throw new FileUploadException();
         }
         return UploadFileNameUtils.getUploadUrl(bucket.getDomain(), filename);

@@ -14,6 +14,8 @@ import com.jusbilee.app.mybatis.pojo.SongStyle;
 import com.rockit.core.Constants;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,6 +35,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/meta/practice/song")
 public class PracticeSongManageController {
+    private static final Logger logger = LoggerFactory.getLogger(PracticeSongManageController.class);
     @Autowired
     private PracticeSongManager practiceSongManager;
 
@@ -45,49 +48,73 @@ public class PracticeSongManageController {
     public ModelAndView add(@Valid @ModelAttribute AdminPracticeSongCriteria criteria,
                             @Valid @ModelAttribute Pagination pagination, BindingResult bindingResult) throws Exception {
         ModelAndView mv = new ModelAndView("meta/practice_song_list");
-        long total = practiceSongManager.countPracticeSong(criteria);
+        try {
+            long total = practiceSongManager.countPracticeSong(criteria);
 
-        List<AdminPracticeSongListItem> songs = Collections.emptyList();
-        if (total > 0) {
-            pagination.setTotal(total);
-            songs = practiceSongManager.queryPracticeSong(criteria, pagination);
+            List<AdminPracticeSongListItem> songs = Collections.emptyList();
+            if (total > 0) {
+                pagination.setTotal(total);
+                songs = practiceSongManager.queryPracticeSong(criteria, pagination);
+            }
+
+            List<SongStyle> styles = songStyleManager.list();
+            mv.addObject("styles", styles);
+            mv.addObject("songs", songs);
+            mv.addObject("c", criteria);
+            mv.addObject("p", pagination);
+        } catch (Exception e) {
+            logger.error("", e);
         }
-
-        List<SongStyle> styles = songStyleManager.list();
-        mv.addObject("styles", styles);
-        mv.addObject("songs", songs);
-        mv.addObject("c", criteria);
-        mv.addObject("p", pagination);
         return mv;
     }
 
     @RequestMapping("/add")
     @ResponseBody
     public JsonResult add(@Valid @ModelAttribute PracticeSongRequest request, BindingResult bindingResult) throws Exception {
-        PracticeSong song = practiceSongManager.addPracticeSong(request);
-        return JsonResult.ok(new PracticeSongWrapper(song));
+        try {
+            PracticeSong song = practiceSongManager.addPracticeSong(request);
+            return JsonResult.ok(new PracticeSongWrapper(song));
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/update")
     @ResponseBody
     public JsonResult update(@RequestParam Integer practiceSongId,
                              @Valid @ModelAttribute PracticeSongRequest request, BindingResult bindingResult) throws Exception {
-        practiceSongManager.updatePracticeSong(practiceSongId, request);
-        return JsonResult.ok();
+        try {
+            practiceSongManager.updatePracticeSong(practiceSongId, request);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/{id}")
     @ResponseBody
     public JsonResult get(@PathVariable("id") Integer practiceSongId) throws Exception {
-        PracticeSong song = practiceSongManager.getPracticeSong(practiceSongId);
-        return JsonResult.ok(new PracticeSongWrapper(song));
+        try {
+            PracticeSong song = practiceSongManager.getPracticeSong(practiceSongId);
+            return JsonResult.ok(new PracticeSongWrapper(song));
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam("id") Integer practiceSongId) throws Exception {
-        practiceSongManager.deletePracticeSong(practiceSongId);
-        return JsonResult.ok();
+        try {
+            practiceSongManager.deletePracticeSong(practiceSongId);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     private static class PracticeSongWrapper {

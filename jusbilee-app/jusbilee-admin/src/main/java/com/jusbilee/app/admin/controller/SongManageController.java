@@ -14,6 +14,8 @@ import com.jusbilee.app.mybatis.pojo.SongStyle;
 import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/meta/song")
 public class SongManageController {
+    private static final Logger logger = LoggerFactory.getLogger(SongManageController.class);
     @Autowired
     private SongManager songManager;
     @Autowired
@@ -43,21 +46,25 @@ public class SongManageController {
     public ModelAndView list(@ModelAttribute AdminSongQueryCriteria criteria,
                              @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         ModelAndView mv = new ModelAndView("meta/song_list");
-        long total = songManager.countSongByCriteria(criteria, pagination);
-        List<AdminSongListItem> songList = Collections.emptyList();
-        if (total > 0) {
-            pagination.setTotal(total);
-            songList = songManager.querySongByCriteria(criteria, pagination);
+        try {
+            long total = songManager.countSongByCriteria(criteria, pagination);
+            List<AdminSongListItem> songList = Collections.emptyList();
+            if (total > 0) {
+                pagination.setTotal(total);
+                songList = songManager.querySongByCriteria(criteria, pagination);
+            }
+            mv.addObject("songs", songList);
+            List<StageLevel> levelList = stageLevelManager.list();
+            mv.addObject("levels", levelList);
+
+            List<SongStyle> styleList = songStyleManager.list();
+            mv.addObject("styles", styleList);
+
+            mv.addObject("c", criteria);
+            mv.addObject("p", pagination);
+        } catch (Exception e) {
+            logger.error("", e);
         }
-        mv.addObject("songs", songList);
-        List<StageLevel> levelList = stageLevelManager.list();
-        mv.addObject("levels", levelList);
-
-        List<SongStyle> styleList = songStyleManager.list();
-        mv.addObject("styles", styleList);
-
-        mv.addObject("c", criteria);
-        mv.addObject("p", pagination);
         return mv;
     }
 
@@ -69,17 +76,22 @@ public class SongManageController {
                           @RequestParam MultipartFile wavFile,
                           @RequestParam MultipartFile midiFile,
                           @Valid @ModelAttribute SongRequest request, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
-        }
-        request.setIconMultipartFile(iconFile);
-        request.setScreenshotMultipartFile(screenshotFile);
-        request.setOpernMultipartFile(opernFile);
-        request.setWavMultipartFile(wavFile);
-        request.setMidiMultipartFile(midiFile);
+        try {
+            if (bindingResult.hasErrors()) {
+                return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
+            }
+            request.setIconMultipartFile(iconFile);
+            request.setScreenshotMultipartFile(screenshotFile);
+            request.setOpernMultipartFile(opernFile);
+            request.setWavMultipartFile(wavFile);
+            request.setMidiMultipartFile(midiFile);
 
-        songManager.addSong(request);
-        return JsonResult.ok();
+            songManager.addSong(request);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
 
@@ -92,32 +104,54 @@ public class SongManageController {
                              @RequestParam(required = false) MultipartFile midiFile,
                              @RequestParam(required = true) Integer songId,
                              @Valid @ModelAttribute SongRequest request, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
+        try {
+            if (bindingResult.hasErrors()) {
+                return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
+            }
+            if (logger.isDebugEnabled()) {
+                logger.debug("receive iconFile:" + iconFile);
+                logger.debug("receive screenshotFile:" + iconFile);
+                logger.debug("receive opernFile:" + iconFile);
+                logger.debug("receive wavFile:" + iconFile);
+                logger.debug("receive midiFile:" + iconFile);
+            }
+
+            request.setIconMultipartFile(iconFile);
+            request.setScreenshotMultipartFile(screenshotFile);
+            request.setOpernMultipartFile(opernFile);
+            request.setWavMultipartFile(wavFile);
+            request.setMidiMultipartFile(midiFile);
+
+            songManager.updateSong(songId, request);
+
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
         }
-
-        request.setIconMultipartFile(iconFile);
-        request.setScreenshotMultipartFile(screenshotFile);
-        request.setOpernMultipartFile(opernFile);
-        request.setWavMultipartFile(wavFile);
-        request.setMidiMultipartFile(midiFile);
-
-        songManager.updateSong(songId, request);
-
-        return JsonResult.ok();
     }
 
     @RequestMapping("/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam(required = true) Integer songId) {
-        songManager.deleteSong(songId);
-        return JsonResult.ok();
+        try {
+            songManager.deleteSong(songId);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/{songId}")
     @ResponseBody
     public JsonResult get(@PathVariable("songId") Integer songId) {
-        Song song = songManager.getSongById(songId);
-        return JsonResult.ok(song);
+        try {
+            Song song = songManager.getSongById(songId);
+            return JsonResult.ok(song);
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 }

@@ -13,6 +13,8 @@ import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.jusbilee.app.mybatis.pojo.StageSong;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/meta/stage/song")
 public class StageSongManageController {
+    private static final Logger logger = LoggerFactory.getLogger(StageSongManageController.class);
     @Autowired
     private StageSongManager stageSongManager;
     @Autowired
@@ -42,49 +45,74 @@ public class StageSongManageController {
     public ModelAndView add(@Valid @ModelAttribute AdminStageSongQueryCriteria criteria,
                             @Valid @ModelAttribute Pagination pagination, BindingResult bindingResult) throws Exception {
         ModelAndView mv = new ModelAndView("meta/stage_song_list");
-        long total = stageSongManager.countStageSong(criteria);
+        try {
+            long total = stageSongManager.countStageSong(criteria);
 
-        List<AdminStageSongListItem> songs = Collections.emptyList();
-        if (total > 0) {
-            pagination.setTotal(total);
-            songs = stageSongManager.queryStageSong(criteria, pagination);
+            List<AdminStageSongListItem> songs = Collections.emptyList();
+            if (total > 0) {
+                pagination.setTotal(total);
+                songs = stageSongManager.queryStageSong(criteria, pagination);
+            }
+
+            List<StageLevel> levels = stageLevelManager.list();
+            mv.addObject("levels", levels);
+            mv.addObject("songs", songs);
+            mv.addObject("c", criteria);
+            mv.addObject("p", pagination);
+
+        } catch (Exception e) {
+            logger.error("", e);
         }
-
-        List<StageLevel> levels = stageLevelManager.list();
-        mv.addObject("levels", levels);
-        mv.addObject("songs", songs);
-        mv.addObject("c", criteria);
-        mv.addObject("p", pagination);
         return mv;
     }
 
     @RequestMapping("/add")
     @ResponseBody
     public JsonResult add(@Valid @ModelAttribute StageSongRequest request, BindingResult bindingResult) throws Exception {
-        StageSong song = stageSongManager.addStageSong(request);
-        return JsonResult.ok(new StageSongWrapper(song));
+        try {
+            StageSong song = stageSongManager.addStageSong(request);
+            return JsonResult.ok(new StageSongWrapper(song));
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/update")
     @ResponseBody
     public JsonResult update(@RequestParam Integer stageSongId,
                              @Valid @ModelAttribute StageSongRequest request, BindingResult bindingResult) throws Exception {
-        stageSongManager.updateStageSong(stageSongId, request);
-        return JsonResult.ok();
+        try {
+            stageSongManager.updateStageSong(stageSongId, request);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/{id}")
     @ResponseBody
     public JsonResult get(@PathVariable("id") Integer stageSongId) {
-        StageSong song = stageSongManager.getStageSong(stageSongId);
-        return JsonResult.ok(new StageSongWrapper(song));
+        try {
+            StageSong song = stageSongManager.getStageSong(stageSongId);
+            return JsonResult.ok(new StageSongWrapper(song));
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     @RequestMapping("/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam("id") Integer stageSongId) {
-        stageSongManager.delete(stageSongId);
-        return JsonResult.ok();
+        try {
+            stageSongManager.delete(stageSongId);
+            return JsonResult.ok();
+        } catch (Exception e) {
+            logger.error("", e);
+            return JsonResult.error(1, "error");
+        }
     }
 
     private static class StageSongWrapper {
