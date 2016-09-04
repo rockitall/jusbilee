@@ -82,19 +82,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <#list levels as l>
-                            <tr>
-                                <td>${l_index+1}</td>
-                                <td>${l.name}</td>
-                                <td>${l.weight}</td>
-                                <td>${l.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                                <td>${l.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                                <td>
-                                    <a href="javascript:StageLevel.edit('${l.id}','${l.name}', '${l.weight}')">编辑<i class="fa fa-edit"></i></a> |
-                                    <a href="javascript:StageLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            </#list>
+                                <#if levels?? && (levels?size gt 0)>
+                                    <#list levels as l>
+                                    <tr>
+                                        <td>${l_index+1}</td>
+                                        <td>${l.name}</td>
+                                        <td>${l.weight}</td>
+                                        <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
+                                        <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
+                                        <td>
+                                            <a href="javascript:StageLevel.edit('${l.id}','${l.name}', '${l.weight}')">编辑<i class="fa fa-edit"></i></a> |
+                                            <a href="javascript:StageLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    </#list>
+                                <#else >
+                                    <tr><td colspan="11" style="color:red;text-align: center">未找到相关数据</td></tr>
+                                </#if>
                             </tbody>
                         </table>
                     </div>

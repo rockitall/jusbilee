@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.jusbilee.app.admin.dao.SysUserDao;
-import com.jusbilee.app.admin.domain.SysUser;
+import com.jusbilee.app.admin.dao.AdminSysUserDao;
+import com.jusbilee.app.admin.domain.AdminSysUser;
 
 /**
  * Created by Allen on 2016/8/3.
@@ -15,11 +15,11 @@ import com.jusbilee.app.admin.domain.SysUser;
 @Service
 public class AdminUserDataUserDetailsService implements UserDetailsService {
     @Autowired
-    private SysUserDao sysUserDao;
+    private AdminSysUserDao sysUserDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser user = sysUserDao.selectByUsername(username);
+        AdminSysUser user = sysUserDao.selectByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username + " not found");
         }

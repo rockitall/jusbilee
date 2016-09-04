@@ -1,11 +1,14 @@
 package com.jusbilee.app.admin.manager;
 
+import com.jusbilee.app.admin.criteria.AdminSongQueryCriteria;
+import com.jusbilee.app.admin.domain.AdminSongListItem;
 import com.jusbilee.app.admin.request.SongRequest;
-import com.jusbilee.app.api.song.service.SongService;
+import com.jusbilee.app.admin.service.AdminSongService;
 import com.jusbilee.app.mybatis.pojo.Song;
 import com.jusbilee.app.qiniu.QiniuFileUploadService;
 import com.jusbilee.app.qiniu.UploadFileNameUtils;
 import com.qiniu.util.Auth;
+import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,12 +22,16 @@ import java.util.List;
 @Service
 public class SongManager {
     @Autowired
-    private SongService songService;
+    private AdminSongService songService;
     @Autowired
     private QiniuFileUploadService qiniuFileUploadService;
 
-    public List<Song> querySongs() {
-        return songService.querySongs();
+    public List<AdminSongListItem> querySongByCriteria(AdminSongQueryCriteria cretiria, Pagination pagination) {
+        return songService.query(cretiria, pagination);
+    }
+
+    public long countSongByCriteria(AdminSongQueryCriteria cretiria, Pagination pagination) {
+        return songService.count(cretiria, pagination);
     }
 
     public void addSong(SongRequest request) {

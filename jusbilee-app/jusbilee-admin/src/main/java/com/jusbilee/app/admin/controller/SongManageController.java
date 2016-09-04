@@ -3,11 +3,17 @@
  */
 package com.jusbilee.app.admin.controller;
 
+import com.jusbilee.app.admin.criteria.AdminSongQueryCriteria;
+import com.jusbilee.app.admin.domain.AdminSongListItem;
 import com.jusbilee.app.admin.manager.SongManager;
+import com.jusbilee.app.admin.manager.SongStyleManager;
+import com.jusbilee.app.admin.manager.StageLevelManager;
 import com.jusbilee.app.admin.request.SongRequest;
 import com.jusbilee.app.mybatis.pojo.Song;
-import com.jusbilee.app.qiniu.QiniuFileUploadService;
+import com.jusbilee.app.mybatis.pojo.SongStyle;
+import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.rockit.core.pojo.JsonResult;
+import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,15 +34,30 @@ import java.util.List;
 public class SongManageController {
     @Autowired
     private SongManager songManager;
-
     @Autowired
-    private QiniuFileUploadService qiniuFileUploadService;
+    private StageLevelManager stageLevelManager;
+    @Autowired
+    private SongStyleManager songStyleManager;
 
     @RequestMapping("/list")
-    public ModelAndView list() {
+    public ModelAndView list(@ModelAttribute AdminSongQueryCriteria criteria,
+                             @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         ModelAndView mv = new ModelAndView("meta/song_list");
-        List<Song> allLevels = songManager.querySongs();
-        mv.addObject("songs", allLevels);
+        long total = songManager.countSongByCriteria(criteria, pagination);
+        List<AdminSongListItem> songList = Collections.emptyList();
+        if (total > 0) {
+            pagination.setTotal(total);
+            songList = songManager.querySongByCriteria(criteria, pagination);
+        }
+        mv.addObject("songs", songList);
+        List<StageLevel> levelList = stageLevelManager.list();
+        mv.addObject("levels", levelList);
+
+        List<SongStyle> styleList = songStyleManager.list();
+        mv.addObject("styles", styleList);
+
+        mv.addObject("c", criteria);
+        mv.addObject("p", pagination);
         return mv;
     }
 
@@ -80,7 +102,7 @@ public class SongManageController {
         request.setWavMultipartFile(wavFile);
         request.setMidiMultipartFile(midiFile);
 
-        // songManager.updateSong(songId, request);
+        songManager.updateSong(songId, request);
 
         return JsonResult.ok();
     }

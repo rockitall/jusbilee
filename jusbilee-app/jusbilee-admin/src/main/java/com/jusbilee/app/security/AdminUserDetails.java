@@ -8,16 +8,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.jusbilee.app.admin.domain.SysUser;
+import com.jusbilee.app.admin.domain.AdminSysUser;
 import com.rockit.core.Constants;
 
 /**
  * Created by Allen on 2016/8/4.
  */
 public class AdminUserDetails implements UserDetails {
-    private SysUser sysUser;
+    private AdminSysUser sysUser;
 
-    public AdminUserDetails(SysUser sysUser) {
+    public AdminUserDetails(AdminSysUser sysUser) {
         this.sysUser = sysUser;
     }
 

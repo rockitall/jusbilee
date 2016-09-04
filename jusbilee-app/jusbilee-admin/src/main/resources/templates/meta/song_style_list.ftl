@@ -86,8 +86,8 @@
                                 <td>${l_index+1}</td>
                                 <td>${l.name}</td>
                                 <td>${l.sortOrder}</td>
-                                <td>${l.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                                <td>${l.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+                                <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
+                                <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
                                 <td>
                                     <a href="javascript:SongStyle.edit('${l.id}','${l.name}', '${l.sortOrder}')">编辑<i class="fa fa-edit"></i></a> |
                                     <a href="javascript:SongStyle.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
