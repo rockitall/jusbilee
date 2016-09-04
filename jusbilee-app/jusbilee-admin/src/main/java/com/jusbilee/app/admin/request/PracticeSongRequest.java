@@ -1,7 +1,8 @@
 package com.jusbilee.app.admin.request;
 
 import com.rockit.core.constraints.annotation.DateTime;
-import com.sun.istack.internal.NotNull;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Allen on 2016/9/3.
