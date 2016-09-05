@@ -111,6 +111,18 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-users"></i>
+                        <span class="title">后台用户管理</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/user/list')"><i class="fa fa-user"></i> 用户管理</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="last">
                     <a href="javascript:;">
                         <i class="fa fa-gears"></i>

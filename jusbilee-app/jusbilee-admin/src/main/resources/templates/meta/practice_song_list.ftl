@@ -82,7 +82,11 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">闯关解锁</label>
                                         <div class="col-md-8">
-                                            <input type="checkbox" class="form-control" id="passStageUnlock"  name="passStageUnlock" value="true">
+                                            <select class="form-control" id="passStageUnlock" name="passStageUnlock">
+                                                <option value="">--全部--</option>
+                                                <option value="true">可以</option>
+                                                <option value="false">不可以</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -152,9 +156,9 @@
                                         <#if l.status==0>${l.startTime?string("yyyy/MM/dd")} - ${l.startTime?string("yyyy/MM/dd")}</#if>
                                     </td>
                                     <td>${l.unlockGoldCoin}</td>
+                                    <td>${(l.passStageUnlock==1)?string("可以","不可以")}</td>
                                     <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
                                     <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
-                                    <td>${(l.passStageUnlock==1)?string("可以","不可以")}</td>
                                     <td>
                                         <a href="javascript:PracticeSongManager.Action.Update.show('${l.id}','${l.name}')">编辑<i class="fa fa-edit"></i></a> |
                                         <a href="javascript:PracticeSongManager.Action.Remove.submit('${l.id}')">删除<i class="fa fa-trash"></i></a>
@@ -255,10 +259,7 @@
 <script type="text/javascript">
     var searchForm = $("#searchForm")
     <#if (c.online)??>$("#online", searchForm).val("${c.online?string}")</#if>
+    <#if (c.passStageUnlock)??>$("#passStageUnlock", searchForm).val("${c.passStageUnlock?string}")</#if>
     <#if (c.songStyleId)??>$("#songStyleId", searchForm).val("${c.songStyleId?string}")</#if>
-    <#if (c.passStageUnlock)??>
-        var fn = "${(c.passStageUnlock)?string("check", "uncheck")}"
-        $("#passStageUnlock", searchForm).iCheck(fn)
-    </#if>
     PracticeSongManager.Initializer.init();
 </script>

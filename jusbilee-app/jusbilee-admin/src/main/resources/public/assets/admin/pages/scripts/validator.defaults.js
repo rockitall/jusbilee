@@ -25,6 +25,12 @@ var AdminValidator = function () {
                 }
                 return true;
             }, "");
+            jQuery.validator.addMethod("requireWhenEnabled", function (value, element, param) {
+                if (!$(element).is(":disabled")) {
+                    return !!value;
+                }
+                return true;
+            }, "");
         }
     };
 }();

@@ -1,25 +1,24 @@
 package com.jusbilee.app.security;
 
+import com.jusbilee.app.admin.service.AdminUserService;
+import com.jusbilee.app.mybatis.pojo.AdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.jusbilee.app.admin.dao.AdminSysUserDao;
-import com.jusbilee.app.admin.domain.AdminSysUser;
-
 /**
  * Created by Allen on 2016/8/3.
  */
 @Service
-public class AdminUserDataUserDetailsService implements UserDetailsService {
+public class AdminUserDetailsService implements UserDetailsService {
     @Autowired
-    private AdminSysUserDao sysUserDao;
+    private AdminUserService adminUserService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AdminSysUser user = sysUserDao.selectByUsername(username);
+        AdminUser user = adminUserService.getAdminUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username + " not found");
         }
