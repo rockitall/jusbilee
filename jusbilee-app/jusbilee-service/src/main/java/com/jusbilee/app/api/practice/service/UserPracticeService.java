@@ -4,6 +4,7 @@
 package com.jusbilee.app.api.practice.service;
 
 import com.jusbilee.app.api.practice.dao.UserPracticeDao;
+import com.jusbilee.app.api.practice.domain.PracticeSongStyle;
 import com.jusbilee.app.api.practice.domain.UserPracticeActLogDomain;
 import com.jusbilee.app.api.practice.domain.UserPracticeSong;
 import com.jusbilee.app.exception.GoldCoinNotEnoughException;
@@ -12,6 +13,8 @@ import com.jusbilee.app.mybatis.dao.UserPracticeActLogMapper;
 import com.jusbilee.app.mybatis.dao.UserPracticeUnlockLogMapper;
 import com.jusbilee.app.mybatis.dao.UserSummaryMapper;
 import com.jusbilee.app.mybatis.pojo.*;
+import com.rockit.core.pojo.Pagination;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,12 +44,12 @@ public class UserPracticeService {
     @Autowired
     UserPracticeActLogMapper userPracticeActLogMapper;
 
-    public List<UserPracticeActLogDomain> getUserPracticeList(Long userId, Integer styleId) {
-        return userPracticeDao.getUserPracticeList(userId, styleId);
+    public List<UserPracticeActLogDomain> getUserPracticeList(Long userId, Integer styleId,Pagination pagination) {
+        return userPracticeDao.getUserPracticeList(userId, styleId,pagination);
     }
 
-    public List<UserPracticeSong> getUserStageSongList(Long userId, Integer styleId) {
-        return userPracticeDao.getUserStageSongList(userId, styleId);
+    public List<UserPracticeSong> getUserStageSongList(Long userId, Integer styleId,Pagination pagination) {
+        return userPracticeDao.getUserStageSongList(userId, styleId,pagination);
     }
 
     @Transactional
@@ -103,6 +106,10 @@ public class UserPracticeService {
         userSummaryMapper.updateByPrimaryKeySelective(userSummary);
 
 
+    }
+    
+    public List<PracticeSongStyle> getPracticeSongStyle(){
+    	return userPracticeDao.getSongStyle();
     }
 
     private UserPracticeActLog selectUserPracticeActLog(UserPracticeActLog userPracticeActLog) {

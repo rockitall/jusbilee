@@ -28,7 +28,7 @@ public class UserPracticeSong implements Serializable{
 	private String wavPlayUrl;
 	private String midiPlayUrl;
 	
-	private int lockGoldCoin;
+	private int unlockGoldCoin;
 	private int practiceSongId;
 	
 	private String isNeedLock;
@@ -124,12 +124,14 @@ public class UserPracticeSong implements Serializable{
 		this.midiPlayUrl = midiPlayUrl;
 	}
 
-	public int getLockGoldCoin() {
-		return lockGoldCoin;
+	
+
+	public int getUnlockGoldCoin() {
+		return unlockGoldCoin;
 	}
 
-	public void setLockGoldCoin(int lockGoldCoin) {
-		this.lockGoldCoin = lockGoldCoin;
+	public void setUnlockGoldCoin(int unlockGoldCoin) {
+		this.unlockGoldCoin = unlockGoldCoin;
 	}
 
 	public String getIsNeedLock() {
