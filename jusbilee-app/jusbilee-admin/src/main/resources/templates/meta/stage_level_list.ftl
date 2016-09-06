@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-scrollable">
+                    <div class="table-scrollable" style="min-height: 500px">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -91,8 +91,17 @@
                                         <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
                                         <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
                                         <td>
-                                            <a href="javascript:StageLevel.edit('${l.id}','${l.name}', '${l.weight}')">编辑<i class="fa fa-edit"></i></a> |
-                                            <a href="javascript:StageLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                            <div class="dropdown">
+                                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"><span class="caret"></span> 操作</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="javascript:StageLevel.edit('${l.id}','${l.name}', '${l.weight}')"><i class="fa fa-edit"></i>编辑</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:StageLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                     </#list>

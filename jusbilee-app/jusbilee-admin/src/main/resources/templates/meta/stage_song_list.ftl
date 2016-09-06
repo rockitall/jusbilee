@@ -156,8 +156,17 @@
                                     <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
                                     <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
                                     <td>
-                                        <a href="javascript:StageSongManager.Action.Update.show('${l.id}','${l.name}')">编辑<i class="fa fa-edit"></i></a> |
-                                        <a href="javascript:StageSongManager.Action.Remove.submit('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"><span class="caret"></span> 操作</a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="javascript:StageSongManager.Action.Update.show('${l.id}','${l.name}')"><i class="fa fa-edit"></i>编辑</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:StageSongManager.Action.Remove.submit('${l.id}')"><i class="fa fa-trash"></i>删除</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                                 </#list>

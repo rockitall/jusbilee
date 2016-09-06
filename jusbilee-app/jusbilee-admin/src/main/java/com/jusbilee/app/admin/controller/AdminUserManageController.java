@@ -5,6 +5,7 @@ import com.jusbilee.app.admin.domain.AdminUserListItem;
 import com.jusbilee.app.admin.manager.AdminUserManager;
 import com.jusbilee.app.admin.request.AdminUserRequest;
 import com.jusbilee.app.mybatis.pojo.AdminUser;
+import com.jusbilee.app.security.AdminUserDetails;
 import com.rockit.core.exception.UserAlreadyExistsException;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -12,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -40,14 +42,16 @@ public class AdminUserManageController {
         try {
             long total = adminUserManager.countAdminUser(criteria);
 
-            List<AdminUserListItem> songs = Collections.emptyList();
+            List<AdminUserListItem> users = Collections.emptyList();
             if (total > 0) {
                 pagination.setTotal(total);
-                songs = adminUserManager.queryAdminUser(criteria, pagination);
+                users = adminUserManager.queryAdminUser(criteria, pagination);
             }
-            mv.addObject("users", songs);
+            AdminUserDetails details = (AdminUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            mv.addObject("users", users);
             mv.addObject("c", criteria);
             mv.addObject("p", pagination);
+            mv.addObject("me", details);
         } catch (Exception e) {
             logger.error("", e);
         }

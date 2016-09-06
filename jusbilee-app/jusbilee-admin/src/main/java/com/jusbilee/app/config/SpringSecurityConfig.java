@@ -22,8 +22,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/admin/assets/**", "/admin/captcha").permitAll()
                     .anyRequest().authenticated()
                     .and().formLogin()
-                    .loginPage("/admin/login").defaultSuccessUrl("/admin/index")
-                    .permitAll();
+                    .loginPage("/admin/login").defaultSuccessUrl("/admin/main")
+                    .permitAll()
+                    .and().csrf().disable();
         }
     }
 
