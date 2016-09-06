@@ -6,6 +6,7 @@ var Index = function () {
         //main function to initiate the module
         init: function () {
             bindEvent();
+            Index.heatbeat();
         },
         menuLink: function (url) {
             Index.load(url, {});
@@ -20,6 +21,12 @@ var Index = function () {
                     $(".page-content-wrapper").html(data);
                 }, "text");
             }
+        },
+        heatbeat: function () {
+            setInterval(function () {
+                $.get("/admin/heartbeat", function () {
+                });
+            },1000*60*5);
         }
     };
 }();

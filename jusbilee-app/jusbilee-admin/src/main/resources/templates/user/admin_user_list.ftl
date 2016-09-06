@@ -106,13 +106,28 @@
                                             <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
                                             <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
                                             <td>
-                                                <a href="javascript:AdminUserManager.Action.Update.show('${l.id}')">编辑<i class="fa fa-edit"></i></a> |
-                                                <#if (l.isLocked==1)>
-                                                    <a href="javascript:AdminUserManager.Action.Unlock.submit('${l.id}')">解锁<i class="fa fa-unlock"></i></a> |
+                                                <#if me?? && (me.id!=l.id)>
+                                                <div class="dropdown">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"> 操作<span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="javascript:AdminUserManager.Action.Update.show('${l.id}')"><i class="fa fa-edit"></i>编辑</a>
+                                                        </li>
+                                                        <li>
+                                                            <#if (l.isLocked==1)>
+                                                                <a href="javascript:AdminUserManager.Action.Unlock.submit('${l.id}')"><i class="fa fa-unlock"></i>解锁</a>
+                                                            <#else>
+                                                                <a href="javascript:AdminUserManager.Action.Lock.submit('${l.id}')"><i class="fa fa-lock"></i>锁定</a>
+                                                            </#if>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:AdminUserManager.Action.Remove.submit('${l.id}')"><i class="fa fa-trash"></i>删除</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                                 <#else>
-                                                    <a href="javascript:AdminUserManager.Action.Lock.submit('${l.id}')">锁定<i class="fa fa-lock"></i></a> |
+                                                    <span style="color:red">当前登录用户</span>
                                                 </#if>
-                                                <a href="javascript:AdminUserManager.Action.Remove.submit('${l.id}')">删除<i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     </#list>

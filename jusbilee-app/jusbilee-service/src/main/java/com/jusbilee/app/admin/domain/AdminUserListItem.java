@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by Allen on 2016/8/2.
  */
 public class AdminUserListItem implements Serializable {
-    private String id;
+    private Integer id;
     private String username;
     private String nickname;
     private String mobile;
@@ -41,11 +41,11 @@ public class AdminUserListItem implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-scrollable">
+                    <div class="table-scrollable" style="min-height: 500px">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -89,8 +89,17 @@
                                 <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>
                                 <td>${l.updateTime?string("yyyy-MM-dd HH:mm")}</td>
                                 <td>
-                                    <a href="javascript:SongStyle.edit('${l.id}','${l.name}', '${l.sortOrder}')">编辑<i class="fa fa-edit"></i></a> |
-                                    <a href="javascript:SongStyle.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                    <div class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"> 操作<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="javascript:SongStyle.edit('${l.id}','${l.name}', '${l.sortOrder}')"><i class="fa fa-edit"></i>编辑</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:SongStyle.remove('${l.id}')"><i class="fa fa-trash"></i>删除</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                             </#list>
