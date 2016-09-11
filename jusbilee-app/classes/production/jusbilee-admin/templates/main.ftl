@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -14,12 +13,15 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
     <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/global/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
+
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- END PAGE LEVEL PLUGIN STYLES -->
     <!-- END PAGE STYLES -->
@@ -38,7 +40,8 @@
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse">
         </a>
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN TOP NAVIGATION MENU -->
@@ -47,9 +50,10 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
                         <img alt="" class="img-circle" src="assets/admin/layout/img/avatar3_small.jpg"/>
-					<span class="username username-hide-on-mobile">
+                        <span class="username username-hide-on-mobile">
 					Nick </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
@@ -103,11 +107,16 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/list')" id="basic_data_m3"><i class="fa fa-music"></i> 歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/song/list')" id="basic_data_m5"><i class="fa fa-music"></i> 闯关歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/practice/song/list')" id="basic_data_m4"><i class="fa fa-music"></i> 练习歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/style/list')" id="basic_data_m2"><i class="fa fa-tree"></i> 歌曲风格管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/level/list')" id="basic_data_m1"><i class="fa fa-space-shuttle"></i> 闯关难易级别管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/list')" id="basic_data_m3"><i
+                                    class="fa fa-music"></i> 歌曲管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/song/list')"
+                               id="basic_data_m5"><i class="fa fa-music"></i> 闯关歌曲管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/practice/song/list')"
+                               id="basic_data_m4"><i class="fa fa-music"></i> 练习歌曲管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/style/list')"
+                               id="basic_data_m2"><i class="fa fa-tree"></i> 歌曲风格管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/level/list')"
+                               id="basic_data_m1"><i class="fa fa-space-shuttle"></i> 闯关难易级别管理</a>
                         </li>
                     </ul>
                 </li>
@@ -119,7 +128,8 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/user/list')"><i class="fa fa-user"></i> 用户管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/user/list')"><i
+                                    class="fa fa-user"></i> 用户管理</a>
                         </li>
                     </ul>
                 </li>
@@ -157,7 +167,8 @@
                 </ul>
             </div>
             <h3 class="page-title">
-                Dashboard <small>reports & statistics</small>
+                Dashboard
+                <small>reports & statistics</small>
             </h3>
             <div class="row">
                 <div class="col-md-6 col-sm-6">
@@ -193,12 +204,14 @@
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"
+        type="text/javascript"></script>
 <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="assets/global/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
@@ -210,7 +223,7 @@
 <script src="assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar

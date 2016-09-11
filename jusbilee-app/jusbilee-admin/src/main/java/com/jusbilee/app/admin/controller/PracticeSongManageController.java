@@ -42,7 +42,6 @@ public class PracticeSongManageController {
     @Autowired
     private SongStyleManager songStyleManager;
 
-
     @RequestMapping("/list")
     @ResponseBody
     public ModelAndView add(@Valid @ModelAttribute AdminPracticeSongCriteria criteria,

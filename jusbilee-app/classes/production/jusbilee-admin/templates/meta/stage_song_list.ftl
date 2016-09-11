@@ -150,7 +150,16 @@
                                     <td>${l.stageLevelName}</td>
                                     <td>${(l.status==0)?string("已上线","未上线")}</td>
                                     <td>
-                                        <#if l.status==0 && l.startTime??>${l.startTime?string("yyyy/MM/dd")} - ${l.startTime?string("yyyy/MM/dd")}</#if>
+                                        <#if l.status==0 && l.startTime??>
+                                            ${l.startTime?string("yyyy/MM/dd")} - ${l.endTime?string("yyyy/MM/dd")}
+                                            <#if l.online ==-1>
+                                                <span class="label label-default">已过期</span>
+                                            <#elseif l.online==1>
+                                                <span class="label bg-yellow">即将上线</span>
+                                            <#else >
+                                                <span class="label bg-blue">在线</span>
+                                            </#if>
+                                        </#if>
                                     </td>
                                     <td>${l.passScore}</td>
                                     <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>

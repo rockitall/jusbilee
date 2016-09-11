@@ -26,7 +26,26 @@ var Index = function () {
             setInterval(function () {
                 $.get("/admin/heartbeat", function () {
                 });
-            },1000*60*5);
-        }
+            }, 1000 * 60 * 5);
+        },
     };
+}();
+
+var Notific8 = function () {
+    var settings = {
+        horizontalEdge: "top",
+        verticalEdge: "right",
+        life: 1000
+    };
+    $.notific8('zindex', 11500);
+    return {
+        success: function (msg) {
+            var settings = $.extend({theme: "teal", heading: "Success!"}, settings);
+            $.notific8(msg, settings);
+        },
+        error: function (msg) {
+            var settings = $.extend({theme: "teal", heading: "Error!!!"}, settings);
+            $.notific8(msg, settings);
+        }
+    }
 }();

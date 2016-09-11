@@ -8,8 +8,9 @@ var SongManager = function () {
         },
         Pagination: {
             goto: function (pageNo) {
-                $("#pageNo").val(pageNo);
-                var data = $("#pageForm").serialize();
+                var form = $("#pageForm");
+                $("#pageNo", form).val(pageNo);
+                var data = form.serialize();
                 Index.load("/admin/meta/song/list", data);
             }
         },
@@ -32,14 +33,18 @@ var SongManager = function () {
                     cache: false,
                     contentType: false,
                     processData: false,
-                    success: function (returndata) {
-                        SongLib.refresh();
+                    success: function (data) {
+                        if (data.code == 200) {
+                            Notific8.success("添加歌曲成功");
+                            SongManager.Initializer.refresh();
+                            return;
+                        }
+                        Notific8.error(data.msg);
                     },
                     error: function (returndata) {
                         console.log("error");
                     }
                 });
-
             },
             init: function () {
                 var form = $('#addForm');
@@ -71,7 +76,7 @@ var SongManager = function () {
                         },
                         midiFile: {
                             required: true,
-                            accept: "audio/mid"
+                            accept: "audio/mid,audio/midi"
                         }
                     },
                     messages: {
@@ -155,8 +160,13 @@ var SongManager = function () {
                     cache: false,
                     contentType: false,
                     processData: false,
-                    success: function (returndata) {
-                        SongLib.refresh();
+                    success: function (data) {
+                        if (data.code == 200) {
+                            Notific8.success("更新歌曲成功");
+                            SongManager.Initializer.refresh();
+                            return;
+                        }
+                        Notific8.error(data.msg);
                     },
                     error: function (returndata) {
                         console.log("error");
@@ -188,7 +198,7 @@ var SongManager = function () {
                             accept: "audio/wav"
                         },
                         midiFile: {
-                            accept: "audio/mid"
+                            accept: "audio/mid,audio/midi"
                         }
                     },
                     messages: {
@@ -232,11 +242,12 @@ var SongManager = function () {
                 }
                 var url = "/admin/meta/song/delete?songId=" + id;
                 $.get(url, {}, function (data) {
-                    if (data.code != 200) {
-                        alert(data.msg);
+                    if (data.code == 200) {
+                        Notific8.success("删除成功");
+                        SongManager.Initializer.refresh()
                         return;
                     }
-                    SongLib.refresh();
+                    Notific8.error("删除失败");
                 }, "json")
             }
         },
@@ -284,15 +295,13 @@ var SongManager = function () {
                 var isUpdate = (id != "");
                 var url = (isUpdate ? "/admin/meta/stage/song/update" : "/admin/meta/stage/song/add");
                 var queryString = form.serialize();
-                $.post(url, queryString, function (result) {
-                    SongManager.Stage.hide();
-                    if (!isUpdate) {
-                        id=result.data.id;
-                        var songId = $("#songId", form).val();
-                        var songName = $("#stageSongName", form).val();
-                        var content = '<a href="javascript:SongManager.Stage.edit(\'' + songId + '\',\'' + songName + '\',\'' + id + '\')"><span style="color:red">已设置<i class="fa fa-edit" style="margin-left: 4px"></i></span></a>';
-                        $("#S" + songId).html(content)
+                $.post(url, queryString, function (data) {
+                    if(data.code==200){
+                        Notific8.success("设置闯关成功");
+                        SongManager.Initializer.refresh();
+                        return;
                     }
+                    Notific8.error("设置闯关失败");
                 }, "json");
             },
             init: function () {
@@ -404,15 +413,13 @@ var SongManager = function () {
                 var isUpdate = (id != "");
                 var url = (isUpdate ? "/admin/meta/practice/song/update" : "/admin/meta/practice/song/add");
                 var queryString = $('#practiceSongForm').serialize()
-                $.post(url, queryString, function (result) {
-                    SongManager.Practice.hide();
-                    if (!isUpdate) {
-                        id=result.data.id;
-                        var songId = $("#songId", form).val();
-                        var songName = $("#practiceSongName", form).val();
-                        var content = '<a href="javascript:SongManager.Practice.edit(\'' + songId + '\',\'' + songName + '\',\'' + id + '\')"><span style="color:red">已设置<i class="fa fa-edit" style="margin-left: 4px"></i></span></a>';
-                        $("#P" + songId).html(content)
+                $.post(url, queryString, function (data) {
+                    if(data.code==200){
+                        Notific8.success("设置练习成功");
+                        SongManager.Initializer.refresh();
+                        return;
                     }
+                    Notific8.error("设置练习失败");
                 }, "json");
             },
             init: function () {
@@ -468,8 +475,8 @@ var SongManager = function () {
         },
         Initializer: {
             refresh: function () {
-                $("#basic_data_m3").click();
-                $(".modal-backdrop").remove();
+                var pageNo = $("#pageNo", $("#pageForm")).val();
+                SongManager.Pagination.goto(pageNo)
             },
             init: function () {
                 $('.date-picker').datepicker({

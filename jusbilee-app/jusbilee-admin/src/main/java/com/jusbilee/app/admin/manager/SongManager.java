@@ -5,7 +5,6 @@ import com.jusbilee.app.admin.domain.AdminSongListItem;
 import com.jusbilee.app.admin.request.SongRequest;
 import com.jusbilee.app.admin.service.AdminSongService;
 import com.jusbilee.app.mybatis.pojo.Song;
-import com.jusbilee.app.qiniu.QiniuFileUploadService;
 import com.jusbilee.app.qiniu.UploadFileNameUtils;
 import com.qiniu.util.Auth;
 import com.rockit.core.pojo.Pagination;
@@ -24,7 +23,7 @@ public class SongManager {
     @Autowired
     private AdminSongService songService;
     @Autowired
-    private QiniuFileUploadService qiniuFileUploadService;
+    private QiniuFileUploadManager qiniuFileUploadService;
 
     public List<AdminSongListItem> querySongByCriteria(AdminSongQueryCriteria cretiria, Pagination pagination) {
         return songService.query(cretiria, pagination);

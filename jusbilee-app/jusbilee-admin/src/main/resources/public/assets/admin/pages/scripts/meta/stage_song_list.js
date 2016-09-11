@@ -97,11 +97,13 @@ var StageSongManager = function () {
                 submit: function () {
                     var form = $("#stageSongForm");
                     var queryString = form.serialize();
-                    $.post("/admin/meta/stage/song/add", queryString, function (result) {
-                        StageSongManager.Editor.hide();
-                        var content = '<a href="javascript:StageSongManager.Action.Update.show(\'' + result.data.id + '\')">';
-                        content += '<span style="color:red">已设置<i class="fa fa-edit" style="margin-left: 4px"></i></span></a>';
-                        $("#S" + result.data.id).html(content)
+                    $.post("/admin/meta/stage/song/add", queryString, function (data) {
+                        if(data.code==200){
+                            Notific8.success("添加成功");
+                            StageSongManager.Initializer.refresh();
+                            return;
+                        }
+                        Notific8.error(data.msg);
                     }, "json");
                 }
             },
@@ -133,26 +135,25 @@ var StageSongManager = function () {
                 submit: function () {
                     var queryString = $("#stageSongForm").serialize();
                     $.post("/admin/meta/stage/song/update", queryString, function (data, xhr) {
-                        StageSongManager.Editor.hide();
-                        if (StageSongManager.Action.Update.onSubmitCompleted) {
-                            StageSongManager.Action.Update.onSubmitCompleted(data);
+                        if(data.code==200){
+                            Notific8.success("更新成功");
+                            StageSongManager.Initializer.refresh();
+                            return;
                         }
+                        Notific8.error(data.msg);
                     }, "json");
-                },
-                onSubmitCompleted: function (data) {
-                    var pageNo = $("#pageNo").val();
-                    StageSongManager.Pagination.goto(pageNo)
                 }
             },
             Remove: {
                 submit: function (id) {
                     if (window.confirm("确定要删除么？")) {
                         $.get("/admin/meta/stage/song/delete?id=" + id, {}, function (data) {
-                            if (data.code != 200) {
-                                alert(data.msg);
+                            if(data.code==200){
+                                Notific8.success("删除成功");
+                                StageSongManager.Initializer.refresh();
                                 return;
                             }
-                            StageSongManager.Initializer.refresh();
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 }

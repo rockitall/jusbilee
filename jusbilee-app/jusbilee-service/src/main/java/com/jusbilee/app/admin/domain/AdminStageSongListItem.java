@@ -3,6 +3,8 @@
  */
 package com.jusbilee.app.admin.domain;
 
+import com.jusbilee.app.utils.OnlineUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,6 +22,13 @@ public class AdminStageSongListItem implements Serializable {
     private Date createTime;
     private Date updateTime;
 
+    public int getOnline() {
+        if (status == 0) {
+            return OnlineUtils.onlineStatus(startTime, endTime);
+        }
+        return 0;
+    }
+    
     public String getName() {
         return name;
     }

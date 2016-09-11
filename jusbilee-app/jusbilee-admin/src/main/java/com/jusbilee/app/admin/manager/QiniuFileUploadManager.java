@@ -1,8 +1,11 @@
 /**
  * zhandc 2016年8月26日
  */
-package com.jusbilee.app.qiniu;
+package com.jusbilee.app.admin.manager;
 
+import com.jusbilee.app.qiniu.QiniuBucket;
+import com.jusbilee.app.qiniu.QiniuSDKProperties;
+import com.jusbilee.app.qiniu.UploadFileNameUtils;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
@@ -19,8 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 @Service
-public class QiniuFileUploadService {
-    private static final Logger logger = LoggerFactory.getLogger(QiniuFileUploadService.class);
+public class QiniuFileUploadManager {
+    private static final Logger logger = LoggerFactory.getLogger(QiniuFileUploadManager.class);
     @Autowired
     private QiniuSDKProperties qiniuSDKProperties;
 

@@ -92,11 +92,13 @@ var PracticeSongManager = function () {
                 submit: function () {
                     var form = $("#practiceSongRow");
                     var queryString = form.serialize();
-                    $.post("/admin/meta/practice/song/add", queryString, function (result) {
-                        PracticeSongManager.Editor.hide();
-                        var content = '<a href="javascript:PracticeSongManager.Action.Update.show(\'' + result.data.id + '\')">';
-                        content += '<span style="color:red">已设置<i class="fa fa-edit" style="margin-left: 4px"></i></span></a>';
-                        $("#S" + result.data.id).html(content)
+                    $.post("/admin/meta/practice/song/add", queryString, function (data) {
+                        if(data.code==200){
+                            Notific8.success("添加成功");
+                            PracticeSongManager.Initializer.refresh();
+                            return;
+                        }
+                        Notific8.error(data.msg);
                     }, "json");
                 }
             },
@@ -131,26 +133,25 @@ var PracticeSongManager = function () {
                 submit: function () {
                     var queryString = $("#practiceSongForm").serialize();
                     $.post("/admin/meta/practice/song/update", queryString, function (data, xhr) {
-                        PracticeSongManager.Editor.hide();
-                        if (PracticeSongManager.Action.Update.onSubmitCompleted) {
-                            PracticeSongManager.Action.Update.onSubmitCompleted(data);
+                        if(data.code==200){
+                            Notific8.success("更新成功");
+                            PracticeSongManager.Initializer.refresh();
+                            return;
                         }
+                        Notific8.error(data.msg);
                     }, "json");
-                },
-                onSubmitCompleted: function (data) {
-                    var pageNo = $("#pageNo").val();
-                    PracticeSongManager.Pagination.goto(pageNo)
                 }
             },
             Remove: {
                 submit: function (id) {
                     if (window.confirm("确定要删除么？")) {
                         $.get("/admin/meta/practice/song/delete?id=" + id, {}, function (data) {
-                            if (data.code != 200) {
-                                alert(data.msg);
+                            if(data.code==200){
+                                Notific8.success("删除成功");
+                                PracticeSongManager.Initializer.refresh();
                                 return;
                             }
-                            PracticeSongManager.Initializer.refresh();
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 }

@@ -77,11 +77,12 @@ var SongStyle = function () {
             }
             var url = "/admin/meta/song/style/delete?songStyleId=" + id;
             $.get(url, {}, function (data) {
-                if (data.code != 200) {
-                    alert(data.msg);
+                if(data.code==200){
+                    Notific8.success("删除成功");
+                    SongStyle.refresh();
                     return;
                 }
-                SongStyle.refresh();
+                Notific8.error(data.msg);
             }, "json")
         },
         save: function () {
