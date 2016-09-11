@@ -97,13 +97,13 @@ var AdminUserManager = function () {
                 submit: function () {
                     var form = $("#adminUserForm");
                     var queryString = form.serialize();
-                    $.post("/admin/user/add", queryString, function (result) {
-                        if (result.code == 200) {
-                            AdminUserManager.Editor.hide();
+                    $.post("/admin/user/add", queryString, function (data) {
+                        if(data.code==200){
+                            Notific8.success("添加成功");
                             AdminUserManager.Initializer.refresh();
                             return;
                         }
-                        alert(result.msg);
+                        Notific8.error(data.msg);
                     }, "json");
                 }
             },
@@ -129,13 +129,13 @@ var AdminUserManager = function () {
                 },
                 submit: function () {
                     var queryString = $("#adminUserForm").serialize();
-                    $.post("/admin/user/update", queryString, function (result, xhr) {
-                        if (result.code == 200) {
-                            AdminUserManager.Editor.hide();
+                    $.post("/admin/user/update", queryString, function (data, xhr) {
+                        if(data.code==200){
+                            Notific8.success("更新成功");
                             AdminUserManager.Initializer.refresh();
                             return;
                         }
-                        alert(result.msg);
+                        Notific8.error(data.msg);
                     }, "json");
                 }
             },
@@ -143,11 +143,12 @@ var AdminUserManager = function () {
                 submit: function (id) {
                     if (window.confirm("确定要删除么？")) {
                         $.get("/admin/user/delete?id=" + id, {}, function (data) {
-                            if (data.code == 200) {
+                            if(data.code==200){
+                                Notific8.success("删除成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
-                            alert(data.msg);
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 }
@@ -156,11 +157,12 @@ var AdminUserManager = function () {
                 submit: function (id) {
                     if (window.confirm("确定要锁定该用户么？")) {
                         $.get("/admin/user/lock?id=" + id, {}, function (data) {
-                            if (data.code == 200) {
+                            if(data.code==200){
+                                Notific8.success("锁定成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
-                            alert(data.msg);
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 },
@@ -169,11 +171,12 @@ var AdminUserManager = function () {
                 submit: function (id) {
                     if (window.confirm("确定要解锁该用户么？")) {
                         $.get("/admin/user/unlock?id=" + id, {}, function (data) {
-                            if (data.code == 200) {
+                            if(data.code==200){
+                                Notific8.success("解锁成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
-                            alert(data.msg);
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 }
@@ -182,11 +185,12 @@ var AdminUserManager = function () {
                 submit: function (id) {
                     if (window.confirm("确定要重设该用户密码么？")) {
                         $.get("/admin/user/pwd/reset?id=" + id, {}, function (data) {
-                            if (data.code == 200) {
+                            if(data.code==200){
+                                Notific8.success("重设密码成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
-                            alert(data.msg);
+                            Notific8.error(data.msg);
                         }, "json")
                     }
                 }
