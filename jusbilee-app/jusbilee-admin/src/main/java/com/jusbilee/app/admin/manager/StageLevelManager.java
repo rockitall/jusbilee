@@ -1,7 +1,7 @@
 package com.jusbilee.app.admin.manager;
 
 import com.jusbilee.app.admin.request.StageLevelRequest;
-import com.jusbilee.app.api.stage.service.StageLevelService;
+import com.jusbilee.app.admin.service.AdminStageLevelService;
 import com.jusbilee.app.mybatis.pojo.StageLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class StageLevelManager {
     @Autowired
-    private StageLevelService stageLevelService;
+    private AdminStageLevelService stageLevelService;
 
     public List<StageLevel> list() {
         return stageLevelService.list();

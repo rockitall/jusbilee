@@ -1,12 +1,12 @@
 package com.jusbilee.app.api.user.relationship.service.impl;
 
-import com.jusbilee.app.mybatis.dao.UserFriendMapper;
-import com.jusbilee.app.mybatis.pojo.UserFriend;
-import com.jusbilee.app.mybatis.pojo.UserFriendCriteria;
 import com.jusbilee.app.api.user.account.dao.AppUserDao;
 import com.jusbilee.app.api.user.relationship.dao.UserRelationshipDao;
 import com.jusbilee.app.api.user.relationship.domain.UserFriendProfile;
 import com.jusbilee.app.api.user.relationship.service.IUserRelationshipService;
+import com.jusbilee.app.mybatis.dao.UserFriendMapper;
+import com.jusbilee.app.mybatis.pojo.UserFriend;
+import com.jusbilee.app.mybatis.pojo.UserFriendCriteria;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.UserNotExistsException;
 import com.rockit.core.qcloud.im.signature.TLSSignatureGenerator;

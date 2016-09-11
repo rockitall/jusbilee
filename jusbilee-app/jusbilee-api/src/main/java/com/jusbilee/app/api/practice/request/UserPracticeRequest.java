@@ -5,96 +5,70 @@ package com.jusbilee.app.api.practice.request;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * @author zhandc 2016年9月2日
- *
- */
 public class UserPracticeRequest {
-	
-	 public static class practiceUnlockData {
-	        @NotNull(message = "practiceSongId不能为空")
-	        private Integer practiceSongId;
+    @NotNull(message = "songId不能为空")
+    private Integer songId;
 
-	        @NotNull(message = "goldCoin不能为空")
-	        private Integer goldCoin;
+    @NotNull(message = "practiceTime不能为空")
+    private Integer practiceTime;
 
-			public Integer getPracticeSongId() {
-				return practiceSongId;
-			}
+    @NotNull(message = "practiceScore不能为空")
+    private Integer practiceScore;
 
-			public void setPracticeSongId(Integer practiceSongId) {
-				this.practiceSongId = practiceSongId;
-			}
+    @NotNull(message = "practiceCount不能为空")
+    private Integer practiceCount;
 
-			public Integer getGoldCoin() {
-				return goldCoin;
-			}
+    @NotNull(message = "bestAvgScore不能为空")
+    private Integer bestAvgScore;
 
-			public void setGoldCoin(Integer goldCoin) {
-				this.goldCoin = goldCoin;
-			}
-	 } 
-	 
-	 public static class actLogData {
-	        @NotNull(message = "practiceSongId不能为空")
-	        private Integer practiceSongId;
+    @NotNull(message = "fullScoreBestTime不能为空")
+    private Integer fullScoreBestTime;
 
-	        @NotNull(message = "styleId不能为空")
-	        private Integer styleId;
+    public Integer getSongId() {
+        return songId;
+    }
 
-	        @NotNull(message = "practiceTime不能为空")
-			private Integer practiceTime;
-	        
-	        @NotNull(message = "practiceScore不能为空")
-	        private Integer practiceScore;
-			
-	        @NotNull(message = "bestTime不能为空")
-	        private Integer bestTime;
-	        
+    public void setSongId(Integer songId) {
+        this.songId = songId;
+    }
 
-			public Integer getPracticeSongId() {
-				return practiceSongId;
-			}
+    public Integer getPracticeTime() {
+        return practiceTime;
+    }
 
-			public void setPracticeSongId(Integer practiceSongId) {
-				this.practiceSongId = practiceSongId;
-			}
+    public void setPracticeTime(Integer practiceTime) {
+        this.practiceTime = practiceTime;
+    }
 
-			public Integer getStyleId() {
-				return styleId;
-			}
+    public Integer getPracticeScore() {
+        return practiceScore;
+    }
 
-			public void setStyleId(Integer styleId) {
-				this.styleId = styleId;
-			}
+    public void setPracticeScore(Integer practiceScore) {
+        this.practiceScore = practiceScore;
+    }
 
-			public Integer getPracticeTime() {
-				return practiceTime;
-			}
+    public Integer getPracticeCount() {
+        return practiceCount;
+    }
 
-			public void setPracticeTime(Integer practiceTime) {
-				this.practiceTime = practiceTime;
-			}
+    public void setPracticeCount(Integer practiceCount) {
+        this.practiceCount = practiceCount;
+    }
 
-			public Integer getPracticeScore() {
-				return practiceScore;
-			}
+    public Integer getBestAvgScore() {
+        return bestAvgScore;
+    }
 
-			public void setPracticeScore(Integer practiceScore) {
-				this.practiceScore = practiceScore;
-			}
+    public void setBestAvgScore(Integer bestAvgScore) {
+        this.bestAvgScore = bestAvgScore;
+    }
 
-			public Integer getBestTime() {
-				return bestTime;
-			}
+    public Integer getFullScoreBestTime() {
+        return fullScoreBestTime;
+    }
 
-			public void setBestTime(Integer bestTime) {
-				this.bestTime = bestTime;
-			}
-
-	        
-			
-	        
-	 } 
-
+    public void setFullScoreBestTime(Integer fullScoreBestTime) {
+        this.fullScoreBestTime = fullScoreBestTime;
+    }
 }

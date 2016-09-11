@@ -153,7 +153,7 @@
                                     <td>${l.songStyleName}</td>
                                     <td>${(l.status==0)?string("已上线","未上线")}</td>
                                     <td>
-                                        <#if l.status==0>${l.startTime?string("yyyy/MM/dd")} - ${l.startTime?string("yyyy/MM/dd")}</#if>
+                                        <#if l.status==0>${l.startTime?string("yyyy/MM/dd")} - ${l.endTime?string("yyyy/MM/dd")}</#if>
                                     </td>
                                     <td>${l.unlockGoldCoin}</td>
                                     <td>${(l.passStageUnlock==1)?string("可以","不可以")}</td>

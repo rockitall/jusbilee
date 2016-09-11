@@ -40,7 +40,7 @@ public class AdminSongDaoSqlProvider {
         StringBuilder buf = new StringBuilder(128);
         sql.usingAppender(buf);
         Method[] methods = pagination.getClass().getDeclaredMethods();
-        for (Method method:methods){
+        for (Method method : methods) {
             System.out.println(method);
         }
         buf.append(" limit ").append(pagination.getOffset()).append(",").append(pagination.getLimit());

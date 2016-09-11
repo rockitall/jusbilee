@@ -1,11 +1,11 @@
 package com.jusbilee.app.api.user.controller;
 
 
-import com.jusbilee.app.base.BaseController;
 import com.jusbilee.app.api.user.account.service.IUserAccountService;
 import com.jusbilee.app.api.user.relationship.domain.UserFriendProfile;
 import com.jusbilee.app.api.user.relationship.service.IUserRelationshipService;
 import com.jusbilee.app.api.user.request.UserFriendRequest;
+import com.jusbilee.app.base.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

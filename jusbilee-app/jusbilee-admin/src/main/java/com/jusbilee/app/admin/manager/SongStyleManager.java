@@ -1,7 +1,7 @@
 package com.jusbilee.app.admin.manager;
 
 import com.jusbilee.app.admin.request.SongStyleRequest;
-import com.jusbilee.app.api.style.service.SongStyleService;
+import com.jusbilee.app.admin.service.AdminSongStyleService;
 import com.jusbilee.app.mybatis.pojo.SongStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class SongStyleManager {
     @Autowired
-    private SongStyleService songStyleService;
+    private AdminSongStyleService songStyleService;
 
     public List<SongStyle> list() {
         return songStyleService.list();

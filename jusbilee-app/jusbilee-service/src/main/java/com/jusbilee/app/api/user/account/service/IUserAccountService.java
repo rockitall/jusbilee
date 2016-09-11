@@ -1,12 +1,12 @@
 package com.jusbilee.app.api.user.account.service;
 
-import com.jusbilee.app.api.user.account.domain.AppUserProfile;
-import com.jusbilee.app.api.user.account.param.Credentials;
-import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
 import com.jusbilee.app.api.user.account.domain.AccessToken;
+import com.jusbilee.app.api.user.account.domain.AppUserProfile;
 import com.jusbilee.app.api.user.account.domain.UserSummary;
+import com.jusbilee.app.api.user.account.param.Credentials;
 import com.jusbilee.app.api.user.account.param.PasswordModification;
 import com.jusbilee.app.api.user.account.param.Registration;
+import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.UserAccountLockedException;
 import com.rockit.core.exception.UserAlreadyExistsException;

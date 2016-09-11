@@ -1,19 +1,20 @@
 package com.jusbilee.app.api.user.account.service.impl;
 
+import com.jusbilee.app.api.user.account.dao.ApiUserSummaryDao;
+import com.jusbilee.app.api.user.account.dao.AppUserDao;
 import com.jusbilee.app.api.user.account.dao.PassportDao;
 import com.jusbilee.app.api.user.account.dao.ThirdUserBindDao;
 import com.jusbilee.app.api.user.account.domain.*;
 import com.jusbilee.app.api.user.account.param.*;
 import com.jusbilee.app.api.user.account.service.IUserAccountService;
 import com.jusbilee.app.redis.RedisCacheService;
-import com.jusbilee.app.api.user.account.dao.AppUserDao;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.PasswordModificationException;
 import com.rockit.core.exception.UserAccountLockedException;
 import com.rockit.core.exception.UserAlreadyExistsException;
-import com.rockit.core.utils.UniqueIdUtils;
 import com.rockit.core.qcloud.im.signature.TLSSignatureGenerator;
+import com.rockit.core.utils.UniqueIdUtils;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -30,6 +31,8 @@ import org.springframework.util.Assert;
 public class UserAccountServiceImpl implements IUserAccountService {
     @Autowired
     private AppUserDao appUserDao;
+    @Autowired
+    private ApiUserSummaryDao apiUserSummaryDao;
 
     @Autowired
     private PassportDao passportDao;
@@ -116,7 +119,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
             bind.setOpenid(credentials.getOpenid());
             bind.setUserType(credentials.getUserTypeName());
             this.thirdUserBindDao.insert(bind);
-            this.appUserDao.initUserSummary(appUser.getId());
+            this.apiUserSummaryDao.initUserSummary(appUser.getId());
         } else {
 
             //check user account locked status
@@ -156,7 +159,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
         AppUser appUser = new AppUser();
         appUser.setNickname("");
         this.appUserDao.insert(appUser);
-        this.appUserDao.initUserSummary(appUser.getId());
+        this.apiUserSummaryDao.initUserSummary(appUser.getId());
 
         Passport passport = this.createAppUserPassport(appUser.getId(), registration);
         AccessToken accessToken = getSuccessAccessToken(passport);
@@ -220,8 +223,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Override
     public UserSummary getUserSummary(Long userId) {
-        UserSummary userSummary = appUserDao.getUserSummary(userId);
-
+        UserSummary userSummary = apiUserSummaryDao.getUserSummary(userId);
         return userSummary;
     }
 }

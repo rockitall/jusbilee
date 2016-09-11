@@ -3,8 +3,8 @@
  */
 package com.jusbilee.app.admin.dao;
 
-import com.jusbilee.app.admin.dao.sql.AdminAppUserDaoProvider;
 import com.jusbilee.app.admin.criteria.AdminAppUserCriteria;
+import com.jusbilee.app.admin.dao.sql.AdminAppUserDaoProvider;
 import com.jusbilee.app.api.user.account.domain.AppUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
