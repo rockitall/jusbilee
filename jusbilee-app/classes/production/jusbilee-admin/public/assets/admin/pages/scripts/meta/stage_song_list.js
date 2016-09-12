@@ -98,7 +98,7 @@ var StageSongManager = function () {
                     var form = $("#stageSongForm");
                     var queryString = form.serialize();
                     $.post("/admin/meta/stage/song/add", queryString, function (data) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("添加成功");
                             StageSongManager.Initializer.refresh();
                             return;
@@ -135,7 +135,7 @@ var StageSongManager = function () {
                 submit: function () {
                     var queryString = $("#stageSongForm").serialize();
                     $.post("/admin/meta/stage/song/update", queryString, function (data, xhr) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("更新成功");
                             StageSongManager.Initializer.refresh();
                             return;
@@ -146,16 +146,17 @@ var StageSongManager = function () {
             },
             Remove: {
                 submit: function (id) {
-                    if (window.confirm("确定要删除么？")) {
+                    bootbox.confirm("确定要删除么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/meta/stage/song/delete?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("删除成功");
                                 StageSongManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
+                    });
                 }
             },
         },

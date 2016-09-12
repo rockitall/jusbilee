@@ -77,7 +77,7 @@ var PracticeSongManager = function () {
                         error3.show();
                     },
                     submitHandler: function (form) {
-                        !!$("#practiceSongId", $(form)).val() ?PracticeSongManager.Action.Update.submit() : PracticeSongManager.Action.Add.submit();
+                        !!$("#practiceSongId", $(form)).val() ? PracticeSongManager.Action.Update.submit() : PracticeSongManager.Action.Add.submit();
                     }
                 });
             },
@@ -93,7 +93,7 @@ var PracticeSongManager = function () {
                     var form = $("#practiceSongRow");
                     var queryString = form.serialize();
                     $.post("/admin/meta/practice/song/add", queryString, function (data) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("添加成功");
                             PracticeSongManager.Initializer.refresh();
                             return;
@@ -133,7 +133,7 @@ var PracticeSongManager = function () {
                 submit: function () {
                     var queryString = $("#practiceSongForm").serialize();
                     $.post("/admin/meta/practice/song/update", queryString, function (data, xhr) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("更新成功");
                             PracticeSongManager.Initializer.refresh();
                             return;
@@ -144,16 +144,17 @@ var PracticeSongManager = function () {
             },
             Remove: {
                 submit: function (id) {
-                    if (window.confirm("确定要删除么？")) {
+                    bootbox.confirm("确定要删除么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/meta/practice/song/delete?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("删除成功");
                                 PracticeSongManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
+                    });
                 }
             },
         },

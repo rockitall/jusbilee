@@ -98,7 +98,7 @@ var AdminUserManager = function () {
                     var form = $("#adminUserForm");
                     var queryString = form.serialize();
                     $.post("/admin/user/add", queryString, function (data) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("添加成功");
                             AdminUserManager.Initializer.refresh();
                             return;
@@ -130,7 +130,7 @@ var AdminUserManager = function () {
                 submit: function () {
                     var queryString = $("#adminUserForm").serialize();
                     $.post("/admin/user/update", queryString, function (data, xhr) {
-                        if(data.code==200){
+                        if (data.code == 200) {
                             Notific8.success("更新成功");
                             AdminUserManager.Initializer.refresh();
                             return;
@@ -141,58 +141,62 @@ var AdminUserManager = function () {
             },
             Remove: {
                 submit: function (id) {
-                    if (window.confirm("确定要删除么？")) {
+                    bootbox.confirm("确定要删除么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/user/delete?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("删除成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
+                    });
                 }
             },
             Lock: {
                 submit: function (id) {
-                    if (window.confirm("确定要锁定该用户么？")) {
+                    bootbox.confirm("确定要锁定该用户么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/user/lock?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("锁定成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
-                },
+                    });
+                }
             },
             Unlock: {
                 submit: function (id) {
-                    if (window.confirm("确定要解锁该用户么？")) {
+                    bootbox.confirm("确定要解锁该用户么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/user/unlock?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("解锁成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
+                    });
                 }
             },
             ResetPassword: {
                 submit: function (id) {
-                    if (window.confirm("确定要重设该用户密码么？")) {
+                    bootbox.confirm("确定要重设该用户密码么？", function (sure) {
+                        if (!sure) return;
                         $.get("/admin/user/pwd/reset?id=" + id, {}, function (data) {
-                            if(data.code==200){
+                            if (data.code == 200) {
                                 Notific8.success("重设密码成功");
                                 AdminUserManager.Initializer.refresh();
                                 return;
                             }
                             Notific8.error(data.msg);
                         }, "json")
-                    }
+                    });
                 }
             }
         },

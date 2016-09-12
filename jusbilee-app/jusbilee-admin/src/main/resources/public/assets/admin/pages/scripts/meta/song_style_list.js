@@ -3,7 +3,7 @@ var SongStyle = function () {
     var error = $('.alert-danger', form);
     var success = $('.alert-success', form);
 
-    function clear(){
+    function clear() {
         success.hide();
         error.show();
         form.find('.form-group').removeClass('has-error');
@@ -71,19 +71,18 @@ var SongStyle = function () {
             $("#formModal").modal();
         },
         remove: function (id) {
-            var yes = window.confirm("确定要删除么？");
-            if (!yes) {
-                return;
-            }
-            var url = "/admin/meta/song/style/delete?songStyleId=" + id;
-            $.get(url, {}, function (data) {
-                if(data.code==200){
-                    Notific8.success("删除成功");
-                    SongStyle.refresh();
-                    return;
-                }
-                Notific8.error(data.msg);
-            }, "json")
+            bootbox.confirm("确定要删除么？", function (sure) {
+                if (!sure) return;
+                var url = "/admin/meta/song/style/delete?songStyleId=" + id;
+                $.get(url, {}, function (data) {
+                    if (data.code == 200) {
+                        Notific8.success("删除成功");
+                        SongStyle.refresh();
+                        return;
+                    }
+                    Notific8.error(data.msg);
+                }, "json")
+            });
         },
         save: function () {
             var _name = $.trim($("#name").val());
@@ -103,7 +102,7 @@ var SongStyle = function () {
             $("#basic_data_m2").click();
             $(".modal-backdrop").remove();
         },
-        init: function() {
+        init: function () {
             handSave();
         }
     };

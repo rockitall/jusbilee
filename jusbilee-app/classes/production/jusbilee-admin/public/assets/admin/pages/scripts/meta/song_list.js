@@ -24,16 +24,21 @@ var SongManager = function () {
                 $("#addRow").hide();
             },
             submit: function () {
+                Metronic.blockUI({
+                    target: '#addRow',
+                    animate: true
+                });
                 var formData = new FormData($("#addForm")[0]);
                 $.ajax({
                     url: '/admin/meta/song/add',
                     type: 'POST',
                     data: formData,
-                    async: false,
+                    async: true,
                     cache: false,
                     contentType: false,
                     processData: false,
                     success: function (data) {
+                        Metronic.unblockUI("#addRow");
                         if (data.code == 200) {
                             Notific8.success("添加歌曲成功");
                             SongManager.Initializer.refresh();
@@ -42,6 +47,7 @@ var SongManager = function () {
                         Notific8.error(data.msg);
                     },
                     error: function (returndata) {
+                        Metronic.unblockUI("#addRow");
                         console.log("error");
                     }
                 });
@@ -152,15 +158,20 @@ var SongManager = function () {
                 var id = $("#songId").val();
                 var formData = new FormData($("#updateForm")[0]);
                 formData.append("songId", id);
+                Metronic.blockUI({
+                    target: '#updateRow',
+                    animate: true
+                });
                 $.ajax({
                     url: '/admin/meta/song/update',
                     type: 'POST',
                     data: formData,
-                    async: false,
+                    async: true,
                     cache: false,
                     contentType: false,
                     processData: false,
                     success: function (data) {
+                        Metronic.unblockUI("#updateRow");
                         if (data.code == 200) {
                             Notific8.success("更新歌曲成功");
                             SongManager.Initializer.refresh();
@@ -169,6 +180,7 @@ var SongManager = function () {
                         Notific8.error(data.msg);
                     },
                     error: function (returndata) {
+                        Metronic.unblockUI("#updateRow");
                         console.log("error");
                     }
                 });
@@ -236,19 +248,18 @@ var SongManager = function () {
         },
         Removal: {
             remove: function (id) {
-                var yes = window.confirm("确定要删除么？");
-                if (!yes) {
-                    return;
-                }
-                var url = "/admin/meta/song/delete?songId=" + id;
-                $.get(url, {}, function (data) {
-                    if (data.code == 200) {
-                        Notific8.success("删除成功");
-                        SongManager.Initializer.refresh()
-                        return;
-                    }
-                    Notific8.error("删除失败");
-                }, "json")
+                bootbox.confirm("确定要删除么？", function (sure) {
+                    if (!sure) return;
+                    var url = "/admin/meta/song/delete?songId=" + id;
+                    $.get(url, {}, function (data) {
+                        if (data.code == 200) {
+                            Notific8.success("删除成功");
+                            SongManager.Initializer.refresh()
+                            return;
+                        }
+                        Notific8.error("删除失败");
+                    }, "json")
+                });
             }
         },
         Stage: {
@@ -296,7 +307,7 @@ var SongManager = function () {
                 var url = (isUpdate ? "/admin/meta/stage/song/update" : "/admin/meta/stage/song/add");
                 var queryString = form.serialize();
                 $.post(url, queryString, function (data) {
-                    if(data.code==200){
+                    if (data.code == 200) {
                         Notific8.success("设置闯关成功");
                         SongManager.Initializer.refresh();
                         return;
@@ -414,7 +425,7 @@ var SongManager = function () {
                 var url = (isUpdate ? "/admin/meta/practice/song/update" : "/admin/meta/practice/song/add");
                 var queryString = $('#practiceSongForm').serialize()
                 $.post(url, queryString, function (data) {
-                    if(data.code==200){
+                    if (data.code == 200) {
                         Notific8.success("设置练习成功");
                         SongManager.Initializer.refresh();
                         return;

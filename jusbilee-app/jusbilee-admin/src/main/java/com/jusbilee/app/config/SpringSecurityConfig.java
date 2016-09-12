@@ -1,8 +1,6 @@
 package com.jusbilee.app.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,23 +9,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private Environment environment;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        if (environment.acceptsProfiles("prod")) {
-            http.
-                    authorizeRequests()
-                    .antMatchers("/admin/assets/**", "/admin/captcha").permitAll()
-                    .anyRequest().authenticated()
-                    .and().formLogin()
-                    .loginPage("/admin/login").defaultSuccessUrl("/admin/main")
-                    .permitAll()
-                    .and().csrf().disable();
-        } else {
-            http.csrf().disable();
-        }
+        http.authorizeRequests()
+                .antMatchers("/admin/assets/**", "/admin/captcha").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/admin/login").defaultSuccessUrl("/admin/main")
+                .permitAll()
+                .and().csrf().disable();
     }
 
     @Bean
