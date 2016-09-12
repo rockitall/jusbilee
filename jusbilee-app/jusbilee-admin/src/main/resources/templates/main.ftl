@@ -65,12 +65,12 @@
                         <li class="divider">
                         </li>
                         <li>
-                            <a href="extra_lock.html">
-                                <i class="icon-lock"></i> Lock Screen </a>
+                            <a href="javascript:UserProfile.Password.show()">
+                                <i class="icon-lock"></i>修改密码 </a>
                         </li>
                         <li>
-                            <a href="/admin/login?logout">
-                                <i class="icon-key"></i> Log Out </a>
+                            <a href="/admin/logout">
+                                <i class="icon-key"></i>注销</a>
                         </li>
                     </ul>
                 </li>
@@ -190,6 +190,42 @@
         <i class="icon-arrow-up"></i>
     </div>
 </div>
+<form class="form-horizontal" id="passwordModifyForm">
+    <div class="modal fade" id="passwordModifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">原密码</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="oldUserPassword"  placeholder="原密码" name="oldUserPassword" maxlength="16">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">新密码</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="userPassword"  placeholder="新密码" name="userPassword" maxlength="16">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">确认密码</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="c_userPassword"  placeholder="确认密码" name="c_userPassword" maxlength="16">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
@@ -228,8 +264,8 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
-        Index.init();
         AdminValidator.initDefaults();
+        Index.init();
     });
 </script>
 <!-- END JAVASCRIPTS -->

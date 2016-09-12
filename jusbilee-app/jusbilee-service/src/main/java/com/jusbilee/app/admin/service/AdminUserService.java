@@ -74,4 +74,11 @@ public class AdminUserService {
     public AdminUser getAdminUserById(Integer userId) {
         return adminUserMapper.selectByPrimaryKey(userId);
     }
+
+    public void updateAdminUserPassword(Integer userId, String userPassword) {
+        AdminUser user = new AdminUser();
+        user.setId(userId);
+        user.setPassword(userPassword);
+        adminUserMapper.updateByPrimaryKeySelective(user);
+    }
 }

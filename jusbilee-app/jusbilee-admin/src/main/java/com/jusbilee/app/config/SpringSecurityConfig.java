@@ -18,7 +18,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/admin/login").defaultSuccessUrl("/admin/main")
                 .permitAll()
-                .and().csrf().disable();
+                .and().csrf().disable()
+                .logout().clearAuthentication(true).logoutUrl("/admin/logout")
+                .logoutSuccessUrl("/admin/login?logout");
     }
 
     @Bean

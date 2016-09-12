@@ -9,7 +9,6 @@ import javax.validation.constraints.Pattern;
  * Created by Allen on 2016/9/5.
  */
 public class AdminUserRequest {
-
     @NotEmpty(message = "登录名不能为空")
     @Pattern(regexp = "^[a-zA-z0-9]+$", message = "登录名只能为大小写字母、数字")
     @Length(min = 4, max = 16, message = "登录名长度在4~16之间")
@@ -18,6 +17,8 @@ public class AdminUserRequest {
     @NotEmpty(message = "用户昵称不能为空")
     private String nickname;
 
+    @NotEmpty(message = "密码不能为空")
+    @Length(min = 6, max = 16, message = "密码长度在6~16之间")
     private String password;
     private String mobile;
     private String email;

@@ -98,4 +98,8 @@ public class AdminUserDetails implements UserDetails {
     public Date getUpdateTime() {
         return adminUser.getUpdateTime();
     }
+
+    public void setPassword(String password) {
+        adminUser.setPassword(password);
+    }
 }
