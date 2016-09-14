@@ -15,12 +15,6 @@ public class UserPracticeRequest {
     @NotNull(message = "practiceScore不能为空")
     private Integer practiceScore;
 
-    @NotNull(message = "practiceCount不能为空")
-    private Integer practiceCount;
-
-    @NotNull(message = "bestAvgScore不能为空")
-    private Integer bestAvgScore;
-
     @NotNull(message = "fullScoreBestTime不能为空")
     private Integer fullScoreBestTime;
 
@@ -46,22 +40,6 @@ public class UserPracticeRequest {
 
     public void setPracticeScore(Integer practiceScore) {
         this.practiceScore = practiceScore;
-    }
-
-    public Integer getPracticeCount() {
-        return practiceCount;
-    }
-
-    public void setPracticeCount(Integer practiceCount) {
-        this.practiceCount = practiceCount;
-    }
-
-    public Integer getBestAvgScore() {
-        return bestAvgScore;
-    }
-
-    public void setBestAvgScore(Integer bestAvgScore) {
-        this.bestAvgScore = bestAvgScore;
     }
 
     public Integer getFullScoreBestTime() {

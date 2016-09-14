@@ -36,14 +36,6 @@ public class PracticeLogSongFacade {
         return info.getIconUrl();
     }
 
-    public String getOpernScreenshotUrl() {
-        return info.getOpernScreenshotUrl();
-    }
-
-    public String getOpernUrl() {
-        return info.getOpernUrl();
-    }
-
     public String getWavPlayUrl() {
         return info.getWavPlayUrl();
     }

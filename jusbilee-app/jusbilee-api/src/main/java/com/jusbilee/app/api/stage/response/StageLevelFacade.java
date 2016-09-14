@@ -1,15 +1,15 @@
 package com.jusbilee.app.api.stage.response;
 
-import com.jusbilee.app.api.stage.domain.ApiStageLevel;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiSongLevel;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
 
 /**
  * Created by Allen on 2016/9/10.
  */
 public class StageLevelFacade {
-    private ApiStageLevel level;
-    private ApiStageLevelSongCount levelTotalCount;
-    private ApiStageLevelSongCount userPassedCount;
+    private ApiSongLevel level;
+    private ApiLevelStageSongCount levelTotalCount;
+    private ApiLevelStageSongCount userPassedCount;
 
     public Integer getTotal() {
         return levelTotalCount != null ? levelTotalCount.getSongCount() : 0;
@@ -27,15 +27,15 @@ public class StageLevelFacade {
         return level.getLevelId();
     }
 
-    public void setLevel(ApiStageLevel level) {
+    public void setLevel(ApiSongLevel level) {
         this.level = level;
     }
 
-    public void setLevelTotalCount(ApiStageLevelSongCount levelTotalCount) {
+    public void setLevelTotalCount(ApiLevelStageSongCount levelTotalCount) {
         this.levelTotalCount = levelTotalCount;
     }
 
-    public void setUserPassedCount(ApiStageLevelSongCount userPassedCount) {
+    public void setUserPassedCount(ApiLevelStageSongCount userPassedCount) {
         this.userPassedCount = userPassedCount;
     }
 }

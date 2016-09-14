@@ -7,7 +7,7 @@ package com.jusbilee.app.admin.criteria;
 public class AdminPracticeSongCriteria {
     private String name;
     private Boolean online;
-    private Integer songStyleId;
+    private Integer styleId;
     private String onlineStartTime;
     private String onlineEndTime;
     private Integer unlockGoldCoinStart;
@@ -54,12 +54,12 @@ public class AdminPracticeSongCriteria {
         this.passStageUnlock = passStageUnlock;
     }
 
-    public Integer getSongStyleId() {
-        return songStyleId;
+    public Integer getStyleId() {
+        return styleId;
     }
 
-    public void setSongStyleId(Integer songStyleId) {
-        this.songStyleId = songStyleId;
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
     }
 
     public Integer getUnlockGoldCoinEnd() {

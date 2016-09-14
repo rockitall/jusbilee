@@ -116,3 +116,7 @@ var Notific8 = function () {
     }
 }();
 
+function download(url) {
+    window.open(url);
+}
+

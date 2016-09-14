@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 
-public class StageLevelRequest {
+public class SongLevelRequest {
     @NotEmpty(message = "名称不能为空")
     @Length(max = 16, message = "名称不能超过16个字符")
     private String name;

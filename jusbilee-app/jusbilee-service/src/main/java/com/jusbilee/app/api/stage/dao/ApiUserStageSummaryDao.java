@@ -1,7 +1,7 @@
 package com.jusbilee.app.api.stage.dao;
 
 import com.jusbilee.app.api.stage.dao.sql.UserStageSummaryDaoSqlProvider;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
 import com.jusbilee.app.api.stage.domain.ApiUserStageSummary;
 import org.apache.ibatis.annotations.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface ApiUserStageSummaryDao {
     @Select(UserStageSummaryDaoSqlProvider.GET_USER_STAGE_PASSED_COUNT_SQL)
-    List<ApiStageLevelSongCount> getUserAllStageLevelPassedSongCount(@Param("userId") Long userId);
+    List<ApiLevelStageSongCount> getUserAllStageLevelPassedSongCount(@Param("userId") Long userId);
 
     @SelectProvider(type = UserStageSummaryDaoSqlProvider.class, method = "getUserStageSummaryListBySongIdListSql")
     List<ApiUserStageSummary> selectBySongIdList(@Param("userId") Long userId, List<Integer> songIdList);

@@ -18,7 +18,7 @@ public class ApiUserPracticeDaoSqlProvider {
         sql.SELECT("total_practice_time as totalPracticeTime");
         sql.SELECT("total_practice_count as totalPracticeCount");
         sql.SELECT("total_practice_score as totalPracticeScore");
-        sql.SELECT("best_avg_score as bestAvgScore");
+        sql.SELECT("best_score as bestScore");
         sql.SELECT("full_score_best_time as fullScoreBestTime");
         sql.FROM("t_user_practice_summary");
         sql.WHERE("user_id=#{userId}");
@@ -40,7 +40,7 @@ public class ApiUserPracticeDaoSqlProvider {
         sql.SELECT("total_practice_time as totalPracticeTime");
         sql.SELECT("total_practice_count as totalPracticeCount");
         sql.SELECT("total_practice_score as totalPracticeScore");
-        sql.SELECT("best_avg_score as bestAvgScore");
+        sql.SELECT("best_score as bestScore");
         sql.SELECT("full_score_best_time as fullScoreBestTime");
         sql.FROM("t_user_practice_summary");
         sql.WHERE("style_id=#{styleId}");
@@ -48,7 +48,7 @@ public class ApiUserPracticeDaoSqlProvider {
         sql.WHERE("user_id=#{userId}");
         StringBuilder buf = new StringBuilder(256);
         sql.usingAppender(buf);
-        buf.append(" order by best_avg_score desc");
+        buf.append(" order by best_score desc");
         buf.append(" limit ").append(pagination.getOffset()).append(",").append(pagination.getLimit());
         return buf.toString();
     }

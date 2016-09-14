@@ -2,11 +2,12 @@ package com.jusbilee.app.admin.manager;
 
 import com.jusbilee.app.admin.criteria.AdminPracticeSongCriteria;
 import com.jusbilee.app.admin.domain.AdminPracticeSongListItem;
-import com.jusbilee.app.admin.domain.AdminStageSongListItem;
 import com.jusbilee.app.admin.domain.Status;
 import com.jusbilee.app.admin.request.PracticeSongRequest;
 import com.jusbilee.app.admin.service.AdminPracticeSongService;
+import com.jusbilee.app.admin.service.AdminSongService;
 import com.jusbilee.app.mybatis.pojo.PracticeSong;
+import com.jusbilee.app.mybatis.pojo.Song;
 import com.rockit.core.Constants;
 import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class PracticeSongManager {
     @Autowired
     private AdminPracticeSongService adminPracticeSongService;
 
+    @Autowired
+    private AdminSongService adminSongService;
+
     public PracticeSong addPracticeSong(PracticeSongRequest request) throws Exception {
         PracticeSong song = transformToPracticeSong(request);
         adminPracticeSongService.add(song);
@@ -36,9 +40,10 @@ public class PracticeSongManager {
     }
 
     public PracticeSong transformToPracticeSong(PracticeSongRequest request) throws Exception {
+        Song s = adminSongService.selectById(request.getSongId());
         PracticeSong song = new PracticeSong();
         song.setSongId(request.getSongId());
-        song.setStyleId(request.getSongStyleId());
+        song.setStyleId(s.getStyleId());
         byte status = request.isOnline() ? Status.StageSongStatus.ONLINE : Status.StageSongStatus.OFFLINE;
         song.setStatus(status);
 

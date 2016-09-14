@@ -9,7 +9,7 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                        <input type="hidden" id="songStyleId" value=""/>
+                        <input type="hidden" id="styleId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">歌曲风格名称</label>
                             <div class="col-md-9">

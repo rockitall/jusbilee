@@ -1,7 +1,7 @@
 package com.jusbilee.app.api.stage.service;
 
 import com.jusbilee.app.api.stage.dao.ApiUserStageSummaryDao;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
 import com.jusbilee.app.api.stage.domain.ApiUserStageSummary;
 import com.jusbilee.app.mybatis.dao.UserStageSummaryMapper;
 import com.jusbilee.app.mybatis.pojo.StageSong;
@@ -28,8 +28,8 @@ public class ApiUserStageSummaryService {
     @Autowired
     private UserStageSummaryMapper userStageSummaryMapper;
 
-    public Map<Integer, ApiStageLevelSongCount> getUserAllStageLevelPassedSongCount(Long userId) {
-        List<ApiStageLevelSongCount> counts = apiUserStageSummaryDao.getUserAllStageLevelPassedSongCount(userId);
+    public Map<Integer, ApiLevelStageSongCount> getUserAllLevelPassedStageSongCount(Long userId) {
+        List<ApiLevelStageSongCount> counts = apiUserStageSummaryDao.getUserAllStageLevelPassedSongCount(userId);
         return IdentityUtils.asMap(counts, v -> v.getLevelId());
     }
 
@@ -63,7 +63,7 @@ public class ApiUserStageSummaryService {
         updateAsssistUserId(summary, assistUserId);
         summary.setStageCount(1);
         summary.setSongId(song.getSongId());
-        summary.setStageLevelId(song.getStageLevelId());
+        summary.setLevelId(song.getLevelId());
         summary.setStageSongId(song.getId());
         Byte isPassed = (score >= song.getPassScore() ? YES : NO);
         summary.setIsPassed(isPassed);

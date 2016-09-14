@@ -1,7 +1,7 @@
 package com.jusbilee.app.api.stage.dao;
 
 import com.jusbilee.app.api.stage.dao.sql.ApiStageSongDaoSqlProvider;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
 import com.jusbilee.app.api.stage.domain.ApiStageSong;
 import com.rockit.core.pojo.Pagination;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,9 +15,9 @@ import java.util.List;
  */
 @Mapper
 public interface ApiStageSongDao {
-    @Select(ApiStageSongDaoSqlProvider.ALL_STAGE_LEVEL_SONG_COUNT_SQL)
-    List<ApiStageLevelSongCount> getAllStageLevelSongCount();
+    @Select(ApiStageSongDaoSqlProvider.ALL_LEVEL_STAGE_SONG_COUNT_SQL)
+    List<ApiLevelStageSongCount> getAllLevelStageSongCount();
 
-    @Select(ApiStageSongDaoSqlProvider.STAGE_LEVEL_SONG_SQL)
-    List<ApiStageSong> getByStyleId(@Param("stageLevelId") Integer stageLevelId, @Param("p") Pagination pagination);
+    @Select(ApiStageSongDaoSqlProvider.LEVEL_STAGE_SONG_SQL)
+    List<ApiStageSong> selectByLevelId(@Param("levelId") Integer levelId, @Param("p") Pagination pagination);
 }

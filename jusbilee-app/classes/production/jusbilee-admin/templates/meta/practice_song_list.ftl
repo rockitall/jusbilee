@@ -35,7 +35,7 @@
                             <input type="hidden" name="name" value="${(c.name)!''}"/>
                             <input type="hidden" name="unlockGoldCoinStart" value="${(c.unlockGoldCoinStart)!""}"/>
                             <input type="hidden" name="unlockGoldCoinEnd" value="${(c.unlockGoldCoinEnd)!""}"/>
-                            <input type="hidden" name="songStyleId" value="${(c.songStyleId)!""}"/>
+                            <input type="hidden" name="styleId" value="${(c.styleId)!""}"/>
                             <input type="hidden" name="passStageUnlock" value="<#if c.passStageUnlock??>${c.passStageUnlock?string}</#if>"/>
                             <input type="hidden" name="online" value="<#if c.online??>${c.online?string}</#if>"/>
                             <input type="hidden" name="onlineStartTime" value="${(c.onlineStartTime)!''}"/>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">歌曲风格</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" id="songStyleId" name="songStyleId">
+                                            <select class="form-control" id="styleId" name="styleId">
                                                 <option value="">--全部--</option>
                                                 <#list styles as l>
                                                     <option value="${l.id}">${l.name}</option>
@@ -150,7 +150,7 @@
                                 <#list songs as l>
                                 <tr>
                                     <td>${l.name}</td>
-                                    <td>${l.songStyleName}</td>
+                                    <td>${l.styleName}</td>
                                     <td>${(l.status==0)?string("已上线","未上线")}</td>
                                     <td>
                                         <#if l.status==0 && l.startTime??>
@@ -200,17 +200,6 @@
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" disabled="" id="practiceSongName" name="practiceSongName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">歌曲风格</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="songStyleId" name="songStyleId">
-                                        <option value="">-请选择歌曲风格-</option>
-                                    <#list styles as l>
-                                        <option value="${l.id}">${l.name}</option>
-                                    </#list>
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -278,6 +267,6 @@
     var searchForm = $("#searchForm")
     <#if (c.online)??>$("#online", searchForm).val("${c.online?string}")</#if>
     <#if (c.passStageUnlock)??>$("#passStageUnlock", searchForm).val("${c.passStageUnlock?string}")</#if>
-    <#if (c.songStyleId)??>$("#songStyleId", searchForm).val("${c.songStyleId?string}")</#if>
+    <#if (c.styleId)??>$("#styleId", searchForm).val("${c.styleId?string}")</#if>
     PracticeSongManager.Initializer.init();
 </script>

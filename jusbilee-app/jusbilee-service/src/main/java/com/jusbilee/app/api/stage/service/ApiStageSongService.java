@@ -21,8 +21,8 @@ public class ApiStageSongService {
     @Autowired
     private StageSongMapper stageSongMapper;
 
-    public List<ApiStageSong> getStageSongByStageLevelId(Integer stageLevelId, Pagination pagination) {
-        return apiStageSongDao.getByStyleId(stageLevelId, pagination);
+    public List<ApiStageSong> getStageSongByLevelId(Integer levelId, Pagination pagination) {
+        return apiStageSongDao.selectByLevelId(levelId, pagination);
     }
 
     public StageSong getStageSongBySongId(Integer songId) {

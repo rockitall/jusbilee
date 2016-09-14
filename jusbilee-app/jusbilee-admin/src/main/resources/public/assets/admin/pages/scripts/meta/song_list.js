@@ -61,6 +61,12 @@ var SongManager = function () {
                         name: {
                             required: true
                         },
+                        levelId: {
+                            required: true
+                        },
+                        styleId: {
+                            required: true
+                        },
                         description: {
                             required: true
                         },
@@ -69,11 +75,11 @@ var SongManager = function () {
                             accept: "image/png,image/jpeg"
                         },
                         screenshotFile: {
-                            required: true,
+                            required: false,
                             accept: "image/png,image/jpeg"
                         },
                         opernFile: {
-                            required: true,
+                            required: false,
                             accept: "image/png,image/jpeg"
                         },
                         wavFile: {
@@ -89,6 +95,12 @@ var SongManager = function () {
                         name: {
                             required: "歌曲名称不能为空"
                         },
+                        levelId: {
+                            required: "请选择歌曲难易程度"
+                        },
+                        styleId: {
+                            required: "请选择歌曲风格"
+                        },
                         description: {
                             required: "描述不能为空"
                         },
@@ -97,11 +109,9 @@ var SongManager = function () {
                             accept: "只支持jpg,png格式图片"
                         },
                         screenshotFile: {
-                            required: "请选择上传图片",
                             accept: "只支持jpg,png格式图片"
                         },
                         opernFile: {
-                            required: "请选择上传图片",
                             accept: "只支持jpg,png格式图片"
                         },
                         wavFile: {
@@ -141,7 +151,9 @@ var SongManager = function () {
                     $('#ssImg', form).attr("src", song.opernScreenshotUrl);
                     $('#opernImg', form).attr("src", song.opernUrl);
                     $('#wavDwUrl', form).attr("href", song.wavPlayUrl);
-                    $('#midiDwUrl', form).val("href", song.midiPlayUrl);
+                    $('#midiDwUrl', form).attr("href", song.midiPlayUrl);
+                    $('#levelId', form).val(song.levelId);
+                    $('#styleId', form).val(song.styleId);
 
                     SongManager.Edit.show();
                 }, "json")
@@ -181,7 +193,6 @@ var SongManager = function () {
                     },
                     error: function (returndata) {
                         Metronic.unblockUI("#updateRow");
-                        console.log("error");
                     }
                 });
             },
@@ -192,6 +203,12 @@ var SongManager = function () {
                 form.validate({
                     rules: {
                         name: {
+                            required: true
+                        },
+                        levelId: {
+                            required: true
+                        },
+                        styleId: {
                             required: true
                         },
                         description: {
@@ -216,6 +233,12 @@ var SongManager = function () {
                     messages: {
                         name: {
                             required: "歌曲名称不能为空"
+                        },
+                        levelId: {
+                            required: "请选择歌曲难易程度"
+                        },
+                        styleId: {
+                            required: "请选择歌曲风格"
                         },
                         description: {
                             required: "描述不能为空"
@@ -274,7 +297,6 @@ var SongManager = function () {
                     $("#stageSongId", form).val(stageSongId);
                     $.get("/admin/meta/stage/song/" + stageSongId, {}, function (result) {
                         var song = result.data;
-                        $("#stageLevelId", form).val(song.stageLevelId);
                         if (song.online) {
                             $("#online", form).iCheck("check");
                             $("#startTime", form).val(song.startTime);
@@ -322,9 +344,6 @@ var SongManager = function () {
 
                 form.validate({
                     rules: {
-                        stageLevelId: {
-                            required: true
-                        },
                         startTime: {
                             requireDependOn: ".stage-song-online"
                         },
@@ -341,9 +360,6 @@ var SongManager = function () {
                         }
                     },
                     messages: {
-                        stageLevelId: {
-                            required: "请选择难易程度级别"
-                        },
                         startTime: {
                             requireDependOn: "上线开始时间不能为空"
                         },
@@ -381,7 +397,6 @@ var SongManager = function () {
                     $("#practiceSongId", form).val(practiceSongId);
                     $.get("/admin/meta/practice/song/" + practiceSongId, {}, function (result) {
                         var song = result.data;
-                        $("#songStyleId", form).val(song.styleId);
                         if (song.online) {
                             $("#online", form).iCheck("check");
                             $("#startTime", form).val(song.startTime);
@@ -405,7 +420,6 @@ var SongManager = function () {
                     $("#unlockGoldCoin", form).val("");
                     $("#startTime", form).val("");
                     $("#endTime", form).val("");
-                    $("#songStyleId", form).val("");
                     $("#practiceSongId", form).val("");
                     SongManager.Practice.show();
                 }
@@ -440,9 +454,6 @@ var SongManager = function () {
 
                 form.validate({
                     rules: {
-                        songStyleId: {
-                            required: true
-                        },
                         startTime: {
                             requireDependOn: ".practice-song-online"
                         },
@@ -455,9 +466,6 @@ var SongManager = function () {
                         }
                     },
                     messages: {
-                        songStyleId: {
-                            required: "请选择歌曲风格"
-                        },
                         startTime: {
                             requireDependOn: "上线开始时间不能为空"
                         },

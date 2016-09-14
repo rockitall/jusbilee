@@ -28,7 +28,6 @@ var StageSongManager = function () {
                 $('.has-error', form).removeClass("has-error");
 
                 $("#stageSongName", form).val("");
-                $("#stageLevelId", form).val("");
                 $("#online", form).iCheck("uncheck");
                 $("#startTime", form).val("");
                 $("#endTime", form).val("");
@@ -39,9 +38,6 @@ var StageSongManager = function () {
                 $('#stageSongForm').validate({
                     //debug: true,
                     rules: {
-                        stageLevelId: {
-                            required: true
-                        },
                         startTime: {
                             requireDependOn: ".stage-song-online"
                         },
@@ -58,9 +54,6 @@ var StageSongManager = function () {
                         }
                     },
                     messages: {
-                        stageLevelId: {
-                            required: "请选择难易程度级别"
-                        },
                         startTime: {
                             requireDependOn: "上线开始时间不能为空"
                         },
@@ -113,7 +106,6 @@ var StageSongManager = function () {
                     $.get("/admin/meta/stage/song/" + id, {}, function (result) {
                         var song = result.data;
                         var form = $("#stageSongForm");
-                        $("#stageLevelId", form).val(song.stageLevelId);
                         $("#songId", form).val(song.songId);
                         $("#stageSongId", form).val(id);
                         $("#stageSongName", form).val(songName);

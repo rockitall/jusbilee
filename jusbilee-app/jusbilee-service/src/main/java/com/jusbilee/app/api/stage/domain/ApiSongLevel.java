@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Allen on 2016/8/24.
  */
-public class ApiStageLevel implements Serializable {
+public class ApiSongLevel implements Serializable {
     private Integer levelId;
     private String levelName;
 

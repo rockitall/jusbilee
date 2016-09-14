@@ -10,8 +10,6 @@ import javax.validation.constraints.NotNull;
 public class PracticeSongRequest {
     @NotNull
     private Integer songId;
-    @NotNull
-    private Integer songStyleId;
     @DateTime
     private String startTime;
     @DateTime
@@ -28,14 +26,6 @@ public class PracticeSongRequest {
 
     public void setSongId(Integer songId) {
         this.songId = songId;
-    }
-
-    public Integer getSongStyleId() {
-        return songStyleId;
-    }
-
-    public void setSongStyleId(Integer songStyleId) {
-        this.songStyleId = songStyleId;
     }
 
     public String getStartTime() {

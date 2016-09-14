@@ -2,8 +2,8 @@ package com.jusbilee.app.api.stage.service;
 
 import com.jusbilee.app.api.stage.dao.ApiStageLevelDao;
 import com.jusbilee.app.api.stage.dao.ApiStageSongDao;
-import com.jusbilee.app.api.stage.domain.ApiStageLevel;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
+import com.jusbilee.app.api.stage.domain.ApiSongLevel;
 import com.rockit.core.utils.IdentityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,12 @@ public class ApiStageLevelService {
     private ApiStageSongDao apiStageSongDao;
 
 
-    public List<ApiStageLevel> getAllStageLevel() {
-        return apiStageLevelDao.getAllStageLevel();
+    public List<ApiSongLevel> getAllSongLevel() {
+        return apiStageLevelDao.getAllSongLevel();
     }
 
-    public Map<Integer, ApiStageLevelSongCount> getAllStageLevelSongCountAsMap() {
-        List<ApiStageLevelSongCount> counts = apiStageSongDao.getAllStageLevelSongCount();
+    public Map<Integer, ApiLevelStageSongCount> getAllLevelStageSongCountAsMap() {
+        List<ApiLevelStageSongCount> counts = apiStageSongDao.getAllLevelStageSongCount();
         return IdentityUtils.asMap(counts, v -> v.getLevelId());
     }
 

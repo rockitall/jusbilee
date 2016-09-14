@@ -175,10 +175,8 @@ public class PracticeManager {
 
     private void addUserPracticeLog(UserPracticeSummary summary, UserPracticeRequest request) {
         UserPracticeLog log = new UserPracticeLog();
-        log.setPracticeCount(request.getPracticeCount());
         log.setPracticeScore(request.getPracticeScore());
         log.setPracticeTime(request.getPracticeTime());
-        log.setBestAvgScore(request.getBestAvgScore());
         log.setFullScoreBestTime(request.getFullScoreBestTime());
         log.setUserId(summary.getUserId());
         log.setSongId(summary.getSongId());
@@ -189,7 +187,7 @@ public class PracticeManager {
 
     private void updateUserSummary(UserPracticeSummary summary, UserPracticeRequest request) {
         UserSummary userSummary = new UserSummary();
-        userSummary.setTotalPracticeCount(summary.getTotalPracticeCount() + request.getPracticeCount());
+        userSummary.setTotalPracticeCount(summary.getTotalPracticeCount() + 1);
         userSummary.setTotalPracticeScore(summary.getTotalPracticeScore() + request.getPracticeScore());
         userSummary.setTotalPracticeTime(summary.getTotalPracticeTime() + request.getPracticeTime());
         apiUserSummaryService.updateUserSummaryByUserId(summary.getUserId(), userSummary);
@@ -198,11 +196,11 @@ public class PracticeManager {
     private void updateUserPracticeSummary(UserPracticeSummary summary, UserPracticeRequest request) {
         UserPracticeSummary update = new UserPracticeSummary();
         update.setId(summary.getId());
-        update.setTotalPracticeCount(summary.getTotalPracticeCount() + request.getPracticeCount());
+        update.setTotalPracticeCount(summary.getTotalPracticeCount() + 1);
         update.setTotalPracticeTime(summary.getTotalPracticeTime() + request.getPracticeTime());
         update.setTotalPracticeScore(summary.getTotalPracticeScore() + request.getPracticeScore());
-        if (request.getBestAvgScore() > summary.getBestAvgScore()) {
-            update.setBestAvgScore(request.getBestAvgScore());
+        if (request.getPracticeScore() > summary.getBestScore()) {
+            update.setBestScore(request.getPracticeScore());
         }
         if (request.getFullScoreBestTime() > summary.getFullScoreBestTime()) {
             update.setFullScoreBestTime(request.getFullScoreBestTime());

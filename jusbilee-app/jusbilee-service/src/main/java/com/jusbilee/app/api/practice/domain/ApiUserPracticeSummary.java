@@ -1,6 +1,3 @@
-/**
- * zhandc 2016年9月2日
- */
 package com.jusbilee.app.api.practice.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,10 +13,16 @@ public class ApiUserPracticeSummary implements Serializable {
     private Integer practiceSongId;
 
     private Integer totalPracticeTime;
+    @JsonIgnore
     private Integer totalPracticeScore;
+    @JsonIgnore
     private Integer totalPracticeCount;
-    private Integer bestAvgScore;
+    private Integer bestScore;
     private Integer fullScoreBestTime;
+
+    public Integer getAvgScore() {
+        return totalPracticeCount != 0 ? totalPracticeScore / totalPracticeCount : 0;
+    }
 
     public Integer getSongId() {
         return songId;
@@ -69,12 +72,12 @@ public class ApiUserPracticeSummary implements Serializable {
         this.totalPracticeCount = totalPracticeCount;
     }
 
-    public Integer getBestAvgScore() {
-        return bestAvgScore;
+    public Integer getBestScore() {
+        return bestScore;
     }
 
-    public void setBestAvgScore(Integer bestAvgScore) {
-        this.bestAvgScore = bestAvgScore;
+    public void setBestScore(Integer bestScore) {
+        this.bestScore = bestScore;
     }
 
     public Integer getFullScoreBestTime() {

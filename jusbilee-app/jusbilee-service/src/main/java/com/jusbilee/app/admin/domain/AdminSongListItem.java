@@ -9,6 +9,10 @@ import java.util.Date;
 public class AdminSongListItem implements Serializable {
     private Integer id;
     private String name;
+    private Integer levelId;
+    private String levelName;
+    private Integer styleId;
+    private String styleName;
     private String iconUrl;
     private String screenshotUrl;
     private String opernUrl;
@@ -33,6 +37,38 @@ public class AdminSongListItem implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public Integer getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
+    }
+
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 
     public String getIconUrl() {

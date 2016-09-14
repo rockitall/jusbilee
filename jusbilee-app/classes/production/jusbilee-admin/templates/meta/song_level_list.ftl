@@ -10,11 +10,11 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                        <input type="hidden" id="stageLevelId" value=""/>
+                        <input type="hidden" id="levelId" value=""/>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">闯关级别名称</label>
+                            <label class="col-md-3 control-label">歌曲级别名称</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="name"  placeholder="闯关级别名称" name="name" maxlength="16">
+                                <input type="text" class="form-control" id="name"  placeholder="歌曲级别名称" name="name" maxlength="16">
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,7 +44,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">闯关难易级别管理</a>
+                <a href="#">歌曲难易级别管理</a>
             </li>
         </ul>
     </div>
@@ -54,7 +54,7 @@
             <div class="portlet box red">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-cogs"></i>闯关难易级别管理
+                        <i class="fa fa-cogs"></i>歌曲难易级别管理
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <button id="addBtn" class="btn green" onclick="StageLevel.add()">
+                                    <button id="addBtn" class="btn green" onclick="SongLevel.add()">
                                         添加 <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
@@ -74,7 +74,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>闯关级别名称</th>
+                                <th>歌曲级别名称</th>
                                 <th>难易程度权重</th>
                                 <th>创建时间</th>
                                 <th>最后更新时间</th>
@@ -95,10 +95,10 @@
                                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"><span class="caret"></span> 操作</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a href="javascript:StageLevel.edit('${l.id}','${l.name}', '${l.weight}')"><i class="fa fa-edit"></i>编辑</a>
+                                                        <a href="javascript:SongLevel.edit('${l.id}','${l.name}', '${l.weight}')"><i class="fa fa-edit"></i>编辑</a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:StageLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
+                                                        <a href="javascript:SongLevel.remove('${l.id}')">删除<i class="fa fa-trash"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -116,4 +116,4 @@
         </div>
     </div>
 </div>
-<script src="assets/admin/pages/scripts/meta/stage_level_list.js" type="text/javascript"></script>
+<script src="assets/admin/pages/scripts/meta/song_level_list.js" type="text/javascript"></script>

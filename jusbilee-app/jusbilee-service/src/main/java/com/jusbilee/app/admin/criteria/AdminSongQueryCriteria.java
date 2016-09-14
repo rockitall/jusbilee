@@ -5,10 +5,28 @@ package com.jusbilee.app.admin.criteria;
  */
 public class AdminSongQueryCriteria {
     private String name;
+    private Integer levelId;
+    private Integer styleId;
     private Boolean stageModel;
     private Boolean practiceModel;
     private String startTime;
     private String endTime;
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
+
+    public Integer getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
+    }
 
     public String getEndTime() {
         return endTime;

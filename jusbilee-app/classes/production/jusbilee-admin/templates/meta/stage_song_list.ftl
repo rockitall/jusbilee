@@ -35,7 +35,7 @@
                             <input type="hidden" name="name" value="${(c.name)!''}"/>
                             <input type="hidden" name="passScoreStart" value="${(c.passScoreStart)!""}"/>
                             <input type="hidden" name="passScoreEnd" value="${(c.passScoreEnd)!""}"/>
-                            <input type="hidden" name="stageLevelId" value="${(c.stageLevelId)!""}"/>
+                            <input type="hidden" name="levelId" value="${(c.levelId)!""}"/>
                             <input type="hidden" name="sortOrder" value="${(c.sortOrder)!""}"/>
                             <input type="hidden" name="online" value="<#if c.online??>${c.online?string}</#if>"/>
                             <input type="hidden" name="onlineStartTime" value="${(c.onlineStartTime)!''}"/>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">难易程度级别</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" id="stageLevelId" name="stageLevelId">
+                                            <select class="form-control" id="levelId" name="levelId">
                                                 <option value="">--全部--</option>
                                             <#list levels as l>
                                                 <option value="${l.id}">${l.name}</option>
@@ -147,7 +147,7 @@
                                 <tr>
                                     <td>${l.name}</td>
                                     <td>${l.sortOrder}</td>
-                                    <td>${l.stageLevelName}</td>
+                                    <td>${l.levelName}</td>
                                     <td>${(l.status==0)?string("已上线","未上线")}</td>
                                     <td>
                                         <#if l.status==0 && l.startTime??>
@@ -196,17 +196,6 @@
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" disabled="" id="stageSongName" name="stageSongName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">难易程度级别</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="stageLevelId" name="stageLevelId">
-                                        <option value="">-请选择难易程度级别-</option>
-                                        <#list levels as l>
-                                            <option value="${l.id}">${l.name}</option>
-                                        </#list>
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -272,6 +261,6 @@
 <script src="assets/admin/pages/scripts/meta/stage_song_list.js" type="text/javascript"></script>
 <script type="text/javascript">
     <#if (c.online)??>$("#online").val("${c.online?string}")</#if>
-    <#if (c.stageLevelId)??>$("#stageLevelId").val("${c.stageLevelId?string}")</#if>
+    <#if (c.levelId)??>$("#levelId").val("${c.levelId?string}")</#if>
     StageSongManager.Initializer.init();
 </script>

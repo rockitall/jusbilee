@@ -6,7 +6,7 @@ package com.jusbilee.app.admin.criteria;
 public class AdminStageSongQueryCriteria {
     private String name;
     private Boolean online;
-    private Integer stageLevelId;
+    private Integer levelId;
     private String onlineStartTime;
     private String onlineEndTime;
     private Integer passScoreStart;
@@ -69,11 +69,11 @@ public class AdminStageSongQueryCriteria {
         this.sortOrder = sortOrder;
     }
 
-    public Integer getStageLevelId() {
-        return stageLevelId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setStageLevelId(Integer stageLevelId) {
-        this.stageLevelId = stageLevelId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 }

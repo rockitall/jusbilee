@@ -11,8 +11,6 @@ public class ApiSong implements Serializable {
     private String songName;
     private String description;
     private String iconUrl;
-    private String opernScreenshotUrl;
-    private String opernUrl;
     private String wavPlayUrl;
     private String midiPlayUrl;
 
@@ -46,22 +44,6 @@ public class ApiSong implements Serializable {
 
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
-    }
-
-    public String getOpernScreenshotUrl() {
-        return opernScreenshotUrl;
-    }
-
-    public void setOpernScreenshotUrl(String opernScreenshotUrl) {
-        this.opernScreenshotUrl = opernScreenshotUrl;
-    }
-
-    public String getOpernUrl() {
-        return opernUrl;
-    }
-
-    public void setOpernUrl(String opernUrl) {
-        this.opernUrl = opernUrl;
     }
 
     public String getWavPlayUrl() {

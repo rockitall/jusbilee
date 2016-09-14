@@ -5,8 +5,8 @@ import com.jusbilee.app.api.practice.service.ApiPracticeSongService;
 import com.jusbilee.app.api.practice.service.ApiUserPracticeSummaryService;
 import com.jusbilee.app.api.song.domain.ApiSong;
 import com.jusbilee.app.api.song.service.ApiSongService;
-import com.jusbilee.app.api.stage.domain.ApiStageLevel;
-import com.jusbilee.app.api.stage.domain.ApiStageLevelSongCount;
+import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
+import com.jusbilee.app.api.stage.domain.ApiSongLevel;
 import com.jusbilee.app.api.stage.domain.ApiStageSong;
 import com.jusbilee.app.api.stage.domain.ApiUserStageSummary;
 import com.jusbilee.app.api.stage.request.UserStageChallengeResultRequest;
@@ -59,13 +59,13 @@ public class StageManager {
     @Autowired
     private ApiPracticeSongService apiPracticeSongService;
 
-    public List<StageLevelFacade> getAllStageLevel(Long userId) {
-        List<ApiStageLevel> levels = apiStageLevelService.getAllStageLevel();
+    public List<StageLevelFacade> getAllSongLevel(Long userId) {
+        List<ApiSongLevel> levels = apiStageLevelService.getAllSongLevel();
         if (levels.isEmpty()) {
             return Collections.emptyList();
         }
-        Map<Integer, ApiStageLevelSongCount> totals = apiStageLevelService.getAllStageLevelSongCountAsMap();
-        Map<Integer, ApiStageLevelSongCount> passes = apiUserStageSummaryService.getUserAllStageLevelPassedSongCount(userId);
+        Map<Integer, ApiLevelStageSongCount> totals = apiStageLevelService.getAllLevelStageSongCountAsMap();
+        Map<Integer, ApiLevelStageSongCount> passes = apiUserStageSummaryService.getUserAllLevelPassedStageSongCount(userId);
         List<StageLevelFacade> facades = new ArrayList<>(levels.size());
         levels.stream().forEach(v -> {
             StageLevelFacade facade = new StageLevelFacade();
@@ -78,8 +78,8 @@ public class StageManager {
         return facades;
     }
 
-    public List<StageSongFacade> getStageLevelSongList(Long userId, Integer stageLevelId, Pagination pagination) {
-        List<ApiStageSong> songs = apiStageSongService.getStageSongByStageLevelId(stageLevelId, pagination);
+    public List<StageSongFacade> getLevelStageSongList(Long userId, Integer levelId, Pagination pagination) {
+        List<ApiStageSong> songs = apiStageSongService.getStageSongByLevelId(levelId, pagination);
         if (songs.isEmpty()) {
             return Collections.emptyList();
         }

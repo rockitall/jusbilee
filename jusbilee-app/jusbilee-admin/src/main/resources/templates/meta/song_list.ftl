@@ -36,6 +36,8 @@
                             <input type="hidden" id="pageNo" name="pageNo" value="${p.pageNo}"/>
                             <input type="hidden" name="pageSize" value="${p.pageSize}"/>
                             <input type="hidden" name="name" value="${(c.name)!''}"/>
+                            <input type="hidden" name="levelId" value="${(c.levelId)!''}"/>
+                            <input type="hidden" name="styleId" value="${(c.styleId)!''}"/>
                             <input type="hidden" name="stageModel" value="<#if c.stageModel??>${c.stageModel?string}</#if>"/>
                             <input type="hidden" name="practiceModel" value="<#if c.practiceModel??>${c.practiceModel?string}</#if>"/>
                             <input type="hidden" name="startTime" value="${(c.startTime)!''}"/>
@@ -45,12 +47,40 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
+                                        <label class="col-md-4 control-label">难易程度</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="levelId" name="levelId">
+                                                <option value="">---全部---</option>
+                                            <#list levels as l>
+                                                <option value="${l.id}">${l.name}</option>
+                                            </#list>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">歌曲风格</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="styleId" name="styleId">
+                                                <option value="">---全部---</option>
+                                            <#list styles as l>
+                                                <option value="${l.id}">${l.name}</option>
+                                            </#list>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
                                         <label class="col-md-4 control-label">闯关模式</label>
                                         <div class="col-md-8">
                                             <select type="text" class="form-control" id="stageModel" placeholder="歌曲名称" name="stageModel">
-                                                <option value="">--全部--</option>
-                                                <option value="true">已设为闯关模式</option>
-                                                <option value="false">未设为闯关模式</option>
+                                                <option value="">---全部---</option>
+                                                <option value="true">已设置</option>
+                                                <option value="false">未设置</option>
                                             </select>
                                         </div>
                                     </div>
@@ -60,9 +90,9 @@
                                         <label class="col-md-4 control-label">练习模式</label>
                                         <div class="col-md-8">
                                             <select type="text" class="form-control" id="practiceModel" placeholder="歌曲名称" name="practiceModel">
-                                                <option value="" >--全部--</option>
-                                                <option value="true">已设为练习模式</option>
-                                                <option value="false">未设为练习模式</option>
+                                                <option value="">---全部---</option>
+                                                <option value="true">已设置</option>
+                                                <option value="false">未设置</option>
                                             </select>
                                         </div>
                                     </div>
@@ -110,8 +140,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>歌曲名称</th>
+                                <th>难易程度</th>
+                                <th>风格</th>
                                 <th>图标</th>
-                                <th>乐谱截图</th>
                                 <th>乐谱图</th>
                                 <th>音乐文件</th>
                                 <th>设置闯关</th>
@@ -127,11 +158,36 @@
                                 <tr>
                                     <td>${l.id}</td>
                                     <td>${l.name}</td>
+                                    <td>${l.levelName}</td>
+                                    <td>${l.styleName}</td>
                                     <td>
                                         <img src="${l.iconUrl}" kesrc="${l.iconUrl}" style="width: 50px;height: 50px;">
                                     </td>
-                                    <td><img src="${l.screenshotUrl}" style="width: 50px;height: 50px;"></td>
-                                    <td><img src="${l.opernUrl}" style="width: 50px;height: 50px;"></td>
+                                    <td>
+                                        <#if l.screenshotUrl=="" && l.opernUrl=="">
+                                            无
+                                        <#else>
+                                            <div class="dropdown">
+                                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false"> 乐谱图<span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <#if l.opernUrl!="">
+                                                        <li><a href="javascript:download('${l.opernUrl}')">乐谱图下载<i class="fa fa-download"></i></a></li>
+                                                    <#else>
+                                                        <li>（无）</li>
+                                                    </#if>
+                                                    <#if l.screenshotUrl!="">
+                                                        <li><a href="javascript:download('${l.screenshotUrl}')">乐谱截图下载<i class="fa fa-download"></i></a></li>
+                                                    <#else>
+                                                        <li>（无）</li>
+                                                    </#if>
+                                                    <#if l.screenshotUrl!="" && l.opernUrl!="">
+                                                        <li class="divider"></li>
+                                                        <li><a href="javascript:alert('暂未实现，敬请期待'))">乐谱图对比<i class="fa fa-bookmark"></i></a></li>
+                                                    </#if>
+                                                </ul>
+                                            </div>
+                                        </#if>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <a href="#" data-toggle="dropdown" class="dropdown-toggle"aria-expanded="false"> 音乐文件<span class="caret"></span></a>
@@ -145,14 +201,14 @@
                                             </ul>
                                         </div>
                                     </td>
-                                    <td id="S${l.id}">
+                                    <td>
                                         <#if !l.stageSongId??>
                                              <a href="javascript:SongManager.Stage.edit('${l.id}', '${l.name}')">未设置<i class="fa fa-gear" style="margin-left: 4px"></i></a>
                                         <#else>
                                             <a href="javascript:SongManager.Stage.edit('${l.id}', '${l.name}', '${l.stageSongId}')"><span style="color:red">已设置<i class="fa fa-edit" style="margin-left: 4px"></i></span></a>
                                         </#if>
                                     </td>
-                                    <td id="P${l.id}">
+                                    <td>
                                         <#if !l.practiceSongId??>
                                             <a href="javascript:SongManager.Practice.edit('${l.id}', '${l.name}')">未设置<i class="fa fa-gear" style="margin-left: 4px"></i></a>
                                         <#else>
@@ -177,7 +233,7 @@
                                 </tr>
                                 </#list>
                                 <#else >
-                                    <tr><td colspan="11" style="color:red;text-align: center">未找到相关数据</td></tr>
+                                    <tr><td colspan="13" style="color:red;text-align: center">未找到相关数据</td></tr>
                                 </#if>
                             </tbody>
                         </table>
@@ -193,6 +249,28 @@
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" id="name" placeholder="歌曲名称" name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">难易程度级别</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="levelId" name="levelId">
+                                        <option value="">-请选择难易程度级别-</option>
+                                    <#list levels as l>
+                                        <option value="${l.id}">${l.name}</option>
+                                    </#list>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">歌曲风格</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="styleId" name="styleId">
+                                        <option value="">-请选择歌曲风格-</option>
+                                    <#list styles as l>
+                                        <option value="${l.id}">${l.name}</option>
+                                    </#list>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -250,6 +328,28 @@
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="name" placeholder="歌曲名称" name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">难易程度级别</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="levelId" name="levelId">
+                                        <option value="">-请选择难易程度级别-</option>
+                                    <#list levels as l>
+                                        <option value="${l.id}">${l.name}</option>
+                                    </#list>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">歌曲风格</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="styleId" name="styleId">
+                                        <option value="">-请选择歌曲风格-</option>
+                                    <#list styles as l>
+                                        <option value="${l.id}">${l.name}</option>
+                                    </#list>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -320,17 +420,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">难易程度级别</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="stageLevelId" name="stageLevelId">
-                                        <option value="">-请选择难易程度级别-</option>
-                                    <#list levels as l>
-                                        <option value="${l.id}">${l.name}</option>
-                                    </#list>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-md-3 control-label">是否上线</label>
                                 <div class="col-md-4">
                                     <input type="checkbox" id="online" name="online" value="true" class="stage-song-online">
@@ -391,17 +480,6 @@
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" disabled="" id="practiceSongName" name="practiceSongName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">歌曲风格</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" id="songStyleId" name="songStyleId">
-                                        <option value="">-请选择歌曲风格-</option>
-                                    <#list styles as l>
-                                        <option value="${l.id}">${l.name}</option>
-                                    </#list>
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -466,7 +544,11 @@
 <script src="assets/global/plugins/icheck/icheck.min.js" type="text/javascript"></script>
 <script src="assets/admin/pages/scripts/meta/song_list.js" type="text/javascript"></script>
 <script type="text/javascript">
-    <#if (c.stageModel)??>$("#stageModel").val("${c.stageModel?string}")</#if>
-    <#if (c.practiceModel)??>$("#practiceModel").val("${c.practiceModel?string}")</#if>
+    var searchForm=$("#searchForm");
+
+    <#if (c.stageModel)??>$("#stageModel", searchForm).val("${c.stageModel?string}")</#if>
+    <#if (c.practiceModel)??>$("#practiceModel", searchForm).val("${c.practiceModel?string}")</#if>
+    <#if (c.levelId)??>$("#levelId", searchForm).val("${c.levelId}")</#if>
+    <#if (c.styleId)??>$("#styleId", searchForm).val("${c.styleId}")</#if>
     SongManager.Initializer.init();
 </script>

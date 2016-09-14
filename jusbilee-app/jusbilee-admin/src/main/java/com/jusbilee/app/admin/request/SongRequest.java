@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
+
 public class SongRequest {
     @NotEmpty(message = "名称不能为空")
     @Length(max = 16, message = "名称不能超过16个字符")
@@ -11,12 +13,32 @@ public class SongRequest {
 
     @Length(max = 255, message = "名称不能超过255个字符")
     private String description;
+    @NotNull(message = "请选择歌曲难易程度")
+    private Integer levelId;
+    @NotNull(message = "请选择歌曲风格")
+    private Integer styleId;
 
     private MultipartFile iconMultipartFile;
     private MultipartFile screenshotMultipartFile;
     private MultipartFile opernMultipartFile;
     private MultipartFile wavMultipartFile;
     private MultipartFile midiMultipartFile;
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
+
+    public Integer getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
+    }
 
     public String getName() {
         return name;

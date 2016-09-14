@@ -4,7 +4,9 @@ import com.jusbilee.app.admin.criteria.AdminStageSongQueryCriteria;
 import com.jusbilee.app.admin.domain.AdminStageSongListItem;
 import com.jusbilee.app.admin.domain.Status;
 import com.jusbilee.app.admin.request.StageSongRequest;
+import com.jusbilee.app.admin.service.AdminSongService;
 import com.jusbilee.app.admin.service.AdminStageSongService;
+import com.jusbilee.app.mybatis.pojo.Song;
 import com.jusbilee.app.mybatis.pojo.StageSong;
 import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class StageSongManager {
     @Autowired
     private AdminStageSongService adminStageSongService;
 
+    @Autowired
+    private AdminSongService adminSongService;
+
     public StageSong addStageSong(StageSongRequest request) throws Exception {
         StageSong song = transformToStageSong(request);
         adminStageSongService.add(song);
@@ -35,8 +40,10 @@ public class StageSongManager {
     }
 
     private StageSong transformToStageSong(StageSongRequest request) throws ParseException {
+        Song s = adminSongService.selectById(request.getSongId());
+
         StageSong song = new StageSong();
-        song.setStageLevelId(request.getStageLevelId());
+        song.setLevelId(s.getLevelId());
         song.setSongId(request.getSongId());
 
         byte status = request.isOnline() ? Status.StageSongStatus.ONLINE : Status.StageSongStatus.OFFLINE;

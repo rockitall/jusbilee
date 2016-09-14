@@ -10,8 +10,6 @@ import javax.validation.constraints.NotNull;
 public class StageSongRequest {
     @NotNull
     private Integer songId;
-    @NotNull
-    private Integer stageLevelId;
     @DateTime
     private String startTime;
     @DateTime
@@ -37,14 +35,6 @@ public class StageSongRequest {
 
     public void setSongId(Integer songId) {
         this.songId = songId;
-    }
-
-    public Integer getStageLevelId() {
-        return stageLevelId;
-    }
-
-    public void setStageLevelId(Integer stageLevelId) {
-        this.stageLevelId = stageLevelId;
     }
 
     public String getStartTime() {

@@ -22,20 +22,20 @@ public class StageController extends BaseController {
     @Autowired
     private StageManager stageManager;
 
-    @RequestMapping("/song/stage/level/list")
-    public JsonResult getUserStageLevelList() {
+    @RequestMapping("/stage/level/list")
+    public JsonResult getSongLevelList() {
         Long userId = HttpContext.current().getUserId();
-        List<StageLevelFacade> levels = stageManager.getAllStageLevel(userId);
+        List<StageLevelFacade> levels = stageManager.getAllSongLevel(userId);
         return ok(levels);
     }
 
     @RequestMapping("/stage/level/song/list")
-    public JsonResult getUserStageLevelSongList(@RequestParam("stageLevelId") Integer stageLevelId,
+    public JsonResult getUserStageLevelSongList(@RequestParam("levelId") Integer levelId,
                                                 @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         assertValid(bindingResult);
 
         Long userId = HttpContext.current().getUserId();
-        List<StageSongFacade> facades = stageManager.getStageLevelSongList(userId, stageLevelId, pagination);
+        List<StageSongFacade> facades = stageManager.getLevelStageSongList(userId, levelId, pagination);
         return ok(facades);
     }
 }

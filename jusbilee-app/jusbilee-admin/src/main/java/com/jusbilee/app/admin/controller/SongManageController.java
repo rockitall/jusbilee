@@ -5,13 +5,13 @@ package com.jusbilee.app.admin.controller;
 
 import com.jusbilee.app.admin.criteria.AdminSongQueryCriteria;
 import com.jusbilee.app.admin.domain.AdminSongListItem;
+import com.jusbilee.app.admin.manager.SongLevelManager;
 import com.jusbilee.app.admin.manager.SongManager;
 import com.jusbilee.app.admin.manager.SongStyleManager;
-import com.jusbilee.app.admin.manager.StageLevelManager;
 import com.jusbilee.app.admin.request.SongRequest;
 import com.jusbilee.app.mybatis.pojo.Song;
+import com.jusbilee.app.mybatis.pojo.SongLevel;
 import com.jusbilee.app.mybatis.pojo.SongStyle;
-import com.jusbilee.app.mybatis.pojo.StageLevel;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class SongManageController {
     @Autowired
     private SongManager songManager;
     @Autowired
-    private StageLevelManager stageLevelManager;
+    private SongLevelManager stageLevelManager;
     @Autowired
     private SongStyleManager songStyleManager;
 
@@ -54,7 +54,7 @@ public class SongManageController {
                 songList = songManager.querySongByCriteria(criteria, pagination);
             }
             mv.addObject("songs", songList);
-            List<StageLevel> levelList = stageLevelManager.list();
+            List<SongLevel> levelList = stageLevelManager.list();
             mv.addObject("levels", levelList);
 
             List<SongStyle> styleList = songStyleManager.list();
@@ -71,8 +71,8 @@ public class SongManageController {
     @RequestMapping("/add")
     @ResponseBody
     public JsonResult add(@RequestParam MultipartFile iconFile,
-                          @RequestParam MultipartFile screenshotFile,
-                          @RequestParam MultipartFile opernFile,
+                          @RequestParam(required = false) MultipartFile screenshotFile,
+                          @RequestParam(required = false) MultipartFile opernFile,
                           @RequestParam MultipartFile wavFile,
                           @RequestParam MultipartFile midiFile,
                           @Valid @ModelAttribute SongRequest request, BindingResult bindingResult) {

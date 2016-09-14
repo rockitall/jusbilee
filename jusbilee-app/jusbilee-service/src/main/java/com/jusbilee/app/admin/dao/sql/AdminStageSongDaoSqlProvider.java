@@ -19,8 +19,8 @@ public class AdminStageSongDaoSqlProvider {
         sql.SELECT("t0.id");
         sql.SELECT("t1.id as songId");
         sql.SELECT("t1.name");
-        sql.SELECT("t2.id as stageLevelId");
-        sql.SELECT("t2.name as stageLevelName");
+        sql.SELECT("t2.id as levelId");
+        sql.SELECT("t2.name as levelName");
         sql.SELECT("t0.status");
         sql.SELECT("t0.pass_score as passScore");
         sql.SELECT("t0.sort_order as sortOrder");
@@ -30,7 +30,7 @@ public class AdminStageSongDaoSqlProvider {
         sql.SELECT("t0.update_time as updateTime");
         sql.FROM("t_stage_song t0");
         sql.LEFT_OUTER_JOIN("t_song as t1        on t0.song_id=t1.id");
-        sql.LEFT_OUTER_JOIN("t_stage_level as t2 on t0.stage_level_id=t2.id");
+        sql.LEFT_OUTER_JOIN("t_song_level as t2 on t0.level_id=t2.id");
 
         //where
         whereClause(sql, criteria);
@@ -53,8 +53,8 @@ public class AdminStageSongDaoSqlProvider {
         if (StringUtils.isNotBlank(criteria.getName())) {
             sql.LEFT_OUTER_JOIN("t_song as t1        on t0.song_id=t1.id");
         }
-        if (criteria.getStageLevelId() != null) {
-            sql.LEFT_OUTER_JOIN("t_stage_level as t2 on t0.stage_level_id=t2.id");
+        if (criteria.getLevelId() != null) {
+            sql.LEFT_OUTER_JOIN("t_song_level as t2 on t0.level_id=t2.id");
         }
         //where
         whereClause(sql, criteria);
@@ -89,8 +89,8 @@ public class AdminStageSongDaoSqlProvider {
         if (criteria.getPassScoreEnd() != null) {
             sql.AND().WHERE("t0.pass_score <= #{c.passScoreEnd}");
         }
-        if (criteria.getStageLevelId() != null) {
-            sql.AND().WHERE("t0.stage_level_id = #{c.stageLevelId}");
+        if (criteria.getLevelId() != null) {
+            sql.AND().WHERE("t0.level_id = #{c.levelId}");
         }
         if (criteria.getSortOrder() != null) {
             sql.AND().WHERE("t0.sort_order = #{c.sortOrder}");

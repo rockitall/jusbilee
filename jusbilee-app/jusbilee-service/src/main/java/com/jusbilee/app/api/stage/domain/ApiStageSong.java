@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class ApiStageSong implements Serializable {
     private Integer stageSongId;
     private Integer songId;
-    private Integer stageLevelId;
+    private Integer levelId;
     private Integer passScore;
 
     public Integer getStageSongId() {
@@ -27,12 +27,12 @@ public class ApiStageSong implements Serializable {
         this.songId = songId;
     }
 
-    public Integer getStageLevelId() {
-        return stageLevelId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setStageLevelId(Integer stageLevelId) {
-        this.stageLevelId = stageLevelId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public Integer getPassScore() {

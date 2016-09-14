@@ -115,8 +115,8 @@
                                id="basic_data_m4"><i class="fa fa-music"></i> 练习歌曲管理</a>
                             <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/style/list')"
                                id="basic_data_m2"><i class="fa fa-tree"></i> 歌曲风格管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/level/list')"
-                               id="basic_data_m1"><i class="fa fa-space-shuttle"></i> 闯关难易级别管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/level/list')"
+                               id="basic_data_m1"><i class="fa fa-space-shuttle"></i> 歌曲难易级别管理</a>
                         </li>
                     </ul>
                 </li>

@@ -12,8 +12,8 @@ public class AdminPracticeSongListItem implements Serializable {
     private Long id;
     private Integer songId;
     private String name;
-    private Integer songStyleId;
-    private String songStyleName;
+    private Integer styleId;
+    private String styleName;
     private Integer unlockGoldCoin;
     private Date startTime;
     private Date endTime;
@@ -93,20 +93,20 @@ public class AdminPracticeSongListItem implements Serializable {
         this.songId = songId;
     }
 
-    public Integer getSongStyleId() {
-        return songStyleId;
+    public Integer getStyleId() {
+        return styleId;
     }
 
-    public void setSongStyleId(Integer songStyleId) {
-        this.songStyleId = songStyleId;
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
     }
 
-    public String getSongStyleName() {
-        return songStyleName;
+    public String getStyleName() {
+        return styleName;
     }
 
-    public void setSongStyleName(String songStyleName) {
-        this.songStyleName = songStyleName;
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 
     public Byte getStatus() {

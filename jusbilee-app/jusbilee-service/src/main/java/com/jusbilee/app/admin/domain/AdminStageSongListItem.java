@@ -12,8 +12,8 @@ public class AdminStageSongListItem implements Serializable {
     private Long id;
     private Integer songId;
     private String name;
-    private Integer stageLevelId;
-    private String stageLevelName;
+    private Integer levelId;
+    private String levelName;
     private Byte status;
     private Integer passScore;
     private Integer sortOrder;
@@ -85,20 +85,20 @@ public class AdminStageSongListItem implements Serializable {
         this.sortOrder = sortOrder;
     }
 
-    public Integer getStageLevelId() {
-        return stageLevelId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setStageLevelId(Integer stageLevelId) {
-        this.stageLevelId = stageLevelId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
-    public String getStageLevelName() {
-        return stageLevelName;
+    public String getLevelName() {
+        return levelName;
     }
 
-    public void setStageLevelName(String stageLevelName) {
-        this.stageLevelName = stageLevelName;
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 
     public Date getStartTime() {

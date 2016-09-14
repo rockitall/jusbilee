@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class UserStageSummaryDaoSqlProvider {
     public static final String GET_USER_STAGE_PASSED_COUNT_SQL = "select "
-            + " stage_level_id as levelId,"
+            + " level_id as levelId,"
             + " count(1) as songCount"
             + " from t_user_stage_summary"
             + " where is_passed=1 and"
             + " user_id=#{userId}"
-            + " group by stage_level_id";
+            + " group by levelId";
 
     public String getUserStageSummaryListBySongIdListSql(@Param("userId") Long userId, List<Integer> songIdList) {
         SQL sql = new SQL();

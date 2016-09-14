@@ -30,7 +30,7 @@ public class ApiUserStageLogService {
             log.setAssistUserId(assistUserId);
         }
         log.setSongId(song.getSongId());
-        log.setStageLevelId(song.getStageLevelId());
+        log.setLevelId(song.getLevelId());
         log.setStageSongId(song.getId());
         Byte isPassed = (score >= song.getPassScore() ? YES : NO);
         log.setIsPassed(isPassed);

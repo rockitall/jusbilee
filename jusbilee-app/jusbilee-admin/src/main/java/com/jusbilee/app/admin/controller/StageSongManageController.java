@@ -6,10 +6,10 @@ package com.jusbilee.app.admin.controller;
 import com.jusbilee.app.admin.criteria.AdminStageSongQueryCriteria;
 import com.jusbilee.app.admin.domain.AdminStageSongListItem;
 import com.jusbilee.app.admin.domain.Status;
-import com.jusbilee.app.admin.manager.StageLevelManager;
+import com.jusbilee.app.admin.manager.SongLevelManager;
 import com.jusbilee.app.admin.manager.StageSongManager;
 import com.jusbilee.app.admin.request.StageSongRequest;
-import com.jusbilee.app.mybatis.pojo.StageLevel;
+import com.jusbilee.app.mybatis.pojo.SongLevel;
 import com.jusbilee.app.mybatis.pojo.StageSong;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -38,7 +38,7 @@ public class StageSongManageController {
     @Autowired
     private StageSongManager stageSongManager;
     @Autowired
-    private StageLevelManager stageLevelManager;
+    private SongLevelManager stageLevelManager;
 
     @RequestMapping("/list")
     @ResponseBody
@@ -54,7 +54,7 @@ public class StageSongManageController {
                 songs = stageSongManager.queryStageSong(criteria, pagination);
             }
 
-            List<StageLevel> levels = stageLevelManager.list();
+            List<SongLevel> levels = stageLevelManager.list();
             mv.addObject("levels", levels);
             mv.addObject("songs", songs);
             mv.addObject("c", criteria);
@@ -144,8 +144,8 @@ public class StageSongManageController {
             return song.getStatus() == Status.PracticeSongStatus.ONLINE;
         }
 
-        public Integer getStageLevelId() {
-            return song.getStageLevelId();
+        public Integer getLevelId() {
+            return song.getLevelId();
         }
 
         public Integer getPassScore() {

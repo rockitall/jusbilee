@@ -37,7 +37,7 @@ public class PracticeController extends BaseController {
      * @return
      */
     @RequestMapping("/practice/style/song/list")
-    public JsonResult getStyleOnlinePracticeSongList(@RequestParam(required = true) Integer styleId,
+    public JsonResult getStyleOnlinePracticeSongList(@RequestParam Integer styleId,
                                                      @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         assertValid(bindingResult);
         Long userId = HttpContext.current().getUserId();

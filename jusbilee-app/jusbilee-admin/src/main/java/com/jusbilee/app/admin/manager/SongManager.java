@@ -38,8 +38,14 @@ public class SongManager {
         String sn = UploadFileNameUtils.getUploadSN();
 
         String iconUrl = qiniuFileUploadService.uploadImageFile(request.getIconMultipartFile(), auth, "icon", sn);
-        String screenshotUrl = qiniuFileUploadService.uploadImageFile(request.getScreenshotMultipartFile(), auth, "screenshot", sn);
-        String opernUrl = qiniuFileUploadService.uploadImageFile(request.getOpernMultipartFile(), auth, "opern", sn);
+        String screenshotUrl = "";
+        if (notEmpty(request.getScreenshotMultipartFile())) {
+            screenshotUrl = qiniuFileUploadService.uploadImageFile(request.getScreenshotMultipartFile(), auth, "screenshot", sn);
+        }
+        String opernUrl = "";
+        if (notEmpty(request.getOpernMultipartFile())) {
+            opernUrl = qiniuFileUploadService.uploadImageFile(request.getOpernMultipartFile(), auth, "opern", sn);
+        }
         String wavPlayUrl = qiniuFileUploadService.uploadMusicFile(request.getWavMultipartFile(), auth, "wav", sn);
         String midiPlayUrl = qiniuFileUploadService.uploadMusicFile(request.getMidiMultipartFile(), auth, "midi", sn);
 
@@ -51,6 +57,8 @@ public class SongManager {
         song.setOpernUrl(opernUrl);
         song.setWavPlayUrl(wavPlayUrl);
         song.setMidiPlayUrl(midiPlayUrl);
+        song.setLevelId(request.getLevelId());
+        song.setStyleId(request.getStyleId());
         songService.addSong(song);
     }
 
@@ -63,6 +71,8 @@ public class SongManager {
         song.setId(songId);
         song.setName(request.getName());
         song.setDescription(request.getDescription());
+        song.setLevelId(request.getLevelId());
+        song.setStyleId(request.getStyleId());
         List<String> toDeleteImageFiles = new ArrayList<>(5);
         List<String> toDeleteMusicFiles = new ArrayList<>(5);
         String url;

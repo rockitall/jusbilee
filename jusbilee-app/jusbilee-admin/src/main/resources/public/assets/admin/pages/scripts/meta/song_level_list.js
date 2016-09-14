@@ -1,4 +1,4 @@
-var StageLevel = function () {
+var SongLevel = function () {
     var form = $('#form');
     var error = $('.alert-danger', form);
     var success = $('.alert-success', form);
@@ -11,7 +11,6 @@ var StageLevel = function () {
     }
 
     var handSave = function () {
-
         form.validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block help-block-error', // default input error message class
@@ -40,14 +39,8 @@ var StageLevel = function () {
                 success.hide();
                 error.show();
             },
-            highlight: function (element) {
-                $(element).closest('.form-group').addClass('has-error');
-            },
-            unhighlight: function (element) {
-                $(element).closest('.form-group').removeClass('has-error');
-            },
             submitHandler: function (form) {
-                StageLevel.save();
+                SongLevel.save();
             }
         });
     }
@@ -56,7 +49,7 @@ var StageLevel = function () {
         add: function () {
             clear();
 
-            $("#stageLevelId").val("");
+            $("#levelId").val("");
             $("#name").val("");
             $("#weight").val("");
             $("#formModal .modal-title").text("添加");
@@ -65,7 +58,7 @@ var StageLevel = function () {
         edit: function (id, name, weight) {
             clear();
 
-            $("#stageLevelId").val(id);
+            $("#levelId").val(id);
             $("#name").val(name);
             $("#weight").val(weight);
             $("#formModal .modal-title").text("编辑");
@@ -74,28 +67,28 @@ var StageLevel = function () {
         remove: function (id) {
             bootbox.confirm("确定要删除么？", function (sure) {
                 if (!sure) return;
-                var url = "/admin/meta/stage/level/delete?stageLevelId=" + id;
+                var url = "/admin/meta/song/level/delete?levelId=" + id;
                 $.get(url, {}, function (data) {
                     if (data.code != 200) {
                         alert(data.msg);
                         return;
                     }
-                    StageLevel.refresh();
+                    SongLevel.refresh();
                 }, "json")
             });
         },
         save: function () {
             var _name = $.trim($("#name").val());
             var _weight = $.trim($("#weight").val());
-            var id = $("#stageLevelId").val();
-            var url = !!id ? "/admin/meta/stage/level/update?stageLevelId=" + id : "/admin/meta/stage/level/add";
+            var id = $("#levelId").val();
+            var url = !!id ? "/admin/meta/song/level/update?levelId=" + id : "/admin/meta/song/level/add";
             $.get(url, {name: _name, weight: _weight}, function (data) {
                 if (data.code != 200) {
                     alert(data.msg);
                     return;
                 }
                 $("#formModal").modal("hide");
-                StageLevel.refresh();
+                SongLevel.refresh();
             }, "json")
         },
         refresh: function () {
@@ -108,4 +101,4 @@ var StageLevel = function () {
     };
 }();
 
-StageLevel.init();
+SongLevel.init();

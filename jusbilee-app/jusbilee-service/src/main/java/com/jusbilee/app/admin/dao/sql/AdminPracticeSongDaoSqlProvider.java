@@ -16,8 +16,8 @@ public class AdminPracticeSongDaoSqlProvider {
         sql.SELECT("t0.id");
         sql.SELECT("t1.id as songId");
         sql.SELECT("t1.name");
-        sql.SELECT("t2.id as songStyleId");
-        sql.SELECT("t2.name as songStyleName");
+        sql.SELECT("t2.id as styleId");
+        sql.SELECT("t2.name as styleName");
         sql.SELECT("t0.status");
         sql.SELECT("t0.unlock_gold_coin as unlockGoldCoin");
         sql.SELECT("t0.pass_stage_unlock as passStageUnlock");
@@ -50,7 +50,7 @@ public class AdminPracticeSongDaoSqlProvider {
         if (StringUtils.isNotBlank(criteria.getName())) {
             sql.LEFT_OUTER_JOIN("t_song as t1        on t0.song_id=t1.id");
         }
-        if (criteria.getSongStyleId() != null) {
+        if (criteria.getStyleId() != null) {
             sql.LEFT_OUTER_JOIN("t_song_style as t2 on t0.style_id=t2.id");
         }
         //where
@@ -87,8 +87,8 @@ public class AdminPracticeSongDaoSqlProvider {
         if (criteria.getUnlockGoldCoinEnd() != null) {
             sql.AND().WHERE("t0.unlock_gold_coin <= #{c.unlockGoldCoinEnd}");
         }
-        if (criteria.getSongStyleId() != null) {
-            sql.AND().WHERE("t0.style_id = #{c.songStyleId}");
+        if (criteria.getStyleId() != null) {
+            sql.AND().WHERE("t0.style_id = #{c.styleId}");
         }
         if (criteria.getPassStageUnlock() != null) {
             sql.AND().WHERE("t0.pass_stage_unlock = #{c.passStageUnlock}");
