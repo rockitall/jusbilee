@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">难易程度</label>
+                                        <label class="col-md-4 control-label">难易级别</label>
                                         <div class="col-md-8">
                                             <select class="form-control" id="levelId" name="levelId">
                                                 <option value="">---全部---</option>
@@ -140,7 +140,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>歌曲名称</th>
-                                <th>难易程度</th>
+                                <th>难易级别</th>
                                 <th>风格</th>
                                 <th>图标</th>
                                 <th>乐谱图</th>
@@ -252,10 +252,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">难易程度级别</label>
+                                <label class="col-md-3 control-label">难易级别</label>
                                 <div class="col-md-4">
                                     <select class="form-control" id="levelId" name="levelId">
-                                        <option value="">-请选择难易程度级别-</option>
+                                        <option value="">-请选择难易级别-</option>
                                     <#list levels as l>
                                         <option value="${l.id}">${l.name}</option>
                                     </#list>
@@ -331,10 +331,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">难易程度级别</label>
+                                <label class="col-md-3 control-label">难易级别</label>
                                 <div class="col-md-4">
                                     <select class="form-control" id="levelId" name="levelId">
-                                        <option value="">-请选择难易程度级别-</option>
+                                        <option value="">-请选择难易级别-</option>
                                     <#list levels as l>
                                         <option value="${l.id}">${l.name}</option>
                                     </#list>

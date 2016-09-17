@@ -101,22 +101,52 @@
                 </li>
                 <li class="start active open">
                     <a href="javascript:;">
+                    <i class="fa fa-database"></i>
+                    <span class="title">歌曲管理</span>
+                    <span class="arrow "></span>
+                </a>
+                    <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/list')"><i class="fa fa-music"></i> 歌曲管理</a>
+                        <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/style/list')"><i class="fa fa-tree"></i> 歌曲风格管理</a>
+                        <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/level/list')"><i class="fa fa-space-shuttle"></i> 歌曲难易级别管理</a>
+                    </li>
+                </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
                         <i class="fa fa-database"></i>
-                        <span class="title">基础数据管理</span>
+                        <span class="title">闯关歌曲管理</span>
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/list')" id="basic_data_m3"><i
-                                    class="fa fa-music"></i> 歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/song/list')"
-                               id="basic_data_m5"><i class="fa fa-music"></i> 闯关歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/practice/song/list')"
-                               id="basic_data_m4"><i class="fa fa-music"></i> 练习歌曲管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/style/list')"
-                               id="basic_data_m2"><i class="fa fa-tree"></i> 歌曲风格管理</a>
-                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/level/list')"
-                               id="basic_data_m1"><i class="fa fa-space-shuttle"></i> 歌曲难易级别管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/stage/song/list')"><i class="fa fa-music"></i> 闯关歌曲管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-database"></i>
+                        <span class="title">练习歌曲管理</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/practice/song/list')"><i class="fa fa-music"></i> 练习歌曲管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-database"></i>
+                        <span class="title">排位赛管理</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/race/season/list')"><i class="fa fa-space-shuttle"></i> 排位赛赛季管理</a>
+                            <a href="javascript:;" onclick="Index.menuLink('/admin/meta/song/sublevel/list')"><i class="fa fa-space-shuttle"></i> 歌曲段位管理</a>
                         </li>
                     </ul>
                 </li>

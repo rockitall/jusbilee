@@ -18,10 +18,16 @@ var SongManager = function () {
             show: function () {
                 $("#addRow").show();
                 $("#listRow").hide();
+                $("#updateRow").hide();
+                $("#stageSongRow").hide();
+                $("#practiceSongRow").hide();
             },
             hide: function () {
                 $("#listRow").show();
                 $("#addRow").hide();
+                $("#updateRow").hide();
+                $("#stageSongRow").hide();
+                $("#practiceSongRow").hide();
             },
             submit: function () {
                 Metronic.blockUI({
@@ -96,7 +102,7 @@ var SongManager = function () {
                             required: "歌曲名称不能为空"
                         },
                         levelId: {
-                            required: "请选择歌曲难易程度"
+                            required: "请选择歌曲难易级别"
                         },
                         styleId: {
                             required: "请选择歌曲风格"
@@ -161,10 +167,16 @@ var SongManager = function () {
             show: function () {
                 $("#updateRow").show();
                 $("#listRow").hide();
+                $("#addRow").hide();
+                $("#stageSongRow").hide();
+                $("#practiceSongRow").hide();
             },
             hide: function () {
                 $("#listRow").show();
+                $("#addRow").hide();
                 $("#updateRow").hide();
+                $("#stageSongRow").hide();
+                $("#practiceSongRow").hide();
             },
             submit: function () {
                 var id = $("#songId").val();
@@ -235,7 +247,7 @@ var SongManager = function () {
                             required: "歌曲名称不能为空"
                         },
                         levelId: {
-                            required: "请选择歌曲难易程度"
+                            required: "请选择歌曲难易级别"
                         },
                         styleId: {
                             required: "请选择歌曲风格"
@@ -317,10 +329,16 @@ var SongManager = function () {
             show: function () {
                 $("#stageSongRow").show();
                 $("#listRow").hide();
+                $("#addRow").hide();
+                $("#practiceSongRow").hide();
+                $("#updateRow").hide();
             },
             hide: function () {
                 $("#listRow").show();
                 $("#stageSongRow").hide();
+                $("#addRow").hide();
+                $("#practiceSongRow").hide();
+                $("#updateRow").hide();
             },
             submit: function () {
                 var form = $("#stageSongForm");
@@ -427,10 +445,16 @@ var SongManager = function () {
             show: function () {
                 $("#practiceSongRow").show();
                 $("#listRow").hide();
+                $("#addRow").hide();
+                $("#stageSongRow").hide();
+                $("#updateRow").hide();
             },
             hide: function () {
                 $("#listRow").show();
                 $("#practiceSongRow").hide();
+                $("#addRow").hide();
+                $("#stageSongRow").hide();
+                $("#updateRow").hide();
             },
             submit: function () {
                 var form = $('#practiceSongForm');

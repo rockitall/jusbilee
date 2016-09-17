@@ -39,7 +39,7 @@
                             <input type="hidden" name="sortOrder" value="${(c.sortOrder)!""}"/>
                             <input type="hidden" name="online" value="<#if c.online??>${c.online?string}</#if>"/>
                             <input type="hidden" name="onlineStartTime" value="${(c.onlineStartTime)!''}"/>
-                            <input type="hidden" name="onlineEndTime" value="${(p.onlineEndTime)!''}"/>
+                            <input type="hidden" name="onlineEndTime" value="${(c.onlineEndTime)!''}"/>
                         </form>
                         <form class="form-horizontal" id="searchForm">
                             <div class="row">
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">难易程度级别</label>
+                                        <label class="col-md-4 control-label">难易级别</label>
                                         <div class="col-md-8">
                                             <select class="form-control" id="levelId" name="levelId">
                                                 <option value="">--全部--</option>
@@ -132,7 +132,7 @@
                                 <tr>
                                     <th>歌曲名称</th>
                                     <th>排序</th>
-                                    <th>难易程度</th>
+                                    <th>难易级别</th>
                                     <th>是否上线</th>
                                     <th>上线时间区间</th>
                                     <th>过关分数</th>
@@ -191,7 +191,7 @@
                 <div class="portlet-body form" id="stageSongRow" style="display: none">
                     <form class="form-horizontal" action="" id="stageSongForm" method="post">
                         <div class="form-body">
-                            <h3 class="form-section">添加到闯关库</h3>
+                            <h3 class="form-section">编辑闯关歌曲</h3>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">

@@ -5,6 +5,7 @@ import com.jusbilee.app.admin.dao.AdminSongDao;
 import com.jusbilee.app.admin.domain.AdminSongListItem;
 import com.jusbilee.app.mybatis.dao.SongMapper;
 import com.jusbilee.app.mybatis.pojo.Song;
+import com.jusbilee.app.mybatis.pojo.SongCriteria;
 import com.rockit.core.Constants;
 import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class AdminSongService {
         song.setId(id);
         song.setIsDeleted(Constants.BOOL.YES);
         mapper.updateByPrimaryKeySelective(song);
+    }
+
+    public List<Song> selectByIdList(List<Integer> ids) {
+        SongCriteria criteria = new SongCriteria();
+        criteria.createCriteria().andIdIn(ids);
+        return mapper.selectByExample(criteria);
     }
 
     public Song selectById(Integer id) {

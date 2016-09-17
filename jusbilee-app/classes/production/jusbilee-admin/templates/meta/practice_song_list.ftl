@@ -39,7 +39,7 @@
                             <input type="hidden" name="passStageUnlock" value="<#if c.passStageUnlock??>${c.passStageUnlock?string}</#if>"/>
                             <input type="hidden" name="online" value="<#if c.online??>${c.online?string}</#if>"/>
                             <input type="hidden" name="onlineStartTime" value="${(c.onlineStartTime)!''}"/>
-                            <input type="hidden" name="onlineEndTime" value="${(p.onlineEndTime)!''}"/>
+                            <input type="hidden" name="onlineEndTime" value="${(c.onlineEndTime)!''}"/>
                         </form>
                         <form class="form-horizontal" id="searchForm">
                             <div class="row">
@@ -195,7 +195,7 @@
                 <div class="portlet-body form" id="practiceSongRow" style="display: none" >
                     <form class="form-horizontal" action="" id="practiceSongForm" method="post">
                         <div class="form-body">
-                            <h3 class="form-section">添加到练习库</h3>
+                            <h3 class="form-section">编辑练习库歌曲</h3>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">歌曲名称</label>
                                 <div class="col-md-4">

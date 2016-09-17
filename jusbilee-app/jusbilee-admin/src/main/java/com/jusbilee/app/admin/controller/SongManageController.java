@@ -56,7 +56,6 @@ public class SongManageController {
             mv.addObject("songs", songList);
             List<SongLevel> levelList = stageLevelManager.list();
             mv.addObject("levels", levelList);
-
             List<SongStyle> styleList = songStyleManager.list();
             mv.addObject("styles", styleList);
 
