@@ -45,14 +45,11 @@ public class SongStyleManageController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public JsonResult update(@RequestParam(required = true) Integer songStyleId, @Valid @ModelAttribute SongStyleRequest request, BindingResult bindingResult) {
+    public JsonResult update(@RequestParam Integer styleId, @Valid @ModelAttribute SongStyleRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return JsonResult.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-
-
-        songStyleManager.updateSongStyle(songStyleId, request);
-
+        songStyleManager.updateSongStyle(styleId, request);
         return JsonResult.ok();
     }
 

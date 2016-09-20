@@ -12,9 +12,6 @@ var SongLevel = function () {
 
     var handSave = function () {
         form.validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block help-block-error', // default input error message class
-            onfocusout: true,
             rules: {
                 name: {
                     required: true
@@ -24,7 +21,6 @@ var SongLevel = function () {
                     digits: true
                 }
             },
-
             messages: {
                 name: {
                     required: "闯关级别名称不能为空"
@@ -34,7 +30,6 @@ var SongLevel = function () {
                     digits: "请输入一个有效的整数"
                 }
             },
-
             invalidHandler: function (event, validator) {
                 success.hide();
                 error.show();
@@ -69,11 +64,11 @@ var SongLevel = function () {
                 if (!sure) return;
                 var url = "/admin/meta/song/level/delete?levelId=" + id;
                 $.get(url, {}, function (data) {
-                    if (data.code != 200) {
-                        alert(data.msg);
+                    if (data.code == 200) {
+                        Notific8.success("删除成功");
+                        SongLevel.refresh();
                         return;
                     }
-                    SongLevel.refresh();
                 }, "json")
             });
         },
@@ -83,17 +78,23 @@ var SongLevel = function () {
             var id = $("#levelId").val();
             var url = !!id ? "/admin/meta/song/level/update?levelId=" + id : "/admin/meta/song/level/add";
             $.get(url, {name: _name, weight: _weight}, function (data) {
-                if (data.code != 200) {
-                    alert(data.msg);
+                if (data.code == 200) {
+                    if (!!id) {
+                        Notific8.success("更新成功");
+                    } else {
+                        Notific8.success("添加成功");
+                    }
+                    SongLevel.refresh();
                     return;
                 }
-                $("#formModal").modal("hide");
-                SongLevel.refresh();
+                Notific8.error("error");
             }, "json")
         },
         refresh: function () {
-            $("#basic_data_m1").click();
-            $(".modal-backdrop").remove();
+            $("#formModal").modal("hide");
+            window.setTimeout(function () {
+                Index.load("/admin/meta/song/level/list");
+            }, 500)
         },
         init: function () {
             handSave();

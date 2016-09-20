@@ -9,6 +9,7 @@ import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.rockit.core.Constants.BOOL.YES;
@@ -37,6 +38,7 @@ public class RaceSeasonService {
     }
 
     public void addRaceSeason(RaceSeason season) {
+        season.setCreateTime(new Date());
         raceSeasonMapper.insertSelective(season);
     }
 

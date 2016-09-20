@@ -44,7 +44,7 @@ public class RaceSeasonManager {
         RaceSeason season = new RaceSeason();
         DateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
         try {
-            season.setCreateTime(fmt.parse(request.getStartTime()));
+            season.setStartTime(fmt.parse(request.getStartTime()));
             season.setEndTime(fmt.parse(request.getEndTime()));
             season.setSeasonName(request.getSeasonName());
         } catch (ParseException e) {

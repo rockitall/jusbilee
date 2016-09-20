@@ -92,7 +92,6 @@
                         <h4 class="modal-title">Modal</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="levelId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">歌曲级别名称</label>
                             <div class="col-md-9">
@@ -107,6 +106,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" id="levelId" value=""/>
                         <button type="submit" class="btn blue">提交</button>
                         <button type="button" class="btn default" data-dismiss="modal">关闭</button>
                     </div>

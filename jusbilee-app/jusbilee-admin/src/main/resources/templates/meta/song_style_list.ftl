@@ -9,7 +9,6 @@
                     <h4 class="modal-title">Modal</h4>
                 </div>
                 <div class="modal-body">
-                        <input type="hidden" id="styleId" value=""/>
                         <div class="form-group">
                             <label class="col-md-3 control-label">歌曲风格名称</label>
                             <div class="col-md-9">
@@ -24,6 +23,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="styleId" value=""/>
                     <button type="submit" class="btn blue">提交</button>
                     <button type="button" class="btn default" data-dismiss="modal">关闭</button>
                 </div>

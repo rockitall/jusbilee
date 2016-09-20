@@ -12,9 +12,6 @@ var SongStyle = function () {
 
     var handSave = function () {
         form.validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block help-block-error', // default input error message class
-            onfocusout: true,
             rules: {
                 name: {
                     required: true
@@ -64,7 +61,7 @@ var SongStyle = function () {
         edit: function (id, name, sortOrder) {
             clear();
 
-            $("#songStyleId").val(id);
+            $("#styleId").val(id);
             $("#name").val(name);
             $("#sortOrder").val(sortOrder);
             $("#formModal .modal-title").text("编辑");
@@ -87,20 +84,26 @@ var SongStyle = function () {
         save: function () {
             var _name = $.trim($("#name").val());
             var _sortOrder = $.trim($("#sortOrder").val());
-            var id = $("#songStyleId").val();
-            var url = !!id ? "/admin/meta/song/style/update?songStyleId=" + id : "/admin/meta/song/style/add";
+            var id = $("#styleId").val();
+            var url = !!id ? "/admin/meta/song/style/update?styleId=" + id : "/admin/meta/song/style/add";
             $.get(url, {name: _name, sortOrder: _sortOrder}, function (data) {
-                if (data.code != 200) {
-                    alert(data.msg);
+                if (data.code == 200) {
+                    if (!!id) {
+                        Notific8.success("更新成功");
+                    } else {
+                        Notific8.success("添加成功");
+                    }
+                    SongStyle.refresh();
                     return;
                 }
-                $("#formModal").modal("hide");
-                SongStyle.refresh();
+                Notific8.error(data.msg);
             }, "json")
         },
         refresh: function () {
-            $("#basic_data_m2").click();
-            $(".modal-backdrop").remove();
+            $("#formModal").modal("hide");
+            window.setTimeout(function () {
+                Index.load("/admin/meta/song/style/list");
+            },500)
         },
         init: function () {
             handSave();
