@@ -3,20 +3,19 @@
  */
 package com.jusbilee.app.api.seasonRace.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.jusbilee.app.api.seasonRace.dao.ApiSeasonRaceDao;
 import com.jusbilee.app.api.seasonRace.domain.UserInfo;
 import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
 import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
 import com.rockit.core.pojo.Pagination;
 import com.rockit.core.utils.IdentityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhandc 2016年9月23日
@@ -32,7 +31,7 @@ public class ApiSeasonRaceService {
 	public int getSeasonId(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
 		List<Integer> list = apiSeasonRaceDao.getSeasonId(sdf.format(new Date()));
-		return list.isEmpty() ? null : list.get(0);
+		return list.isEmpty() ? 0 : list.get(0);
 	}
 	
 	public UserSeasonRaceSummaryDomain getUserSeasonRaceSummary( long userId ,int seasonId){
