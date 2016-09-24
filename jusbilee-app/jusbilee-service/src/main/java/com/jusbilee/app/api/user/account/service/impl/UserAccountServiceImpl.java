@@ -123,6 +123,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
             bind.setUserType(credentials.getUserTypeName());
             this.thirdUserBindDao.insert(bind);
             this.apiUserSummaryDao.initUserSummary(appUser.getId());
+            passport.setUserId(appUser.getId());
         } else {
 
             //check user account locked status

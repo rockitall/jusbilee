@@ -12,7 +12,6 @@ import com.rockit.core.http.HttpRequest;
 import com.rockit.core.http.HttpResponse;
 import com.rockit.core.http.HttpRuntimeException;
 import com.rockit.core.utils.JacksonUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,8 @@ public class QQUserService implements ThirdUserLookup {
             JsonNode node = JacksonUtil.toJsonNode(response.getBody());
             if (node != null) {
                 QQUser user = JacksonUtil.toObject(node, QQUser.class);
-                if (StringUtils.isNotBlank(user.getOpenid())) {
+                if (user != null || user.getCode() != null || user.getCode() == 0) {
+                    user.setOpenid(credentials.getOpenid());
                     return user;
                 }
             }
