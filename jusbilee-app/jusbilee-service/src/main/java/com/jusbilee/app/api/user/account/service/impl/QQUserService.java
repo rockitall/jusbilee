@@ -13,6 +13,8 @@ import com.rockit.core.http.HttpResponse;
 import com.rockit.core.http.HttpRuntimeException;
 import com.rockit.core.utils.JacksonUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import org.springframework.util.Assert;
  */
 @Service
 public class QQUserService implements ThirdUserLookup {
+    private static final Logger logger = LoggerFactory.getLogger(QQUserService.class);
     @Value("${qq.oauth2.userInfoUrl}")
     private String userInfoUrl;
 
@@ -41,6 +44,9 @@ public class QQUserService implements ThirdUserLookup {
             request.addUrlParameter("oauth_consumer_key", appid);
 
             HttpResponse response = httpService.execute(request);
+            if (logger.isDebugEnabled()) {
+                logger.debug("qq login result:{}", response.getBody());
+            }
             JsonNode node = JacksonUtil.toJsonNode(response.getBody());
             if (node != null) {
                 QQUser user = JacksonUtil.toObject(node, QQUser.class);
@@ -49,8 +55,10 @@ public class QQUserService implements ThirdUserLookup {
                 }
             }
         } catch (HttpRuntimeException e) {
+            logger.error("qq login error", e);
             throw new NetworkErrorException();
         } catch (Exception e) {
+            logger.error("qq login error", e);
             throw new BadCredentialsException();
         }
         throw new InvalidAccessTokenException();
