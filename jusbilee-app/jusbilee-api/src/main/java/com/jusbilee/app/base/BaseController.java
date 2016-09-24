@@ -6,6 +6,7 @@ import com.rockit.core.exception.IllegalApiParameterException;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -36,7 +37,7 @@ public class BaseController {
             errorCode = ErrorCode.ILLEGAL_PARAMETER;
             MissingServletRequestParameterException ex = ((MissingServletRequestParameterException) e);
             args = new String[]{"参数'" + ex.getParameterName() + "'缺失"};
-        } else if (e instanceof MethodArgumentTypeMismatchException) {
+        } else if (e instanceof MethodArgumentTypeMismatchException || e instanceof ConversionFailedException) {
             MethodArgumentTypeMismatchException ex = ((MethodArgumentTypeMismatchException) e);
             errorCode = ErrorCode.ILLEGAL_PARAMETER;
             args = new String[]{"参数'" + ex.getName() + "'数据类型不正确"};

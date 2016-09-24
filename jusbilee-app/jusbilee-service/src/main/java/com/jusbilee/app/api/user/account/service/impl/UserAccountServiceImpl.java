@@ -44,13 +44,13 @@ public class UserAccountServiceImpl implements IUserAccountService {
     private RedisCacheService redisCacheService;
 
     @Autowired
-    private WeixinUserService weixinUserService;
+    private WeixinThirdLoginUserService weixinThirdLoginUserService;
 
     @Autowired
-    private SinaWeiboUserService weiboUserService;
+    private SinaWeiboThirdLoginUserService sinaWeiboThirdLoginUserService;
 
     @Autowired
-    private QQUserService qqUserService;
+    private QQThirdLoginUserService qqThirdLoginUserService;
 
     @Autowired
     private TLSSignatureGenerator signatureGenerator;
@@ -95,12 +95,12 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     public AccessToken doWeixinUserLogin(ThirdUserCredentials credentials) throws UserAccountLockedException {
-        WeixinUser user = weixinUserService.lookup(credentials);
+        WeixinUser user = weixinThirdLoginUserService.lookup(credentials);
         return doThirdUserLogin(credentials, user);
     }
 
     public AccessToken doSinaWeiboUserLogin(ThirdUserCredentials credentials) throws UserAccountLockedException {
-        SinaWeiboUser user = weiboUserService.lookup(credentials);
+        SinaWeiboUser user = sinaWeiboThirdLoginUserService.lookup(credentials);
         return doThirdUserLogin(credentials, user);
     }
 
@@ -182,7 +182,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
     }
 
     private AccessToken doQQUserLogin(ThirdUserCredentials credentials) {
-        QQUser user = qqUserService.lookup(credentials);
+        QQUser user = qqThirdLoginUserService.lookup(credentials);
         return doThirdUserLogin(credentials, user);
     }
 
