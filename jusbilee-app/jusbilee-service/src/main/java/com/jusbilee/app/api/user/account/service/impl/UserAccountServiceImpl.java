@@ -50,6 +50,9 @@ public class UserAccountServiceImpl implements IUserAccountService {
     private SinaWeiboUserService weiboUserService;
 
     @Autowired
+    private QQUserService qqUserService;
+
+    @Autowired
     private TLSSignatureGenerator signatureGenerator;
 
     @Value("${passport.securityKey}")
@@ -170,9 +173,16 @@ public class UserAccountServiceImpl implements IUserAccountService {
     public AccessToken trdlogin(ThirdUserCredentials credentials) throws BadCredentialsException, UserAccountLockedException {
         if (credentials.getUserType() == ThirdUserType.WEIXIN) {
             return this.doWeixinUserLogin(credentials);
+        } else if (credentials.getUserType() == ThirdUserType.QQ) {
+            return this.doQQUserLogin(credentials);
+        } else {
+            return this.doSinaWeiboUserLogin(credentials);
         }
+    }
 
-        return this.doSinaWeiboUserLogin(credentials);
+    private AccessToken doQQUserLogin(ThirdUserCredentials credentials) {
+        QQUser user = qqUserService.lookup(credentials);
+        return doThirdUserLogin(credentials, user);
     }
 
     public Passport createAppUserPassport(Long userId, Credentials credentials) throws UserAlreadyExistsException {
