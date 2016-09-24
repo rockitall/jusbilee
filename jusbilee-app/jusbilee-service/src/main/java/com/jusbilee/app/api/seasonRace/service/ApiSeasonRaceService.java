@@ -29,7 +29,7 @@ public class ApiSeasonRaceService {
 	@Autowired
 	private ApiSeasonRaceDao apiSeasonRaceDao;
 	
-	public int getSeasonId(){
+	public Integer  getSeasonId(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
 		List<Integer> list = apiSeasonRaceDao.getSeasonId(sdf.format(new Date()));
 		return list.isEmpty() ? null : list.get(0);
