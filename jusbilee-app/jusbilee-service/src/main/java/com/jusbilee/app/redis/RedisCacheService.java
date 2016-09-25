@@ -2,6 +2,7 @@ package com.jusbilee.app.redis;
 
 import com.jusbilee.app.api.user.account.domain.AccessToken;
 import com.rockit.core.utils.JacksonUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,17 @@ public class RedisCacheService {
     }
 
     public void setUserAccessToken(AccessToken token) {
+        String userIdKey = USR_TOKEN_PREFIX + token.getUserId();
+        String oldToken = this.get(userIdKey);
+        if (StringUtils.isNoneBlank(oldToken)) {
+            String oldTokenKey = USR_TOKEN_PREFIX + oldToken;
+            this.delete(oldTokenKey);
+        }
+        
         String value = JacksonUtil.toJson(token);
         String key = USR_TOKEN_PREFIX + token.getUserToken();
         this.set(key, value, 30, TimeUnit.DAYS);
+        this.set(userIdKey, token.getUserToken(), 30, TimeUnit.DAYS);
     }
 
     public AccessToken getUserAccessToken(String token) {

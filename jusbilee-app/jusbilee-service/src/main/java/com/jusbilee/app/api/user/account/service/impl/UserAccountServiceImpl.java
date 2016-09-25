@@ -72,30 +72,27 @@ public class UserAccountServiceImpl implements IUserAccountService {
         this.checkUserAccountLocked(passport.getUserId());
 
         AccessToken token = getSuccessAccessToken(passport);
-        redisCacheService.setUserAccessToken(token);
         return token;
     }
 
-    protected AccessToken getSuccessAccessToken(Passport passport) {
-        Assert.notNull(passport, "passport is null");
-
-        String userToken = HmacUtils.hmacSha1Hex(securityKey.getBytes(), passport.toString().getBytes()).toUpperCase();
-        String userSecret = UniqueIdUtils.getUserSecret();
-
-        AccessToken accessToken = new AccessToken();
-        accessToken.setUserId(passport.getUserId());
-        accessToken.setUserToken(userToken);
-        accessToken.setUserSecret(userSecret);
-
-        String identifier = signatureGenerator.getIdentifier(passport.getUserId());
-        String userSignature = signatureGenerator.getUserSignature(identifier);
-        accessToken.setIdentifier(identifier);
-        accessToken.setUserSignature(userSignature);
-        return accessToken;
+    @Override
+    public AccessToken trdlogin(ThirdUserCredentials credentials) throws BadCredentialsException, UserAccountLockedException {
+        if (credentials.getUserType() == ThirdUserType.WEIXIN) {
+            return this.doWeixinUserLogin(credentials);
+        } else if (credentials.getUserType() == ThirdUserType.QQ) {
+            return this.doQQUserLogin(credentials);
+        } else {
+            return this.doSinaWeiboUserLogin(credentials);
+        }
     }
 
     public AccessToken doWeixinUserLogin(ThirdUserCredentials credentials) throws UserAccountLockedException {
         WeixinUser user = weixinThirdLoginUserService.lookup(credentials);
+        return doThirdUserLogin(credentials, user);
+    }
+
+    private AccessToken doQQUserLogin(ThirdUserCredentials credentials) {
+        QQUser user = qqThirdLoginUserService.lookup(credentials);
         return doThirdUserLogin(credentials, user);
     }
 
@@ -134,6 +131,27 @@ public class UserAccountServiceImpl implements IUserAccountService {
         return getSuccessAccessToken(passport);
     }
 
+    protected AccessToken getSuccessAccessToken(Passport passport) {
+        Assert.notNull(passport, "passport is null");
+
+        String userToken = HmacUtils.hmacSha1Hex(securityKey.getBytes(), passport.toString().getBytes()).toUpperCase();
+        String userSecret = UniqueIdUtils.getUserSecret();
+
+        AccessToken token = new AccessToken();
+        token.setUserId(passport.getUserId());
+        token.setUserToken(userToken);
+        token.setUserSecret(userSecret);
+
+        String identifier = signatureGenerator.getIdentifier(passport.getUserId());
+        String userSignature = signatureGenerator.getUserSignature(identifier);
+        token.setIdentifier(identifier);
+        token.setUserSignature(userSignature);
+
+        redisCacheService.setUserAccessToken(token);
+
+        return token;
+    }
+
     private void checkUserAccountLocked(Long userId) throws UserAccountLockedException {
         Byte locked = appUserDao.getLockStatus(userId);
         if (Constants.BOOL.isTrue(locked)) {
@@ -168,22 +186,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
         Passport passport = this.createAppUserPassport(appUser.getId(), registration);
         AccessToken accessToken = getSuccessAccessToken(passport);
         return accessToken;
-    }
-
-    @Override
-    public AccessToken trdlogin(ThirdUserCredentials credentials) throws BadCredentialsException, UserAccountLockedException {
-        if (credentials.getUserType() == ThirdUserType.WEIXIN) {
-            return this.doWeixinUserLogin(credentials);
-        } else if (credentials.getUserType() == ThirdUserType.QQ) {
-            return this.doQQUserLogin(credentials);
-        } else {
-            return this.doSinaWeiboUserLogin(credentials);
-        }
-    }
-
-    private AccessToken doQQUserLogin(ThirdUserCredentials credentials) {
-        QQUser user = qqThirdLoginUserService.lookup(credentials);
-        return doThirdUserLogin(credentials, user);
     }
 
     public Passport createAppUserPassport(Long userId, Credentials credentials) throws UserAlreadyExistsException {
