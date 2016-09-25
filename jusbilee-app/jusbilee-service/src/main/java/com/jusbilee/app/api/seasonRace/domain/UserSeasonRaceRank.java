@@ -14,7 +14,7 @@ public class UserSeasonRaceRank {
 	private Integer score;
 	private Integer level;
 	private Long rank;
-	private boolean isFread = true;
+	private boolean isFriend = true;
 	
 	public Long getUserId() {
 		return userId;
@@ -46,12 +46,13 @@ public class UserSeasonRaceRank {
 	public void setRank(Long rank) {
 		this.rank = rank;
 	}
-	public boolean isFread() {
-		return isFread;
+	public boolean isFriend() {
+		return isFriend;
 	}
-	public void setFread(boolean isFread) {
-		this.isFread = isFread;
+	public void setFriend(boolean isFriend) {
+		this.isFriend = isFriend;
 	}
+	
 	
 	
 

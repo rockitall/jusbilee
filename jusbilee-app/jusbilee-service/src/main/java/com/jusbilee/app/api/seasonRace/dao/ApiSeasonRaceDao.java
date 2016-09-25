@@ -27,7 +27,7 @@ public interface ApiSeasonRaceDao {
 	@Select(" select id from t_race_season where create_time <= #{date} and update_time >=#{date}")
 	public List<Integer> getSeasonId(String date);
 
-	@Select(" select best_score as bestScore, win as winCount,win_steak as winStreak from t_user_season_race_summary "
+	@Select(" select best_score as bestScore, win as winCount, win_streak as winStreak from t_user_season_race_summary "
 			+ " where user_id= #{userId} and season_id = #{seasonId}")
 	public UserSeasonRaceSummaryDomain getUserSeasonRaceSummary(@Param("userId") Long userId,
 			@Param("seasonId") Integer seasonId);

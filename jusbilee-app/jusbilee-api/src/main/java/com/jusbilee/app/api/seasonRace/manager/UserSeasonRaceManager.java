@@ -54,7 +54,7 @@ public class UserSeasonRaceManager {
 			UserInfo user = userMap.get(rank.getUserId());
 			rank.setUserName(user.getUserName());
 			rank.setLevel(user.getLevel());
-			rank.setFread(friendsId.containsKey(rank.getUserId()));
+			rank.setFriend(friendsId.containsKey(rank.getUserId()));
 			resultList.add(rank);
 		});
 		formatRank(resultList, pagination);
