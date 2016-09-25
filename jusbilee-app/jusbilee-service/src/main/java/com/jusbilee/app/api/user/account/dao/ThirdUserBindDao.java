@@ -14,6 +14,6 @@ public interface ThirdUserBindDao {
     @SelectKey(before = false, keyProperty = "bindId", keyColumn = "id", resultType = Long.class, statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID()")
     void insert(ThirdUserBind thirdUserBind);
 
-    @Select("select id, user_id, user_type, openid from t_third_user_bind where user_type=#{userType} and openid=#{openid} and status=1")
+    @Select("select id as bindId, user_id as userId, user_type as userType, openid from t_third_user_bind where user_type=#{userType} and openid=#{openid}")
     ThirdUserBind selectByOpenid(@Param("openid") String openid, @Param("userType") String userType);
 }

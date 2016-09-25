@@ -13,6 +13,8 @@ import com.rockit.core.http.HttpResponse;
 import com.rockit.core.http.HttpRuntimeException;
 import com.rockit.core.utils.JacksonUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,9 @@ import org.springframework.util.Assert;
  * Created by allen on 16-1-24.
  */
 @Service
-public class SinaWeiboUserService implements ThirdUserLookup {
+public class SinaWeiboThirdLoginUserService implements ThirdUserLookup {
+    private static final Logger logger = LoggerFactory.getLogger(SinaWeiboThirdLoginUserService.class);
+
     @Value("${weibo.oauth2.userInfoUrl}")
     private String url;
 
@@ -38,16 +42,20 @@ public class SinaWeiboUserService implements ThirdUserLookup {
 
             HttpResponse response = httpService.execute(request);
             JsonNode node = JacksonUtil.toJsonNode(response.getBody());
+            if (logger.isDebugEnabled()) {
+                logger.debug("sina weibo login result:{}", response.getBody());
+            }
             if (node != null) {
                 SinaWeiboUser user = JacksonUtil.toObject(node, SinaWeiboUser.class);
                 if (user != null && StringUtils.isNotBlank(user.getOpenid())) {
                     return user;
                 }
-                return user;
             }
         } catch (HttpRuntimeException e) {
+            logger.error("sina weibo login error", e);
             throw new NetworkErrorException();
         } catch (Exception e) {
+            logger.error("sina weibo login error", e);
             throw new BadCredentialsException();
         }
         throw new InvalidAccessTokenException();

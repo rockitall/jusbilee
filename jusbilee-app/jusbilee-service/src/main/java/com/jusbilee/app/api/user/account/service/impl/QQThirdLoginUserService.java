@@ -1,7 +1,7 @@
 package com.jusbilee.app.api.user.account.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.jusbilee.app.api.user.account.domain.WeixinUser;
+import com.jusbilee.app.api.user.account.domain.QQUser;
 import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
 import com.jusbilee.app.api.user.account.service.ThirdUserLookup;
 import com.rockit.core.exception.BadCredentialsException;
@@ -12,43 +12,63 @@ import com.rockit.core.http.HttpRequest;
 import com.rockit.core.http.HttpResponse;
 import com.rockit.core.http.HttpRuntimeException;
 import com.rockit.core.utils.JacksonUtil;
-import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 /**
- * Created by allen on 16-1-24.
+ * Created by Allen on 2016/9/24.
  */
 @Service
-public class WeixinUserService implements ThirdUserLookup {
-    @Value("${weixin.oauth2.userInfoUrl}")
-    private String weixinUrl;
+public class QQThirdLoginUserService implements ThirdUserLookup {
+    private static final Logger logger = LoggerFactory.getLogger(QQThirdLoginUserService.class);
+    @Value("${qq.oauth2.userInfoUrl}")
+    private String userInfoUrl;
+
+    @Value("${qq.oauth2.appid}")
+    private String appid;
 
     @Autowired(required = false)
     private HttpClientService httpService;
 
-    public WeixinUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {
-        Assert.notNull(credentials, "weixin credentials is null");
+    public QQUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {
+        Assert.notNull(credentials, "qq credentials is null");
         try {
-            HttpRequest request = HttpRequest.get(weixinUrl);
+            HttpRequest request = HttpRequest.get(this.userInfoUrl);
             request.addUrlParameter("access_token", credentials.getAccessToken());
             request.addUrlParameter("openid", credentials.getOpenid());
+            request.addUrlParameter("oauth_consumer_key", appid);
 
             HttpResponse response = httpService.execute(request);
+            if (logger.isDebugEnabled()) {
+                logger.debug("qq login result:{}", response.getBody());
+            }
             JsonNode node = JacksonUtil.toJsonNode(response.getBody());
             if (node != null) {
-                WeixinUser user = JacksonUtil.toObject(node, WeixinUser.class);
-                if (StringUtils.isNotBlank(user.getOpenid())) {
+                QQUser user = JacksonUtil.toObject(node, QQUser.class);
+                if (user != null || user.getCode() != null || user.getCode() == 0) {
+                    user.setOpenid(credentials.getOpenid());
                     return user;
                 }
             }
         } catch (HttpRuntimeException e) {
+            logger.error("qq login error", e);
             throw new NetworkErrorException();
         } catch (Exception e) {
+            logger.error("qq login error", e);
             throw new BadCredentialsException();
         }
         throw new InvalidAccessTokenException();
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
     }
 }

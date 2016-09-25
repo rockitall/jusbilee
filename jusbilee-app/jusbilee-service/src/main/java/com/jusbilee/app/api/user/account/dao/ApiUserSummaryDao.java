@@ -32,7 +32,7 @@ public interface ApiUserSummaryDao {
     @Update("update t_user_summary set total_gold_coin=total_gold_coin+#{goldCoin} where user_id=#{userId}")
     void produceUserGoldCoin(@Param("userId") Long userId, @Param("goldCoin") Integer goldCoin);
 
-    @Insert("insert into t_user_summary(user_id) values (#{userId})")
+    @Insert("insert into t_user_summary(user_id,create_time) values (#{userId},now())")
     void initUserSummary(@Param("userId") Long userId);
 
     @Update("update t_user_summary set total_gold_coin=total_gold_coin-#{goldCoin} where user_id=#{userId}")
