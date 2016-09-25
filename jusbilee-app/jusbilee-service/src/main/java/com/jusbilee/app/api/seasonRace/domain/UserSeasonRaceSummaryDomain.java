@@ -12,6 +12,7 @@ public class UserSeasonRaceSummaryDomain {
 	private Integer bestScore;
 	private Integer winCount;
 	private Integer winStreak;
+	
 
 	public Integer getBestScore() {
 		return bestScore;
