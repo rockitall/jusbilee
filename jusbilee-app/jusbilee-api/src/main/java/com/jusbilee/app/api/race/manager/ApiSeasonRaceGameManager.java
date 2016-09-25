@@ -1,16 +1,16 @@
 /**
  * zhandc 2016年9月24日
  */
-package com.jusbilee.app.api.seasonRace.manager;
+package com.jusbilee.app.api.race.manager;
 
 import java.util.Date;
 
+import com.jusbilee.app.api.race.response.RaceDetailFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jusbilee.app.api.seasonRace.request.RateResultRequest;
-import com.jusbilee.app.api.seasonRace.response.RaceDetailFacade;
+import com.jusbilee.app.api.race.request.RateResultRequest;
 import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceGameService;
 import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceService;
 import com.jusbilee.app.api.song.domain.ApiSong;

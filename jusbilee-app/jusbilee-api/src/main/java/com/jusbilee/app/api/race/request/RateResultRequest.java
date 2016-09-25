@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月25日
  */
-package com.jusbilee.app.api.seasonRace.request;
+package com.jusbilee.app.api.race.request;
 
 import javax.validation.constraints.NotNull;
 

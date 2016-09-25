@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月24日
  */
-package com.jusbilee.app.api.seasonRace.response;
+package com.jusbilee.app.api.race.response;
 
 import com.jusbilee.app.api.song.domain.ApiSong;
 

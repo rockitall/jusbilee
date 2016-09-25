@@ -1,28 +1,26 @@
 /**
  * zhandc 2016年9月22日
  */
-package com.jusbilee.app.api.seasonRace.controller;
+package com.jusbilee.app.api.race.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
+import com.jusbilee.app.api.race.manager.ApiSeasonRaceGameManager;
+import com.jusbilee.app.api.race.manager.UserSeasonRaceManager;
+import com.jusbilee.app.api.race.request.RateResultRequest;
+import com.jusbilee.app.api.race.response.RaceDetailFacade;
+import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
+import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
+import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.context.HttpContext;
+import com.rockit.core.pojo.JsonResult;
+import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
-import com.jusbilee.app.api.seasonRace.manager.ApiSeasonRaceGameManager;
-import com.jusbilee.app.api.seasonRace.manager.UserSeasonRaceManager;
-import com.jusbilee.app.api.seasonRace.request.RateResultRequest;
-import com.jusbilee.app.api.seasonRace.response.RaceDetailFacade;
-import com.jusbilee.app.base.BaseController;
-import com.jusbilee.app.context.HttpContext;
-import com.rockit.core.pojo.JsonResult;
-import com.rockit.core.pojo.Pagination;
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author zhandc 2016年9月22日

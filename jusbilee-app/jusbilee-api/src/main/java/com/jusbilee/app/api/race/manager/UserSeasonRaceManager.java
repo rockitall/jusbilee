@@ -1,21 +1,20 @@
 /**
  * zhandc 2016年9月24日
  */
-package com.jusbilee.app.api.seasonRace.manager;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.jusbilee.app.api.race.manager;
 
 import com.jusbilee.app.api.seasonRace.domain.UserInfo;
 import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
 import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
 import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceService;
 import com.rockit.core.pojo.Pagination;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhandc 2016年9月24日
