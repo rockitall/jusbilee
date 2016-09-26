@@ -11,6 +11,7 @@ public class UserSeasonRaceRank {
 	
 	private Long userId;
 	private String userName;
+	private String avatar;
 	private Integer score;
 	private Integer level;
 	private Long rank;
@@ -51,6 +52,12 @@ public class UserSeasonRaceRank {
 	}
 	public void setFriend(boolean isFriend) {
 		this.isFriend = isFriend;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 	
 	

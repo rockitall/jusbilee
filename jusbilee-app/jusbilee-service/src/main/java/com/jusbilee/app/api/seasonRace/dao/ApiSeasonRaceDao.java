@@ -38,6 +38,9 @@ public interface ApiSeasonRaceDao {
 	@SelectProvider(type = ApiSeasonRaceDaoSqlProvider.class, method = "getUserInfo")
 	List<UserInfo> getUserInfo(@Param("userIdList") List<Long> userIdList);
 	
+	@Select("select id as userId, nickname as userName, level as level, avatar as avatar from t_app_user where id = #{userId}")
+	public UserInfo getUserInfoById(@Param("userId") Long userId);
+	
 	@Select("select friend_user_id as userId from  t_user_friend f where  f.user_id=#{userId} and f.is_deleted=0")
     List<Long> getAllFriends(@Param("userId") Long userId);
 	

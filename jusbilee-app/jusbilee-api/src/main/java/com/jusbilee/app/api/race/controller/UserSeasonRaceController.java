@@ -44,7 +44,7 @@ public class UserSeasonRaceController extends BaseController {
 		return ok(summary);
 	}
 
-	@RequestMapping("/allRank")
+	@RequestMapping("/rank/all")
 	public JsonResult getSeasonRank(@ModelAttribute Pagination pagination,
 			BindingResult bindingResult) {
 		assertValid(bindingResult);
@@ -53,7 +53,7 @@ public class UserSeasonRaceController extends BaseController {
 		return ok(resultList);
 	}
 	
-	@RequestMapping("/friendsRank")
+	@RequestMapping("/rank/friends")
 	public JsonResult getFriendsSeasonRank(@ModelAttribute Pagination pagination,
 			BindingResult bindingResult) {
 		assertValid(bindingResult);
@@ -62,14 +62,14 @@ public class UserSeasonRaceController extends BaseController {
 		return ok(resultList);
 	}
 	
-	@RequestMapping("/startGame")
+	@RequestMapping("/game/start")
 	public JsonResult getRaceDetail() {
 		Long userId = HttpContext.current().getUserId();
 		RaceDetailFacade facade = apiSeasonRaceGameManager.getRaceDetail(userId);
 		return ok(facade);
 	}
 	
-	@RequestMapping("/log")
+	@RequestMapping("/game/log")
     public JsonResult practice(@Valid @ModelAttribute RateResultRequest request,
                                BindingResult bindingResult) {
         assertValid(bindingResult);

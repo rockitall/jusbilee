@@ -3,6 +3,7 @@
  */
 package com.jusbilee.app.api.race.response;
 
+import com.jusbilee.app.api.seasonRace.domain.UserInfo;
 import com.jusbilee.app.api.song.domain.ApiSong;
 
 /**
@@ -10,22 +11,24 @@ import com.jusbilee.app.api.song.domain.ApiSong;
  *
  */
 public class RaceDetailFacade {
-	
-	 private ApiSong info;
-	 private Long opponentId;
-	public ApiSong getInfo() {
-		return info;
+
+	private ApiSong songInfo;
+	private UserInfo userInfo;
+
+	public ApiSong getSongInfo() {
+		return songInfo;
 	}
-	public void setInfo(ApiSong info) {
-		this.info = info;
+
+	public void setSongInfo(ApiSong songInfo) {
+		this.songInfo = songInfo;
 	}
-	public Long getOpponentId() {
-		return opponentId;
+
+	public UserInfo getUserInfo() {
+		return userInfo;
 	}
-	public void setOpponentId(Long opponentId) {
-		this.opponentId = opponentId;
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
-	 
-	 
 
 }

@@ -5,12 +5,13 @@ package com.jusbilee.app.api.race.manager;
 
 import java.util.Date;
 
-import com.jusbilee.app.api.race.response.RaceDetailFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jusbilee.app.api.race.request.RateResultRequest;
+import com.jusbilee.app.api.race.response.RaceDetailFacade;
+import com.jusbilee.app.api.seasonRace.domain.UserInfo;
 import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceGameService;
 import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceService;
 import com.jusbilee.app.api.song.domain.ApiSong;
@@ -33,7 +34,7 @@ public class ApiSeasonRaceGameManager {
 	@Autowired
 	private ApiSeasonRaceService apiSeasonRaceService;
 
-	@Transactional
+	
 	public RaceDetailFacade getRaceDetail(long userId) {
 		// 赛季id
 		int seasonId = apiSeasonRaceService.getSeasonId();
@@ -49,13 +50,12 @@ public class ApiSeasonRaceGameManager {
 		UserSeasonRacePool racePool = apiSeasonRaceGameService.getUserSeasonRacePool(subLevel);
 
 		RaceDetailFacade facade = new RaceDetailFacade();
-
 		if (racePool != null) {
 			apiSeasonRaceGameService.updateUserSeasonRacePool(racePool, userId);
 			ApiSong apiSong = apiSeasonRaceGameService.getSonginfo(racePool.getSeasonSongId());
-
-			facade.setInfo(apiSong);
-			facade.setOpponentId(racePool.getUserId());
+			UserInfo userInfo = apiSeasonRaceService.getUserInfoById(racePool.getUserId());
+			facade.setSongInfo(apiSong);
+			facade.setUserInfo(userInfo);
 			return facade;
 		} else {
 			int songId = apiSeasonRaceGameService.getSongId(seasonId, subLevel);
@@ -63,13 +63,14 @@ public class ApiSeasonRaceGameManager {
 			apiSeasonRaceGameService.addUserSeasonRacePool(userId, subLevel, songId);
 			UserSeasonRacePool race = null;
 			int time = 0;
-			while (time < 60) {
+			while (time < 6) {
 				time = time + 1;
 				race = apiSeasonRaceGameService.getUserSeasonRacePool(userId);
 				if (race.getIsMatch() == 1) {
 					apiSeasonRaceGameService.deleteUserSeasonRacePool(race);
-					facade.setInfo(apiSong);
-					facade.setOpponentId(race.getOpponentId());
+					UserInfo userInfo = apiSeasonRaceService.getUserInfoById(race.getOpponentId());
+					facade.setSongInfo(apiSong);
+					facade.setUserInfo(userInfo);
 					return facade;
 				} else {
 					try {
@@ -82,8 +83,10 @@ public class ApiSeasonRaceGameManager {
 
 			// 返回机器人
 			apiSeasonRaceGameService.deleteUserSeasonRacePool(race);
-			facade.setInfo(apiSong);
-			facade.setOpponentId((long) 0);
+			UserInfo userInfo = new UserInfo();
+			userInfo.setUserId((long)0);
+			facade.setSongInfo(apiSong);
+			facade.setUserInfo(userInfo);
 			return facade;
 
 		}

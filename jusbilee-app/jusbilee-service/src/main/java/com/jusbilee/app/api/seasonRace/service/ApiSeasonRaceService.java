@@ -47,6 +47,10 @@ public class ApiSeasonRaceService {
 		return IdentityUtils.asMap(list, v -> v.getUserId());
 	}
 	
+	public UserInfo getUserInfoById(long userId){
+		return apiSeasonRaceDao.getUserInfoById(userId);
+	}
+	
 	public  Map<Long, Long> getFriendsId(long userId){
 		List<Long> list = apiSeasonRaceDao.getAllFriends(userId);
 		return IdentityUtils.asMap(list, v -> v.longValue());

@@ -28,7 +28,7 @@ public class ApiSeasonRaceDaoSqlProvider {
 
 	public String getUserInfo(@Param("userIdList") List<Long> userIdList) {
 		StringBuilder sb = new StringBuilder(128);
-		sb.append(" select id as userId, nickname as userName, level as level ");
+		sb.append(" select id as userId, nickname as userName, level as level, avatar as avatar ");
 		sb.append(" from t_app_user ");
 		sb.append(" where id in ( ");
 		for (Long id : userIdList) {
@@ -41,8 +41,8 @@ public class ApiSeasonRaceDaoSqlProvider {
 	public String getRateRankByUserId(@Param("seasonId") Integer seasonId, @Param("userId") Long userId,
 			Pagination pagination) {
 		StringBuilder sb = new StringBuilder(512);
-		sb.append(" select u.userId, u.userName,u.level, s.score");
-		sb.append(" from (select u.nickname as userName, u.level as level ,f.friend_user_id as userId ");
+		sb.append(" select u.userId, u.userName,u.avatar,u.level, s.score");
+		sb.append(" from (select u.nickname as userName,u.avatar as avatar, u.level as level ,f.friend_user_id as userId ");
 		sb.append(" from  t_user_friend f ,t_app_user u where f.friend_user_id = u.id ");
 		sb.append(" and f.user_id = #{userId} and f.is_deleted=0 UNION select u.nickname,u. LEVEL,u.id from t_app_user u where id=#{userId}) u");
 		sb.append(" LEFT JOIN t_user_season_race_summary s on u.userId = s.user_id and s.season_id =#{seasonId}");
