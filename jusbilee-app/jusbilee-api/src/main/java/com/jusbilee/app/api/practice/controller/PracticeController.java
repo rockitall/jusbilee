@@ -6,7 +6,7 @@ package com.jusbilee.app.api.practice.controller;
 import com.jusbilee.app.api.practice.domain.ApiSongStyle;
 import com.jusbilee.app.api.practice.manager.PracticeManager;
 import com.jusbilee.app.api.practice.response.PracticeSongFacade;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -26,6 +26,7 @@ public class PracticeController extends BaseController {
 
     @RequestMapping("/song/style/list")
     public JsonResult getPracticeSongStyle() {
+        HttpContext.current().getRequireUserId();
         List<ApiSongStyle> styles = practiceManager.getSongStyleList();
         return ok(styles);
     }
@@ -40,7 +41,7 @@ public class PracticeController extends BaseController {
     public JsonResult getStyleOnlinePracticeSongList(@RequestParam Integer styleId,
                                                      @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         assertValid(bindingResult);
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         List<PracticeSongFacade> facades = practiceManager.getStyleOnlinePracticeSongList(styleId, pagination, userId);
         return ok(facades);
     }

@@ -3,6 +3,7 @@ package com.jusbilee.app.interceptor;
 import com.jusbilee.app.api.user.account.domain.AccessToken;
 import com.jusbilee.app.context.HttpContext;
 import com.jusbilee.app.redis.RedisCacheService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,9 +28,13 @@ public class AuthenticateInterceptor implements HandlerInterceptor {
         ctx.setUserToken(request.getParameter("userToken"));
         ctx.setDevice(request.getParameter("device"));
         ctx.setClientIp(request.getRemoteAddr());
-        AccessToken token = redisCacheService.getUserAccessToken(ctx.getUserToken());
-        if (token != null) {
-            ctx.setUserId(token.getUserId());
+
+        //set user token and userId
+        if (StringUtils.isNotBlank(ctx.getUserToken())) {
+            AccessToken token = redisCacheService.getUserAccessToken(ctx.getUserToken());
+            if (token != null) {
+                ctx.setUserId(token.getUserId());
+            }
         }
         return true;
     }

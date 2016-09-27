@@ -1,4 +1,4 @@
-package com.jusbilee.app.base;
+package com.jusbilee.app.api;
 
 import com.rockit.core.code.ErrorCode;
 import com.rockit.core.exception.ApiException;

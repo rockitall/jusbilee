@@ -3,7 +3,7 @@
  */
 package com.jusbilee.app.api.race.response;
 
-import com.jusbilee.app.api.seasonRace.domain.UserInfo;
+import com.jusbilee.app.api.race.domain.UserInfo;
 import com.jusbilee.app.api.song.domain.ApiSong;
 
 /**

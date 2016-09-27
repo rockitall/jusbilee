@@ -3,7 +3,7 @@ package com.jusbilee.app.api.practice.controller;
 import com.jusbilee.app.api.practice.manager.PracticeManager;
 import com.jusbilee.app.api.practice.request.UserPracticeRequest;
 import com.jusbilee.app.api.practice.response.PracticeLogSongFacade;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -35,7 +35,7 @@ public class UserPracticeController extends BaseController {
     public JsonResult getPracticeLogSongList(@RequestParam Integer styleId,
                                              @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         assertValid(bindingResult);
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         List<PracticeLogSongFacade> facades = practiceManager.getPracticeLogSongListByStyleId(userId, styleId,
                 pagination);
         return ok(facades);
@@ -49,7 +49,7 @@ public class UserPracticeController extends BaseController {
      */
     @RequestMapping("/song/unlock")
     public JsonResult unlockPracticeSongViaGoldCoin(@RequestParam("songId") Integer songId) {
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         practiceManager.unlockPracticeSongViaGoldCoin(userId, songId);
         return ok();
     }

@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月22日
  */
-package com.jusbilee.app.api.seasonRace.dao;
+package com.jusbilee.app.api.race.dao;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
-import com.jusbilee.app.api.seasonRace.dao.sql.ApiSeasonRaceDaoSqlProvider;
-import com.jusbilee.app.api.seasonRace.domain.UserInfo;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
+import com.jusbilee.app.api.race.dao.sql.ApiSeasonRaceDaoSqlProvider;
+import com.jusbilee.app.api.race.domain.UserInfo;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceRank;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceSummaryDomain;
 import com.rockit.core.pojo.Pagination;
 
 /**

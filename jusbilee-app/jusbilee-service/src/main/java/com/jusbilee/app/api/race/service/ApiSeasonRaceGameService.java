@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月24日
  */
-package com.jusbilee.app.api.seasonRace.service;
+package com.jusbilee.app.api.race.service;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jusbilee.app.api.seasonRace.dao.ApiSeasonRaceGameDao;
+import com.jusbilee.app.api.race.dao.ApiSeasonRaceGameDao;
 import com.jusbilee.app.api.song.domain.ApiSong;
 import com.jusbilee.app.mybatis.dao.RaceSeasonSongMapper;
 import com.jusbilee.app.mybatis.dao.UserSeasonRaceLogMapper;

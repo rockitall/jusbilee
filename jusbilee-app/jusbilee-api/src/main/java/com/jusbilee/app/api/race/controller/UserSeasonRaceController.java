@@ -7,9 +7,9 @@ import com.jusbilee.app.api.race.manager.ApiSeasonRaceGameManager;
 import com.jusbilee.app.api.race.manager.UserSeasonRaceManager;
 import com.jusbilee.app.api.race.request.RateResultRequest;
 import com.jusbilee.app.api.race.response.RaceDetailFacade;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceRank;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceSummaryDomain;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -39,7 +39,7 @@ public class UserSeasonRaceController extends BaseController {
 
 	@RequestMapping("/summary")
 	public JsonResult getUserSeasonRaceSummary() {
-		Long userId = HttpContext.current().getUserId();
+		Long userId = HttpContext.current().getRequireUserId();
 		UserSeasonRaceSummaryDomain summary = userSeasonRaceManager.getUserSeasonRaceSummary(userId);
 		return ok(summary);
 	}
@@ -48,7 +48,7 @@ public class UserSeasonRaceController extends BaseController {
 	public JsonResult getSeasonRank(@ModelAttribute Pagination pagination,
 			BindingResult bindingResult) {
 		assertValid(bindingResult);
-		Long userId = HttpContext.current().getUserId();
+		Long userId = HttpContext.current().getRequireUserId();
 		List<UserSeasonRaceRank> resultList = userSeasonRaceManager.getSeasonRank(userId, pagination);
 		return ok(resultList);
 	}
@@ -57,14 +57,14 @@ public class UserSeasonRaceController extends BaseController {
 	public JsonResult getFriendsSeasonRank(@ModelAttribute Pagination pagination,
 			BindingResult bindingResult) {
 		assertValid(bindingResult);
-		Long userId = HttpContext.current().getUserId();
+		Long userId = HttpContext.current().getRequireUserId();
 		List<UserSeasonRaceRank> resultList = userSeasonRaceManager.getFriendsSeasonRank(userId, pagination);
 		return ok(resultList);
 	}
 	
 	@RequestMapping("/game/start")
 	public JsonResult getRaceDetail() {
-		Long userId = HttpContext.current().getUserId();
+		Long userId = HttpContext.current().getRequireUserId();
 		RaceDetailFacade facade = apiSeasonRaceGameManager.getRaceDetail(userId);
 		return ok(facade);
 	}
@@ -73,6 +73,7 @@ public class UserSeasonRaceController extends BaseController {
     public JsonResult practice(@Valid @ModelAttribute RateResultRequest request,
                                BindingResult bindingResult) {
         assertValid(bindingResult);
+		HttpContext.current().getRequireUserId();
         apiSeasonRaceGameManager.RateResultLog(request);
         return ok();
     }

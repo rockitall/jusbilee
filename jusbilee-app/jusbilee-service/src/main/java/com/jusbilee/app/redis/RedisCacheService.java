@@ -35,7 +35,7 @@ public class RedisCacheService {
             String oldTokenKey = USR_TOKEN_PREFIX + oldToken;
             this.delete(oldTokenKey);
         }
-        
+
         String value = JacksonUtil.toJson(token);
         String key = USR_TOKEN_PREFIX + token.getUserToken();
         this.set(key, value, 30, TimeUnit.DAYS);

@@ -1,9 +1,9 @@
-package com.jusbilee.app.api.user.account.service.impl;
+package com.jusbilee.app.api.user.manager;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jusbilee.app.api.user.account.domain.QQUser;
 import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.api.user.account.service.ThirdUserLookup;
+import com.jusbilee.app.api.user.account.service.ThirdUserLookupService;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.InvalidAccessTokenException;
 import com.rockit.core.exception.NetworkErrorException;
@@ -23,15 +23,15 @@ import org.springframework.util.Assert;
  * Created by Allen on 2016/9/24.
  */
 @Service
-public class QQThirdLoginUserService implements ThirdUserLookup {
-    private static final Logger logger = LoggerFactory.getLogger(QQThirdLoginUserService.class);
+public class QQThirdLoginUserManager implements ThirdUserLookupService {
+    private static final Logger logger = LoggerFactory.getLogger(QQThirdLoginUserManager.class);
     @Value("${qq.oauth2.userInfoUrl}")
     private String userInfoUrl;
 
     @Value("${qq.oauth2.appid}")
     private String appid;
 
-    @Autowired(required = false)
+    @Autowired
     private HttpClientService httpService;
 
     public QQUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {

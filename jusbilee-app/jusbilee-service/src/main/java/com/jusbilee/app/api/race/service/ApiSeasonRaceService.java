@@ -1,12 +1,12 @@
 /**
  * zhandc 2016年9月23日
  */
-package com.jusbilee.app.api.seasonRace.service;
+package com.jusbilee.app.api.race.service;
 
-import com.jusbilee.app.api.seasonRace.dao.ApiSeasonRaceDao;
-import com.jusbilee.app.api.seasonRace.domain.UserInfo;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
+import com.jusbilee.app.api.race.dao.ApiSeasonRaceDao;
+import com.jusbilee.app.api.race.domain.UserInfo;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceRank;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceSummaryDomain;
 import com.rockit.core.pojo.Pagination;
 import com.rockit.core.utils.IdentityUtils;
 import org.springframework.beans.factory.annotation.Autowired;

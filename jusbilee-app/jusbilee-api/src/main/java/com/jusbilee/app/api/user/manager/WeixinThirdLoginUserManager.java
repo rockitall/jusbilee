@@ -1,9 +1,9 @@
-package com.jusbilee.app.api.user.account.service.impl;
+package com.jusbilee.app.api.user.manager;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jusbilee.app.api.user.account.domain.WeixinUser;
 import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.api.user.account.service.ThirdUserLookup;
+import com.jusbilee.app.api.user.account.service.ThirdUserLookupService;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.InvalidAccessTokenException;
 import com.rockit.core.exception.NetworkErrorException;
@@ -24,12 +24,12 @@ import org.springframework.util.Assert;
  * Created by allen on 16-1-24.
  */
 @Service
-public class WeixinThirdLoginUserService implements ThirdUserLookup {
-    private static final Logger logger = LoggerFactory.getLogger(WeixinThirdLoginUserService.class);
+public class WeixinThirdLoginUserManager implements ThirdUserLookupService {
+    private static final Logger logger = LoggerFactory.getLogger(WeixinThirdLoginUserManager.class);
     @Value("${weixin.oauth2.userInfoUrl}")
     private String weixinUrl;
 
-    @Autowired(required = false)
+    @Autowired
     private HttpClientService httpService;
 
     public WeixinUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException, NetworkErrorException, BadCredentialsException {

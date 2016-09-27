@@ -8,11 +8,11 @@ import com.jusbilee.app.api.user.account.param.Credentials;
 import com.jusbilee.app.api.user.account.param.PasswordModification;
 import com.jusbilee.app.api.user.account.param.Registration;
 import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.api.user.account.service.IUserAccountService;
 import com.jusbilee.app.api.user.domain.UploadToken;
+import com.jusbilee.app.api.user.manager.UserAccountManager;
 import com.jusbilee.app.api.user.request.UserAvatarModificationRequest;
 import com.jusbilee.app.api.user.request.UserProfileModificationRequest;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.jusbilee.app.qiniu.QiniuBucket;
 import com.jusbilee.app.qiniu.QiniuSDKProperties;
@@ -32,7 +32,7 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserAccountController extends BaseController {
     @Autowired
-    private IUserAccountService userAccountService;
+    private UserAccountManager userAccountManager;
 
     @Autowired
     private QiniuSDKProperties qiniuSDKProperties;
@@ -44,43 +44,44 @@ public class UserAccountController extends BaseController {
     public JsonResult register(@Valid @ModelAttribute Registration registration, BindingResult bindingResult) {
         assertValid(bindingResult);
 
-        AccessToken accessToken = userAccountService.register(registration);
+        AccessToken accessToken = userAccountManager.register(registration);
         return ok(accessToken);
     }
 
     @RequestMapping("/login")
     public JsonResult login(@Valid @ModelAttribute Credentials credentials, BindingResult bindingResult) {
         assertValid(bindingResult);
-        AccessToken token = userAccountService.login(credentials);
+        AccessToken token = userAccountManager.login(credentials);
         return ok(token);
     }
 
     @RequestMapping("/trdlogin")
     public JsonResult trdlogin(@Valid @ModelAttribute ThirdUserCredentials credentials, BindingResult bindingResult) {
         assertValid(bindingResult);
-        AccessToken token = userAccountService.trdlogin(credentials);
+        AccessToken token = userAccountManager.trdlogin(credentials);
         return ok(token);
     }
 
     @RequestMapping("/pwd/modify")
     public JsonResult modifyPassword(@Valid @ModelAttribute PasswordModification modification, BindingResult bindingResult) {
         assertValid(bindingResult);
-        modification.setUserId(HttpContext.current().getUserId());
-        userAccountService.modifyPassword(modification);
+        Long userId = HttpContext.current().getRequireUserId();
+        modification.setUserId(userId);
+        userAccountManager.modifyPassword(modification);
         return ok();
     }
 
     @RequestMapping("/logout")
     public JsonResult logout() {
         String userToken = HttpContext.current().getUserToken();
-        userAccountService.logout(userToken);
+        userAccountManager.logout(userToken);
         return ok();
     }
 
     @RequestMapping("/profile")
     public JsonResult getAppUserProfile() {
-        Long userId = HttpContext.current().getUserId();
-        AppUserProfile profile = userAccountService.getAppUserProfile(userId);
+        Long userId = HttpContext.current().getRequireUserId();
+        AppUserProfile profile = userAccountManager.getAppUserProfile(userId);
         return ok(profile);
     }
 
@@ -88,21 +89,22 @@ public class UserAccountController extends BaseController {
     public JsonResult modifyNickname(@Valid @ModelAttribute UserProfileModificationRequest request, BindingResult bindingResult) {
         assertValid(bindingResult);
 
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         String nickname = StringUtils.trim(request.getNickname());
-        userAccountService.modifyNickname(userId, nickname);
+        userAccountManager.modifyNickname(userId, nickname);
         return ok();
     }
 
     @RequestMapping("/avatar/upload")
     public JsonResult uploadAvatar(@Valid @ModelAttribute UserAvatarModificationRequest request, BindingResult bindingResult) {
-        Long userId = HttpContext.current().getUserId();
-        userAccountService.uploadAvatar(userId, request.getAvatar());
+        Long userId = HttpContext.current().getRequireUserId();
+        userAccountManager.uploadAvatar(userId, request.getAvatar());
         return ok();
     }
 
     @RequestMapping("/upload/token")
     public JsonResult uploadToken() {
+        HttpContext.current().getRequireUserId();
         QiniuBucket bucket = qiniuSDKProperties.getAvatar();
         String token = qiniuSdkAuth.uploadToken(bucket.getName(), null, 10L * 365 * 24 * 60 * 60, null);
 
@@ -116,14 +118,15 @@ public class UserAccountController extends BaseController {
 
     @RequestMapping("/summary")
     public JsonResult getUserSummary() {
-        Long userId = HttpContext.current().getUserId();
-        UserSummary summary = userAccountService.getUserSummary(userId);
+        Long userId = HttpContext.current().getRequireUserId();
+        UserSummary summary = userAccountManager.getUserSummary(userId);
         return ok(summary);
     }
 
     @RequestMapping("/other/profile")
     public JsonResult viewUserInfo(@RequestParam Long userId) {
-        AppUserProfile profile = userAccountService.getAppUserProfile(userId);
+        HttpContext.current().getRequireUserId();
+        AppUserProfile profile = userAccountManager.getAppUserProfile(userId);
         return ok(profile);
     }
 }

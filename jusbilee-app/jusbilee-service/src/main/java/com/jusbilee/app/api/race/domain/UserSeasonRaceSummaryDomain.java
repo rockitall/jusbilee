@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月22日
  */
-package com.jusbilee.app.api.seasonRace.domain;
+package com.jusbilee.app.api.race.domain;
 
 /**
  * @author zhandc 2016年9月22日
