@@ -109,7 +109,7 @@ public class ApiUserAccountService {
         token.setUserToken(userToken);
         token.setUserSecret(userSecret);
 
-        String identifier = signatureGenerator.getIdentifier(passport.getUserId());
+        String identifier = passport.getUserId().toString();
         String userSignature = signatureGenerator.getUserSignature(identifier);
         token.setIdentifier(identifier);
         token.setUserSignature(userSignature);
