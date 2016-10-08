@@ -6,6 +6,7 @@ package com.jusbilee.app.api.race.manager;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,6 +93,16 @@ public class ApiSeasonRaceGameManager {
 		}
 
 	}
+	
+	@Async
+	public void raceMatch(int time){
+		try {
+			Thread.sleep(10000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 
 	@Transactional
 	public void RateResultLog(RateResultRequest result){

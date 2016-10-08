@@ -69,6 +69,13 @@ public class UserSeasonRaceController extends BaseController {
 		return ok(facade);
 	}
 	
+	@RequestMapping("/game/match")
+	public JsonResult gameMatch() {
+		Long userId = HttpContext.current().getUserId();
+		apiSeasonRaceGameManager.raceMatch(0);
+		return ok();
+	}
+	
 	@RequestMapping("/game/log")
     public JsonResult practice(@Valid @ModelAttribute RateResultRequest request,
                                BindingResult bindingResult) {
