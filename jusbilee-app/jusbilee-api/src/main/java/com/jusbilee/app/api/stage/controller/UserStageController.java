@@ -1,9 +1,9 @@
 package com.jusbilee.app.api.stage.controller;
 
 
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.api.stage.manager.StageManager;
 import com.jusbilee.app.api.stage.request.UserStageChallengeResultRequest;
-import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

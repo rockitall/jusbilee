@@ -186,8 +186,12 @@ public class ApiUserAccountService {
         }
     }
 
-    public AppUserProfile getAppUserProfile(Long userId) {
-        return appUserDao.getUserProfile(userId);
+    public MyProfile getAppUserProfile(Long userId) {
+        MyProfile profile = appUserDao.getUserProfile(userId);
+        int nextLevelPoints = 80 + (profile.getLevel() - 1) * 20;
+        int upgradePoints = nextLevelPoints - profile.getPoints();
+        profile.setUpgradePoints(upgradePoints);
+        return profile;
     }
 
     public void uploadAvatar(Long userId, String avatar) {

@@ -2,7 +2,7 @@ package com.jusbilee.app.api.user.account.dao;
 
 import com.jusbilee.app.api.user.account.dao.sql.AppUserDaoSqlProvider;
 import com.jusbilee.app.api.user.account.domain.AppUser;
-import com.jusbilee.app.api.user.account.domain.AppUserProfile;
+import com.jusbilee.app.api.user.account.domain.MyProfile;
 import org.apache.ibatis.annotations.*;
 
 /**
@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface AppUserDao {
     @Select("select nickname,avatar,level,points,friend_count as friendCount from t_app_user where id=#{userId}")
-    AppUserProfile getUserProfile(@Param("userId") Long userId);
+    MyProfile getUserProfile(@Param("userId") Long userId);
 
     @InsertProvider(type = AppUserDaoSqlProvider.class, method = "insert")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id", resultType = Long.class, before = false)

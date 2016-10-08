@@ -7,42 +7,41 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @author zhandc 2016年9月25日
- *
  */
 public class RateResultRequest {
-	
-	@NotNull(message = "winId不能为空")
-	private Long winId;
-	
-	@NotNull(message = "lostId不能为空")
-	private Long lostId;
 
-	@NotNull(message = "songId不能为空")
-	private Integer songId;
+    @NotNull(message = "winId不能为空")
+    private Long winId;
 
-	public Long getWinId() {
-		return winId;
-	}
+    @NotNull(message = "lostId不能为空")
+    private Long lostId;
 
-	public void setWinId(Long winId) {
-		this.winId = winId;
-	}
+    @NotNull(message = "songId不能为空")
+    private Integer songId;
 
-	public Long getLostId() {
-		return lostId;
-	}
+    public Long getWinId() {
+        return winId;
+    }
 
-	public void setLostId(Long lostId) {
-		this.lostId = lostId;
-	}
+    public void setWinId(Long winId) {
+        this.winId = winId;
+    }
 
-	public Integer getSongId() {
-		return songId;
-	}
+    public Long getLostId() {
+        return lostId;
+    }
 
-	public void setSongId(Integer songId) {
-		this.songId = songId;
-	}
-	
-	
+    public void setLostId(Long lostId) {
+        this.lostId = lostId;
+    }
+
+    public Integer getSongId() {
+        return songId;
+    }
+
+    public void setSongId(Integer songId) {
+        this.songId = songId;
+    }
+
+
 }

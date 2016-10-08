@@ -1,8 +1,10 @@
 package com.jusbilee.app.api.user.controller;
 
 
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.api.user.account.domain.AccessToken;
 import com.jusbilee.app.api.user.account.domain.AppUserProfile;
+import com.jusbilee.app.api.user.account.domain.MyProfile;
 import com.jusbilee.app.api.user.account.domain.UserSummary;
 import com.jusbilee.app.api.user.account.param.Credentials;
 import com.jusbilee.app.api.user.account.param.PasswordModification;
@@ -12,7 +14,6 @@ import com.jusbilee.app.api.user.domain.UploadToken;
 import com.jusbilee.app.api.user.manager.UserAccountManager;
 import com.jusbilee.app.api.user.request.UserAvatarModificationRequest;
 import com.jusbilee.app.api.user.request.UserProfileModificationRequest;
-import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.jusbilee.app.qiniu.QiniuBucket;
 import com.jusbilee.app.qiniu.QiniuSDKProperties;
@@ -81,7 +82,7 @@ public class UserAccountController extends BaseController {
     @RequestMapping("/profile")
     public JsonResult getAppUserProfile() {
         Long userId = HttpContext.current().getRequireUserId();
-        AppUserProfile profile = userAccountManager.getAppUserProfile(userId);
+        MyProfile profile = userAccountManager.getAppUserProfile(userId);
         return ok(profile);
     }
 

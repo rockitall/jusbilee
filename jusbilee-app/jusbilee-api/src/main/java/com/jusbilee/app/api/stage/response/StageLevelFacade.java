@@ -1,7 +1,7 @@
 package com.jusbilee.app.api.stage.response;
 
-import com.jusbilee.app.api.stage.domain.ApiSongLevel;
 import com.jusbilee.app.api.stage.domain.ApiLevelStageSongCount;
+import com.jusbilee.app.api.stage.domain.ApiSongLevel;
 
 /**
  * Created by Allen on 2016/9/10.

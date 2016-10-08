@@ -65,7 +65,7 @@ public class UserAccountManager {
         apiUserAccountService.logout(userToken);
     }
 
-    public AppUserProfile getAppUserProfile(Long userId) {
+    public MyProfile getAppUserProfile(Long userId) {
         return apiUserAccountService.getAppUserProfile(userId);
     }
 
