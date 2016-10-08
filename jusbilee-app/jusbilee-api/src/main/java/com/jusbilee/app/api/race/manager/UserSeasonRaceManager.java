@@ -3,10 +3,10 @@
  */
 package com.jusbilee.app.api.race.manager;
 
-import com.jusbilee.app.api.seasonRace.domain.UserInfo;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceRank;
-import com.jusbilee.app.api.seasonRace.domain.UserSeasonRaceSummaryDomain;
-import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceService;
+import com.jusbilee.app.api.race.domain.UserInfo;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceRank;
+import com.jusbilee.app.api.race.domain.UserSeasonRaceSummaryDomain;
+import com.jusbilee.app.api.race.service.ApiSeasonRaceService;
 import com.rockit.core.pojo.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

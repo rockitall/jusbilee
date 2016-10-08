@@ -76,11 +76,11 @@
                                     <td>${l.songCount}</td>
                                     <td>
                                             <#if l.online ==-1>
-                                                <span class="label label-default">已结束</span>
+                                                <span class="label label-default">过往赛季</span>
                                             <#elseif l.online==1>
-                                                <span class="label bg-yellow">未开始</span>
+                                                <span class="label bg-yellow">将来赛季</span>
                                             <#else >
-                                                <span class="label bg-blue">进行中</span>
+                                                <span class="label bg-blue">当前赛季</span>
                                             </#if>
                                     </td>
                                     <td>${l.createTime?string("yyyy-MM-dd HH:mm")}</td>

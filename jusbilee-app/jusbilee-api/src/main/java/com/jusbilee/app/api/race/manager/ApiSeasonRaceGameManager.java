@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jusbilee.app.api.race.request.RateResultRequest;
 import com.jusbilee.app.api.race.response.RaceDetailFacade;
-import com.jusbilee.app.api.seasonRace.domain.UserInfo;
-import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceGameService;
-import com.jusbilee.app.api.seasonRace.service.ApiSeasonRaceService;
+import com.jusbilee.app.api.race.domain.UserInfo;
+import com.jusbilee.app.api.race.service.ApiSeasonRaceGameService;
+import com.jusbilee.app.api.race.service.ApiSeasonRaceService;
 import com.jusbilee.app.api.song.domain.ApiSong;
 import com.jusbilee.app.mybatis.pojo.RaceSeasonSong;
 import com.jusbilee.app.mybatis.pojo.UserSeasonRaceLog;

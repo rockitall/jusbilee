@@ -44,6 +44,7 @@ project(":jusbilee-api") {
         compile libs.springboot_actuator
         compile libs.springboot_hateoas
         compile libs.springboot_devtools
+        compile libs.rockit_http
     }
 }
 
@@ -73,7 +74,6 @@ project(":jusbilee-service") {
 
     dependencies {
         compile libs.rockit_commons
-        compile libs.rockit_http
         compile libs.rockit_qcloud
 
         compile libs.springboot_redis

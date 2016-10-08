@@ -86,7 +86,7 @@ public class UserRelationshipService implements IUserRelationshipService {
         List<UserFriendProfile> friends = userRelationshipDao.getAllFriends(userId);
         if (!friends.isEmpty()) {
             for (UserFriendProfile profile : friends) {
-                profile.setIdentifier(signatureGenerator.getIdentifier(profile.getUserId()));
+                profile.setIdentifier(profile.getUserId().toString());
             }
         }
         return friends;

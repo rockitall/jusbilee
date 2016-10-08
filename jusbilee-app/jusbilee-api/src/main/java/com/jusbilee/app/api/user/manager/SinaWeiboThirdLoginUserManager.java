@@ -1,9 +1,9 @@
-package com.jusbilee.app.api.user.account.service.impl;
+package com.jusbilee.app.api.user.manager;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.jusbilee.app.api.user.account.domain.SinaWeiboUser;
 import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
-import com.jusbilee.app.api.user.account.service.ThirdUserLookup;
+import com.jusbilee.app.api.user.account.service.ThirdUserLookupService;
 import com.rockit.core.exception.BadCredentialsException;
 import com.rockit.core.exception.InvalidAccessTokenException;
 import com.rockit.core.exception.NetworkErrorException;
@@ -24,13 +24,13 @@ import org.springframework.util.Assert;
  * Created by allen on 16-1-24.
  */
 @Service
-public class SinaWeiboThirdLoginUserService implements ThirdUserLookup {
-    private static final Logger logger = LoggerFactory.getLogger(SinaWeiboThirdLoginUserService.class);
+public class SinaWeiboThirdLoginUserManager implements ThirdUserLookupService {
+    private static final Logger logger = LoggerFactory.getLogger(SinaWeiboThirdLoginUserManager.class);
 
     @Value("${weibo.oauth2.userInfoUrl}")
     private String url;
 
-    @Autowired(required = false)
+    @Autowired
     private HttpClientService httpService;
 
     public SinaWeiboUser lookup(ThirdUserCredentials credentials) throws InvalidAccessTokenException {

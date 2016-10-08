@@ -2,6 +2,8 @@ package com.jusbilee.app.api.practice.service;
 
 import com.jusbilee.app.api.practice.dao.ApiPracticeSongDao;
 import com.jusbilee.app.api.practice.domain.ApiPracticeSong;
+import com.jusbilee.app.api.practice.domain.ApiSongExt;
+import com.jusbilee.app.api.practice.param.ApiPracticeSongCriteria;
 import com.jusbilee.app.mybatis.dao.PracticeSongMapper;
 import com.jusbilee.app.mybatis.pojo.PracticeSong;
 import com.jusbilee.app.mybatis.pojo.PracticeSongCriteria;
@@ -30,5 +32,9 @@ public class ApiPracticeSongService {
         criteria.createCriteria().andSongIdEqualTo(songId);
         List<PracticeSong> songs = practiceSongMapper.selectByExample(criteria);
         return songs.isEmpty() ? null : songs.get(0);
+    }
+
+    public List<ApiSongExt> queryPracticeSong(ApiPracticeSongCriteria criteria, Pagination pagination) {
+        return apiPracticeSongDao.queryPracticeSong(criteria, pagination);
     }
 }

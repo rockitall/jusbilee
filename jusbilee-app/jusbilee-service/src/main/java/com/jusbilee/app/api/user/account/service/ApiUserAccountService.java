@@ -1,12 +1,14 @@
-package com.jusbilee.app.api.user.account.service.impl;
+package com.jusbilee.app.api.user.account.service;
 
 import com.jusbilee.app.api.user.account.dao.ApiUserSummaryDao;
 import com.jusbilee.app.api.user.account.dao.AppUserDao;
 import com.jusbilee.app.api.user.account.dao.PassportDao;
 import com.jusbilee.app.api.user.account.dao.ThirdUserBindDao;
 import com.jusbilee.app.api.user.account.domain.*;
-import com.jusbilee.app.api.user.account.param.*;
-import com.jusbilee.app.api.user.account.service.IUserAccountService;
+import com.jusbilee.app.api.user.account.param.Credentials;
+import com.jusbilee.app.api.user.account.param.PasswordModification;
+import com.jusbilee.app.api.user.account.param.Registration;
+import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
 import com.jusbilee.app.redis.RedisCacheService;
 import com.rockit.core.Constants;
 import com.rockit.core.exception.BadCredentialsException;
@@ -28,9 +30,10 @@ import org.springframework.util.Assert;
  * Created by Allen on 2016/7/16.
  */
 @Service
-public class UserAccountServiceImpl implements IUserAccountService {
+public class ApiUserAccountService {
     @Autowired
     private AppUserDao appUserDao;
+
     @Autowired
     private ApiUserSummaryDao apiUserSummaryDao;
 
@@ -42,15 +45,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
     @Autowired
     private RedisCacheService redisCacheService;
-
-    @Autowired
-    private WeixinThirdLoginUserService weixinThirdLoginUserService;
-
-    @Autowired
-    private SinaWeiboThirdLoginUserService sinaWeiboThirdLoginUserService;
-
-    @Autowired
-    private QQThirdLoginUserService qqThirdLoginUserService;
 
     @Autowired
     private TLSSignatureGenerator signatureGenerator;
@@ -75,34 +69,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
         return token;
     }
 
-    @Override
-    public AccessToken trdlogin(ThirdUserCredentials credentials) throws BadCredentialsException, UserAccountLockedException {
-        if (credentials.getUserType() == ThirdUserType.WEIXIN) {
-            return this.doWeixinUserLogin(credentials);
-        } else if (credentials.getUserType() == ThirdUserType.QQ) {
-            return this.doQQUserLogin(credentials);
-        } else {
-            return this.doSinaWeiboUserLogin(credentials);
-        }
-    }
-
-    public AccessToken doWeixinUserLogin(ThirdUserCredentials credentials) throws UserAccountLockedException {
-        WeixinUser user = weixinThirdLoginUserService.lookup(credentials);
-        return doThirdUserLogin(credentials, user);
-    }
-
-    private AccessToken doQQUserLogin(ThirdUserCredentials credentials) {
-        QQUser user = qqThirdLoginUserService.lookup(credentials);
-        return doThirdUserLogin(credentials, user);
-    }
-
-    public AccessToken doSinaWeiboUserLogin(ThirdUserCredentials credentials) throws UserAccountLockedException {
-        SinaWeiboUser user = sinaWeiboThirdLoginUserService.lookup(credentials);
-        return doThirdUserLogin(credentials, user);
-    }
-
     @Transactional
-    private AccessToken doThirdUserLogin(ThirdUserCredentials credentials, ThirdUserBase thirdUserBase) throws UserAccountLockedException {
+    public AccessToken doThirdUserLogin(ThirdUserCredentials credentials, ThirdUserBase thirdUserBase) throws UserAccountLockedException {
         ThirdUserBind bind = thirdUserBindDao.selectByOpenid(credentials.getOpenid(), credentials.getUserTypeName());
 
         Passport passport = new Passport();
@@ -122,7 +90,6 @@ public class UserAccountServiceImpl implements IUserAccountService {
             this.apiUserSummaryDao.initUserSummary(appUser.getId());
             passport.setUserId(appUser.getId());
         } else {
-
             //check user account locked status
             passport.setUserId(bind.getUserId());
             checkUserAccountLocked(bind.getUserId());
@@ -131,7 +98,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
         return getSuccessAccessToken(passport);
     }
 
-    protected AccessToken getSuccessAccessToken(Passport passport) {
+    public AccessToken getSuccessAccessToken(Passport passport) {
         Assert.notNull(passport, "passport is null");
 
         String userToken = HmacUtils.hmacSha1Hex(securityKey.getBytes(), passport.toString().getBytes()).toUpperCase();
@@ -142,7 +109,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
         token.setUserToken(userToken);
         token.setUserSecret(userSecret);
 
-        String identifier = signatureGenerator.getIdentifier(passport.getUserId());
+        String identifier = passport.getUserId().toString();
         String userSignature = signatureGenerator.getUserSignature(identifier);
         token.setIdentifier(identifier);
         token.setUserSignature(userSignature);
@@ -198,7 +165,7 @@ public class UserAccountServiceImpl implements IUserAccountService {
         return passport;
     }
 
-    private void resetPassword(Passport passport, String password) {
+    public void resetPassword(Passport passport, String password) {
         String salt = UniqueIdUtils.getSalt();
         String hash = new Md5Hash(password, salt).toHex();
 
@@ -219,22 +186,18 @@ public class UserAccountServiceImpl implements IUserAccountService {
         }
     }
 
-    @Override
     public AppUserProfile getAppUserProfile(Long userId) {
         return appUserDao.getUserProfile(userId);
     }
 
-    @Override
     public void uploadAvatar(Long userId, String avatar) {
         appUserDao.updateAvatar(userId, avatar);
     }
 
-    @Override
     public void modifyNickname(Long userId, String nickname) {
         appUserDao.updateNickname(userId, nickname);
     }
 
-    @Override
     public UserSummary getUserSummary(Long userId) {
         UserSummary userSummary = apiUserSummaryDao.getUserSummary(userId);
         return userSummary;

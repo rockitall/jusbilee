@@ -3,7 +3,7 @@ package com.jusbilee.app.api.stage.controller;
 
 import com.jusbilee.app.api.stage.manager.StageManager;
 import com.jusbilee.app.api.stage.request.UserStageChallengeResultRequest;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserStageController extends BaseController {
     @RequestMapping("/song/challenge")
     public JsonResult recordStagePlay(@Valid @ModelAttribute UserStageChallengeResultRequest request, BindingResult bindingResult) {
         assertValid(bindingResult);
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         stageManager.recordUserStageChallengeResult(userId, request);
         return ok();
     }

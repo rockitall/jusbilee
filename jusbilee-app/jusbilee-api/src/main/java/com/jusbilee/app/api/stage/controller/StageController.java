@@ -4,7 +4,7 @@ package com.jusbilee.app.api.stage.controller;
 import com.jusbilee.app.api.stage.manager.StageManager;
 import com.jusbilee.app.api.stage.response.StageLevelFacade;
 import com.jusbilee.app.api.stage.response.StageSongFacade;
-import com.jusbilee.app.base.BaseController;
+import com.jusbilee.app.api.BaseController;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
 import com.rockit.core.pojo.Pagination;
@@ -24,7 +24,7 @@ public class StageController extends BaseController {
 
     @RequestMapping("/stage/level/list")
     public JsonResult getSongLevelList() {
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         List<StageLevelFacade> levels = stageManager.getAllSongLevel(userId);
         return ok(levels);
     }
@@ -34,7 +34,7 @@ public class StageController extends BaseController {
                                                 @ModelAttribute Pagination pagination, BindingResult bindingResult) {
         assertValid(bindingResult);
 
-        Long userId = HttpContext.current().getUserId();
+        Long userId = HttpContext.current().getRequireUserId();
         List<StageSongFacade> facades = stageManager.getLevelStageSongList(userId, levelId, pagination);
         return ok(facades);
     }

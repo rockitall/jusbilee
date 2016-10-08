@@ -24,7 +24,7 @@
         <appender-ref ref="CONSOLE"/>
     </logger>
     <logger name="com.jusbilee" additivity="false">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="CONSOLE"/>
     </logger>

@@ -2,10 +2,8 @@ package com.jusbilee.app.api.practice.manager;
 
 import com.jusbilee.app.api.coin.domain.GoldCoinEventType;
 import com.jusbilee.app.api.coin.service.ApiUserGoldCoinService;
-import com.jusbilee.app.api.practice.domain.ApiPracticeSong;
-import com.jusbilee.app.api.practice.domain.ApiSongStyle;
-import com.jusbilee.app.api.practice.domain.ApiUserPracticeSummary;
-import com.jusbilee.app.api.practice.domain.UnlockType;
+import com.jusbilee.app.api.practice.domain.*;
+import com.jusbilee.app.api.practice.param.ApiPracticeSongCriteria;
 import com.jusbilee.app.api.practice.request.UserPracticeRequest;
 import com.jusbilee.app.api.practice.response.PracticeLogSongFacade;
 import com.jusbilee.app.api.practice.response.PracticeSongFacade;
@@ -113,6 +111,18 @@ public class PracticeManager {
             facades.add(facade);
         });
         return facades;
+    }
+
+    public List<ApiSongExt> queryPracticeSong(ApiPracticeSongCriteria criteria, Pagination pagination, Long userId) {
+        List<ApiSongExt> songList = apiPracticeSongService.queryPracticeSong(criteria, pagination);
+        if (songList.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<Integer> songIdList = new ArrayList<>();
+        songList.stream().forEach(song -> songIdList.add(song.getSongId()));
+        Map<Integer, ApiUserPracticeSummary> statMap = apiUserPracticeSummaryService.getUserPracticeSummaryListBySongIdListAsMap(userId, songIdList);
+        songList.stream().forEach(song -> song.setSummary(statMap.get(song.getSongId())));
+        return songList;
     }
 
     @Transactional

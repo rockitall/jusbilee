@@ -1,7 +1,7 @@
 /**
  * zhandc 2016年9月23日
  */
-package com.jusbilee.app.api.seasonRace.dao.sql;
+package com.jusbilee.app.api.race.dao.sql;
 
 import java.util.List;
 

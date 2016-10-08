@@ -6,6 +6,6 @@ import com.jusbilee.app.api.user.account.param.ThirdUserCredentials;
 /**
  * Created by Allen on 2016/8/1.
  */
-public interface ThirdUserLookup {
+public interface ThirdUserLookupService {
     ThirdUserBase lookup(ThirdUserCredentials credentials);
 }

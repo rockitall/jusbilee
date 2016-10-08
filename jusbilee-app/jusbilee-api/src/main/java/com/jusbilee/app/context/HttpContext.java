@@ -1,5 +1,7 @@
 package com.jusbilee.app.context;
 
+import com.rockit.core.exception.UnauthorizedException;
+
 public class HttpContext {
     private static ThreadLocal<HttpContext> current = new ThreadLocal<HttpContext>() {
         protected HttpContext initialValue() {
@@ -37,6 +39,13 @@ public class HttpContext {
     }
 
     public long getUserId() {
+        return userId;
+    }
+
+    public long getRequireUserId() {
+        if (userId <= 0L) {
+            throw new UnauthorizedException();
+        }
         return userId;
     }
 
