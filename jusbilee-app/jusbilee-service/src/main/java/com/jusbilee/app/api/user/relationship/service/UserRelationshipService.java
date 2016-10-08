@@ -1,9 +1,8 @@
-package com.jusbilee.app.api.user.relationship.service.impl;
+package com.jusbilee.app.api.user.relationship.service;
 
 import com.jusbilee.app.api.user.account.dao.AppUserDao;
 import com.jusbilee.app.api.user.relationship.dao.UserRelationshipDao;
 import com.jusbilee.app.api.user.relationship.domain.UserFriendProfile;
-import com.jusbilee.app.api.user.relationship.service.IUserRelationshipService;
 import com.jusbilee.app.mybatis.dao.UserFriendMapper;
 import com.jusbilee.app.mybatis.pojo.UserFriend;
 import com.jusbilee.app.mybatis.pojo.UserFriendCriteria;
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by Allen on 2016/8/2.
  */
 @Service
-public class UserRelationshipService implements IUserRelationshipService {
+public class UserRelationshipService {
     @Autowired
     private AppUserDao appUserDao;
 
@@ -34,7 +33,6 @@ public class UserRelationshipService implements IUserRelationshipService {
     @Autowired
     private TLSSignatureGenerator signatureGenerator;
 
-    @Override
     @Transactional
     public void addFriend(Long userId, Long friendId) throws UserNotExistsException {
         if (userId.equals(friendId)) {
@@ -64,7 +62,7 @@ public class UserRelationshipService implements IUserRelationshipService {
         appUserDao.increaseUserFriend(friendId);
     }
 
-    @Override
+    @Transactional
     public void deleteFriend(Long userId, Long friendId) {
         UserFriendCriteria criteria = new UserFriendCriteria();
         criteria.createCriteria().andUserIdEqualTo(userId).andFriendUserIdEqualTo(friendId);
@@ -81,7 +79,6 @@ public class UserRelationshipService implements IUserRelationshipService {
         appUserDao.decreaseUserFriend(friendId);
     }
 
-    @Override
     public List<UserFriendProfile> getAllFriends(Long userId) {
         List<UserFriendProfile> friends = userRelationshipDao.getAllFriends(userId);
         if (!friends.isEmpty()) {
@@ -92,14 +89,12 @@ public class UserRelationshipService implements IUserRelationshipService {
         return friends;
     }
 
-    @Override
     public boolean isFriend(Long userId, Long friendId) {
         UserFriendCriteria criteria = new UserFriendCriteria();
         criteria.createCriteria().andUserIdEqualTo(userId).andFriendUserIdEqualTo(friendId).andIsDeletedEqualTo(Constants.BOOL.NO);
         return userFriendMapper.selectByExample(criteria).size() > 0;
     }
 
-    @Override
     public long getUserFriendCount(Long userId) {
         UserFriendCriteria criteria = new UserFriendCriteria();
         criteria.createCriteria().andUserIdEqualTo(userId).andIsDeletedEqualTo(Constants.BOOL.NO);

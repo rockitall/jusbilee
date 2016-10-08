@@ -10,6 +10,15 @@ public class UserFriendProfile implements Serializable {
     private String identifier;
     private String nickname;
     private String avatar;
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public String getIdentifier() {
         return identifier;

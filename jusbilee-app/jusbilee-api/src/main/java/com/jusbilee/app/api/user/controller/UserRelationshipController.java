@@ -2,8 +2,8 @@ package com.jusbilee.app.api.user.controller;
 
 
 import com.jusbilee.app.api.BaseController;
+import com.jusbilee.app.api.user.manager.UserRelationshipManager;
 import com.jusbilee.app.api.user.relationship.domain.UserFriendProfile;
-import com.jusbilee.app.api.user.relationship.service.IUserRelationshipService;
 import com.jusbilee.app.api.user.request.UserFriendRequest;
 import com.jusbilee.app.context.HttpContext;
 import com.rockit.core.pojo.JsonResult;
@@ -20,11 +20,11 @@ import java.util.List;
 @RequestMapping("/user/friend")
 public class UserRelationshipController extends BaseController {
     @Autowired
-    private IUserRelationshipService userRelationshipService;
+    private UserRelationshipManager userRelationshipManager;
 
     @RequestMapping("/list")
     public JsonResult list() {
-        List<UserFriendProfile> friends = userRelationshipService.getAllFriends(HttpContext.current().getUserId());
+        List<UserFriendProfile> friends = userRelationshipManager.getAllFriends(HttpContext.current().getUserId());
         return ok(friends);
     }
 
@@ -32,7 +32,7 @@ public class UserRelationshipController extends BaseController {
     public JsonResult add(@Valid @ModelAttribute UserFriendRequest param, BindingResult bindingResult) {
         assertValid(bindingResult);
         Long userId = HttpContext.current().getRequireUserId();
-        userRelationshipService.addFriend(userId, param.getFriendId());
+        userRelationshipManager.addFriend(userId, param.getFriendId());
         return ok();
     }
 
@@ -40,7 +40,7 @@ public class UserRelationshipController extends BaseController {
     public JsonResult delete(@Valid @ModelAttribute UserFriendRequest param, BindingResult bindingResult) {
         assertValid(bindingResult);
         Long userId = HttpContext.current().getRequireUserId();
-        userRelationshipService.deleteFriend(userId, param.getFriendId());
+        userRelationshipManager.deleteFriend(userId, param.getFriendId());
         return ok();
     }
 }

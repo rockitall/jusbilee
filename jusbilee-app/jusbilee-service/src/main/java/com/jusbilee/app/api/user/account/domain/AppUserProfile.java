@@ -8,6 +8,15 @@ public class AppUserProfile {
     private String avatar;
     private int points;
     private long friendCount;
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public String getNickname() {
         return nickname;

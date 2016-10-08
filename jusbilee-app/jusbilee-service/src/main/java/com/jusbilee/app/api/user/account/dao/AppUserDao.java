@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AppUserDao {
-    @Select("select nickname,points,avatar,friend_count as friendCount from t_app_user where id=#{userId}")
+    @Select("select nickname,avatar,level,points,friend_count as friendCount from t_app_user where id=#{userId}")
     AppUserProfile getUserProfile(@Param("userId") Long userId);
 
     @InsertProvider(type = AppUserDaoSqlProvider.class, method = "insert")
