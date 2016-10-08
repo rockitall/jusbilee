@@ -35,7 +35,6 @@ public class ApiSeasonRaceGameManager {
 	@Autowired
 	private ApiSeasonRaceService apiSeasonRaceService;
 
-	
 	public RaceDetailFacade getRaceDetail(long userId) {
 		// 赛季id
 		int seasonId = apiSeasonRaceService.getSeasonId();
@@ -85,7 +84,7 @@ public class ApiSeasonRaceGameManager {
 			// 返回机器人
 			apiSeasonRaceGameService.deleteUserSeasonRacePool(race);
 			UserInfo userInfo = new UserInfo();
-			userInfo.setUserId((long)0);
+			userInfo.setUserId((long) 0);
 			facade.setSongInfo(apiSong);
 			facade.setUserInfo(userInfo);
 			return facade;
@@ -93,36 +92,45 @@ public class ApiSeasonRaceGameManager {
 		}
 
 	}
-	
+
 	@Async
-	public void raceMatch(int time){
-		try {
-			Thread.sleep(10000);
-		} catch (Exception e) {
-			// TODO: handle exception
+	public void raceMatch(long userId, int time) {
+		int seasonId = apiSeasonRaceService.getSeasonId();
+		if(time == 1){
+			
 		}
 	}
-	
+
+	private int getSubLevel(long userId,int seasonId) {
+		// 用户排位赛档案
+		UserSeasonRaceSummary summary = apiSeasonRaceGameService.getUserSeasonRaceSummary(userId, seasonId);
+		if (summary == null) {
+			apiSeasonRaceGameService.initUserSeasonRaceSummary(userId, seasonId);
+			summary = apiSeasonRaceGameService.getUserSeasonRaceSummary(userId, seasonId);
+		}
+		// 用户段位
+		return apiSeasonRaceGameService.getSubLevel(summary.getScore());
+	}
 
 	@Transactional
-	public void RateResultLog(RateResultRequest result){
+	public void RateResultLog(RateResultRequest result) {
 		int seasonId = apiSeasonRaceService.getSeasonId();
 		int winScore = 0;
 		int lostScore = 0;
-		//记录成功者
-		if(result.getWinId() != 0){
-		    winScore = getWinScore( result);
+		// 记录成功者
+		if (result.getWinId() != 0) {
+			winScore = getWinScore(result);
 			UserSeasonRaceSummary winner = apiSeasonRaceGameService.getUserSeasonRaceSummary(result.getWinId(),
 					seasonId);
 			winner.setScore(winner.getScore() + winScore);
-			winner.setBestScore(winner.getBestScore() > winScore ?  winner.getBestScore(): winScore);
+			winner.setBestScore(winner.getBestScore() > winScore ? winner.getBestScore() : winScore);
 			winner.setWin(winner.getWin() + 1);
 			winner.setWinStreak(winner.getWinStreak() + 1);
 			apiSeasonRaceGameService.updateUserSeasonRaceSummary(winner);
 		}
-		
-		//记录失败者
-		if(result.getLostId() != 0){
+
+		// 记录失败者
+		if (result.getLostId() != 0) {
 			lostScore = getLostScore(result);
 			UserSeasonRaceSummary loser = apiSeasonRaceGameService.getUserSeasonRaceSummary(result.getLostId(),
 					seasonId);
@@ -131,8 +139,8 @@ public class ApiSeasonRaceGameManager {
 			loser.setWinStreak(0);
 			apiSeasonRaceGameService.updateUserSeasonRaceSummary(loser);
 		}
-		
-		//记录比赛日志
+
+		// 记录比赛日志
 		RaceSeasonSong RaceSong = apiSeasonRaceGameService.getRaceSeasonSong(seasonId, result.getSongId());
 		UserSeasonRaceLog log = new UserSeasonRaceLog();
 		log.setSeasonId(seasonId);
@@ -145,7 +153,7 @@ public class ApiSeasonRaceGameManager {
 		log.setSongLevelId(RaceSong.getLevelId());
 		log.setSongSubLevelId(RaceSong.getSubLevelId());
 		log.setCreateTime(new Date());
-		
+
 		apiSeasonRaceGameService.insertUserSeasonRaceLog(log);
 	}
 
@@ -166,33 +174,33 @@ public class ApiSeasonRaceGameManager {
 			UserSeasonRaceSummary loser = apiSeasonRaceGameService.getUserSeasonRaceSummary(result.getLostId(),
 					seasonId);
 			int winStreak = winner.getWinStreak() + 1 > 10 ? 10 : winner.getWinStreak() + 1;
-			
+
 			// 用户段位
 			int winSubLevel = apiSeasonRaceGameService.getSubLevel(winner.getScore());
 			int lostSubLevel = apiSeasonRaceGameService.getSubLevel(loser.getScore());
-			
-			int subDiffer = lostSubLevel - winSubLevel -1 > 0? lostSubLevel - winSubLevel -1 : 0;
-			
+
+			int subDiffer = lostSubLevel - winSubLevel - 1 > 0 ? lostSubLevel - winSubLevel - 1 : 0;
+
 			return 50 + winStreak * 15 + subDiffer * 5;
 		}
 	}
-	
+
 	private int getLostScore(RateResultRequest result) {
 		int seasonId = apiSeasonRaceService.getSeasonId();
-		if(result.getWinId() == 0){
+		if (result.getWinId() == 0) {
 			return -50;
-		}else{
+		} else {
 			UserSeasonRaceSummary winner = apiSeasonRaceGameService.getUserSeasonRaceSummary(result.getWinId(),
 					seasonId);
 			UserSeasonRaceSummary loser = apiSeasonRaceGameService.getUserSeasonRaceSummary(result.getLostId(),
 					seasonId);
-			
+
 			// 用户段位
 			int winSubLevel = apiSeasonRaceGameService.getSubLevel(winner.getScore());
 			int lostSubLevel = apiSeasonRaceGameService.getSubLevel(loser.getScore());
-			
-			int subDiffer = lostSubLevel - winSubLevel -1 > 0? lostSubLevel - winSubLevel -1 : 0;
-			
+
+			int subDiffer = lostSubLevel - winSubLevel - 1 > 0 ? lostSubLevel - winSubLevel - 1 : 0;
+
 			return -50 - subDiffer * 5;
 		}
 	}

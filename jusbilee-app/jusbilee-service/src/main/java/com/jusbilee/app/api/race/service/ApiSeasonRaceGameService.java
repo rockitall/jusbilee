@@ -87,9 +87,16 @@ public class ApiSeasonRaceGameService {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public UserSeasonRacePool getUserSeasonRacePool(int subLevel, long userId){
+		UserSeasonRacePoolCriteria criteria = new UserSeasonRacePoolCriteria();
+		criteria.createCriteria().andSubLevelIdBetween(subLevel -2, subLevel + 2).andIsMatchEqualTo((byte)0).andUserIdNotEqualTo(userId);
+		List<UserSeasonRacePool> list = userSeasonRacePoolMapper.selectByExample(criteria);
+		return list.isEmpty() ? null : list.get(new Random().nextInt(list.size()));
+	}
+	
 	public UserSeasonRacePool getUserSeasonRacePool(int subLevel){
 		UserSeasonRacePoolCriteria criteria = new UserSeasonRacePoolCriteria();
-		criteria.createCriteria().andSubLevelIdBetween(subLevel -2, subLevel + 2).andIsMatchEqualTo((byte)0);
+		criteria.createCriteria().andSubLevelIdBetween(subLevel -1, subLevel + 1).andIsMatchEqualTo((byte)0);
 		List<UserSeasonRacePool> list = userSeasonRacePoolMapper.selectByExample(criteria);
 		return list.isEmpty() ? null : list.get(new Random().nextInt(list.size()));
 	}

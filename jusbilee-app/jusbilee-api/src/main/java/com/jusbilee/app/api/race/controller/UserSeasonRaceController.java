@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -70,9 +71,9 @@ public class UserSeasonRaceController extends BaseController {
 	}
 	
 	@RequestMapping("/game/match")
-	public JsonResult gameMatch() {
+	public JsonResult gameMatch(@RequestParam Integer time) {
 		Long userId = HttpContext.current().getUserId();
-		apiSeasonRaceGameManager.raceMatch(0);
+//		apiSeasonRaceGameManager.raceMatch(0);
 		return ok();
 	}
 	
